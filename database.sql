@@ -35,9 +35,9 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 select * from Users
-delete from Users
 select * from UserActivation
 delete from UserActivation
+delete from Users
 
 --drop procedure [dbo].[Insert_User]
 

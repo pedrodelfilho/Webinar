@@ -11,7 +11,7 @@ namespace Webinar
 {
 
 
-    public partial class Master
+    public partial class Activation
     {
 
         /// <summary>

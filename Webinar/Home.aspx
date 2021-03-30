@@ -30,7 +30,7 @@
                     <div class="modal-body">
                         <div role="form">
                             <div class="form-group">
-                                <asp:Login ID="Login" runat="server" Width="100%" CreateUserText="Registre-se" CreateUserUrl="#cadastrar" OnAuthenticate="Login_Authenticate"><LayoutTemplate>
+                                <asp:Login ID="Login" runat="server" Width="100%" CreateUserText="Registre-se" CreateUserUrl="#cadastrar"><LayoutTemplate>
                                 <label for="usrname"><span class="glyphicon glyphicon-envelope"></span> E-mail</label>
                                 <asp:TextBox runat="server" class="form-control" ID="UserName" placeholder="Informe o E-mail"/>
                                 <label for="psw"><span class="glyphicon glyphicon-eye-open"></span> Senha</label>
@@ -81,6 +81,7 @@
                                 
                                 <label for="psw"><span class="glyphicon glyphicon-eye-open"></span> Senha</label><br />
                                 <asp:TextBox runat="server" TextMode="Password" class="form-control" id="txtCadastrarSenha" placeholder="Digite a senha"/><br />
+                                <asp:Label runat="server" ID="lbl" />
                             </div>                            
                             <asp:LinkButton ID="btnCadastrar" OnClick="btnCadastrarUsuario_Click" runat="server" CssClass="btn btn-default btn-success btn-block"><i class="glyphicon glyphicon-off"></i>&nbsp;Cadastrar</asp:LinkButton>
                         </div>
