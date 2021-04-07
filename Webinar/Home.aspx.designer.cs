@@ -15,13 +15,13 @@ namespace Webinar
     {
 
         /// <summary>
-        /// Controle Login.
+        /// Controle Login1.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Login Login;
+        protected global::System.Web.UI.WebControls.Login Login1;
 
         /// <summary>
         /// Controle txtCadastrarNome.
@@ -40,6 +40,15 @@ namespace Webinar
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtCadastrarEmail;
+
+        /// <summary>
+        /// Controle RegularExpressionValidator1.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator1;
 
         /// <summary>
         /// Controle txtDtNasc.
@@ -78,15 +87,6 @@ namespace Webinar
         protected global::System.Web.UI.WebControls.TextBox txtCadastrarSenha;
 
         /// <summary>
-        /// Controle lbl.
-        /// </summary>
-        /// <remarks>
-        /// Campo gerado automaticamente.
-        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl;
-
-        /// <summary>
         /// Controle btnCadastrar.
         /// </summary>
         /// <remarks>
@@ -94,5 +94,32 @@ namespace Webinar
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton btnCadastrar;
+
+        /// <summary>
+        /// Controle txtEmailRecuperar.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtEmailRecuperar;
+
+        /// <summary>
+        /// Controle RegularExpressionValidator2.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator2;
+
+        /// <summary>
+        /// Controle btnRecuperarSenha.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnRecuperarSenha;
     }
 }

@@ -32,11 +32,11 @@ namespace Webinar
                             con.Close();
                             if (rowsAffected == 1)
                             {
-                                ltMessage.Text = "Activation successful.";
+                                ltMessage.Text = "Ativação realizada com sucesso.";
                             }
                             else
                             {
-                                ltMessage.Text = "Invalid Activation code.";
+                                ltMessage.Text = "Ativação inválida.";
                             }
                         }
                     }

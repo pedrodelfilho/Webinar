@@ -20,6 +20,8 @@ CREATE TABLE [dbo].[Users](
 	Email varchar(100) NOT NULL,
 	CreatedDate datetime NOT NULL,
 	LastLoginDate datetime NULL,
+	Ativo bit not null,
+	
  CONSTRAINT PK_Users PRIMARY KEY CLUSTERED 
 (
 	[UserId] ASC
@@ -38,8 +40,6 @@ select * from Users
 select * from UserActivation
 delete from UserActivation
 delete from Users
-
---drop procedure [dbo].[Insert_User]
 
 CREATE PROCEDURE [dbo].[Insert_User]
 	@Username VARCHAR(40),
@@ -78,7 +78,38 @@ BEGIN
 		SELECT SCOPE_IDENTITY() -- UserId			   
      END
 END
+GO
 
+CREATE PROCEDURE [dbo].[Validate_User]
+      @Username VARCHAR(40),
+      @Password VARCHAR(32)
+AS
+BEGIN
+      SET NOCOUNT ON;
+      DECLARE @UserId INT, @LastLoginDate DATETIME
+     
+      SELECT @UserId = UserId, @LastLoginDate = LastLoginDate
+      FROM Users WHERE Email = @Username AND [Password] = @Password
+     
+      IF @UserId IS NOT NULL
+      BEGIN
+            IF NOT EXISTS(SELECT UserId FROM UserActivation WHERE UserId = @UserId)
+            BEGIN
+                  UPDATE Users
+                  SET LastLoginDate = GETDATE()
+                  WHERE UserId = @UserId
+                  SELECT @UserId [UserId] -- Usuário válido
+            END
+            ELSE
+            BEGIN
+                  SELECT -2 -- Usuário pendente de validação
+            END
+      END
+      ELSE
+      BEGIN
+            SELECT -1 -- Usuário inválido
+      END
+END
 GO
 
 SET ANSI_NULLS ON
@@ -102,10 +133,6 @@ GO
 CREATE TABLE Cidades(
 IDCidade int not null PRIMARY KEY,
 NomeCidade varchar(50) not null)
-
-select * from Cidades
-
-SELECT NomeCidade FROM Cidades WHERE Estado = 'Pará'
 
 INSERT INTO Cidades (IDCidade, NomeCidade) VALUES
 (1, 'Afonso Cláudio - ES'),
@@ -5683,4 +5710,6 @@ INSERT INTO Cidades (IDCidade, NomeCidade) VALUES
 (5562, 'Tupiratins - TO'),
 (5563, 'Wanderlândia - TO'),
 (5564, 'Xambioá - TO');
+
+drop procedure Validate_User
 

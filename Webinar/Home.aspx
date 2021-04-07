@@ -30,22 +30,22 @@
                     <div class="modal-body">
                         <div role="form">
                             <div class="form-group">
-                                <asp:Login ID="Login" runat="server" Width="100%" CreateUserText="Registre-se" CreateUserUrl="#cadastrar"><LayoutTemplate>
+                                <asp:Login ID="Login1" runat="server" Width="100%"><LayoutTemplate>
                                 <label for="usrname"><span class="glyphicon glyphicon-envelope"></span> E-mail</label>
-                                <asp:TextBox runat="server" class="form-control" ID="UserName" placeholder="Informe o E-mail"/>
+                                <asp:TextBox runat="server" class="form-control" ID="UserName" placeholder="Informe o E-mail"/>                                
                                 <label for="psw"><span class="glyphicon glyphicon-eye-open"></span> Senha</label>
-                                <asp:TextBox runat="server" class="form-control" ID="Password" TextMode="Password" placeholder="Informe a senha"/>
+                                <asp:TextBox runat="server" class="form-control" ID="Password" TextMode="Password" placeholder="Informe a senha"/>                                
                                 <asp:CheckBox CssClass="checkbox-inline" runat="server" ID="RememberMe" Text="Lembrar-me" /><br />                            
-                                <asp:Literal ID="FailureText" runat="server" /><br />
-                                <asp:LinkButton ID="Login" CommandName="Login" runat="server" CssClass="btn btn-default btn-success btn-block"><i class="glyphicon glyphicon-off"></i>&nbsp;Entrar</asp:LinkButton>                            
+                                <asp:Literal ID="FailureText" runat="server"/><br />
+                                <asp:LinkButton ID="btnEntrarLogin" OnClick="btnEntrarLogin_Click" runat="server" CssClass="btn btn-default btn-success btn-block"><i class="glyphicon glyphicon-off"></i>&nbsp;Entrar</asp:LinkButton>                            
                                 </LayoutTemplate></asp:Login>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <p><a class="pull-left" data-dismiss="modal" data-toggle="modal" href="#cadastrar">
-                        Não possuí cadastro?<span class="glyphicon"></span></a>
-                        <a href="#">Esqueceu a Senha?</a></p>
+                        Não possuí cadastro?<span class="glyphicon"></span></a><br />
+                        <a class="pull-left" data-dismiss="modal" data-toggle="modal" href="#recuperar">Esqueceu a Senha?</a></p>
                     </div>
                 </div>
             </div>
@@ -65,23 +65,25 @@
                         <div role="form">
                             <div class="form-group">
                                 <label for="usrname"><span class="glyphicon glyphicon-user"></span> Nome</label><br />
-                                <asp:TextBox runat="server" class="form-control" id="txtCadastrarNome" placeholder="Digte o Nome"/><br />
+                                <asp:TextBox runat="server" TextMode="SingleLine" class="form-control" id="txtCadastrarNome" placeholder="Digte o Nome"/> 
 
                                 <label for="usrname"><span class="glyphicon glyphicon-envelope"></span> E-mail</label><br />
-                                <asp:TextBox runat="server" TextMode="Email" class="form-control" ID="txtCadastrarEmail" placeholder="Digite o E-mail"/><br />
-                                
+                                <asp:TextBox runat="server" TextMode="Email" class="form-control" ID="txtCadastrarEmail" placeholder="Digite o E-mail"/>
+                                <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ControlToValidate="txtCadastrarEmail" ErrorMessage="E-mail inválido." ForeColor="Red" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"></asp:RegularExpressionValidator>
+                                 <br />
+
                                 <label for="usrname"><span class="glyphicon glyphicon-calendar"></span> Data Nascimento</label><br />
-                                <asp:TextBox runat="server" Width="50%" class="form-control" TextMode="Date" ID="txtDtNasc" placeholder="01/01/2000"></asp:TextBox><br />
+                                <asp:TextBox runat="server" Width="50%" class="form-control" TextMode="Date" ID="txtDtNasc" placeholder="01/01/2000"></asp:TextBox>
+                                 <br />
 
                                 <label for="usrname"><span class="glyphicon glyphicon-home"></span> Cidade - UF</label>
                                 <asp:DropDownList ID="ddlCidade" runat="server" Width="50%" CssClass="form-control" DataSourceID="DsCidade"  DataTextField="NomeCidade" DataValueField="NomeCidade" AppendDataBoundItems="true">
-                                    <asp:ListItem Text="-- Escolha sua Cidade --"></asp:ListItem>
-                                </asp:DropDownList>
+                                    <asp:ListItem Text=""></asp:ListItem>
+                                </asp:DropDownList> 
                                 <asp:SqlDataSource ID="DsCidade" runat="server" ConnectionString="<%$ ConnectionStrings:AggregareBD %>" SelectCommand="SELECT DISTINCT NomeCidade FROM Cidades ORDER BY NomeCidade ASC"></asp:SqlDataSource><br />
                                 
                                 <label for="psw"><span class="glyphicon glyphicon-eye-open"></span> Senha</label><br />
-                                <asp:TextBox runat="server" TextMode="Password" class="form-control" id="txtCadastrarSenha" placeholder="Digite a senha"/><br />
-                                <asp:Label runat="server" ID="lbl" />
+                                <asp:TextBox runat="server" TextMode="Password" class="form-control" id="txtCadastrarSenha" placeholder="Digite a senha"/> <br />
                             </div>                            
                             <asp:LinkButton ID="btnCadastrar" OnClick="btnCadastrarUsuario_Click" runat="server" CssClass="btn btn-default btn-success btn-block"><i class="glyphicon glyphicon-off"></i>&nbsp;Cadastrar</asp:LinkButton>
                         </div>
@@ -93,6 +95,33 @@
                 </div>
             </div>
         </section>
+
+    <!--==========================
+      Sessão Recuperar Senha
+    ============================-->
+
+    <section id="recuperar" class="modal fade" role="dialog" >
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 style="color:red;"><span class="glyphicon glyphicon-wrench"></span> Recuperar Senha</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div role="form">
+                            <div class="form-group">          
+                                <label for="usrname"><span class="glyphicon glyphicon-envelope"></span> E-mail</label><br />
+                                <asp:TextBox runat="server" TextMode="Email" class="form-control" ID="txtEmailRecuperar" placeholder="Digite o E-mail"/>
+                                <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ControlToValidate="txtEmailRecuperar" ErrorMessage="E-mail inválido." ForeColor="Red" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"></asp:RegularExpressionValidator>
+                                 <br />
+                            </div>                            
+                            <asp:LinkButton ID="btnRecuperarSenha" OnClick="btnRecuperarSenha_Click" runat="server" CssClass="btn btn-default btn-success btn-block"><i class="glyphicon glyphicon-off"></i>&nbsp;Cadastrar</asp:LinkButton>
+                        </div>
+                    </div>                    
+                </div>
+            </div>
+        </section>
+
     <!--==========================
       Sessão Sobre
     ============================-->
