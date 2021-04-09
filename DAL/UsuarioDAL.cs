@@ -16,7 +16,7 @@ namespace DAL
 
     public class UsuarioDAL
     {
-        private string connectionString = ConfigurationManager.ConnectionStrings["AggregareBD"].ConnectionString;
+        private string connectionString = ConfigurationManager.ConnectionStrings["AggregateBD"].ConnectionString;
 
         public Usuario VerificarUsuarios(string usr, string mail)
         {

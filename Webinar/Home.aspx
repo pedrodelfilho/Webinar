@@ -24,20 +24,19 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 style="color:red;"><span class="glyphicon glyphicon-lock"></span>Login</h4>
+                        <h4 style="color:red;"><span class="fa fa-unlock-alt"></span> Login</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>                        
                     </div>
                     <div class="modal-body">
                         <div role="form">
                             <div class="form-group">
                                 <asp:Login ID="Login1" runat="server" Width="100%"><LayoutTemplate>
-                                <label for="usrname"><span class="glyphicon glyphicon-envelope"></span> E-mail</label>
-                                <asp:TextBox runat="server" class="form-control" ID="UserName" placeholder="Informe o E-mail"/>                                
-                                <label for="psw"><span class="glyphicon glyphicon-eye-open"></span> Senha</label>
+                                <label for="usrname"><span class="fa fa-envelope"></span> E-mail</label>
+                                <asp:TextBox runat="server" class="form-control" ID="UserName" placeholder="Informe o E-mail"/><br />                               
+                                <label for="psw"><span class="fa fa-key"></span> Senha</label>
                                 <asp:TextBox runat="server" class="form-control" ID="Password" TextMode="Password" placeholder="Informe a senha"/>                                
-                                <asp:CheckBox CssClass="checkbox-inline" runat="server" ID="RememberMe" Text="Lembrar-me" /><br />                            
-                                <asp:Literal ID="FailureText" runat="server"/><br />
-                                <asp:LinkButton ID="btnEntrarLogin" OnClick="btnEntrarLogin_Click" runat="server" CssClass="btn btn-default btn-success btn-block"><i class="glyphicon glyphicon-off"></i>&nbsp;Entrar</asp:LinkButton>                            
+                                <asp:CheckBox CssClass="checkbox-inline" runat="server" ID="RememberMe" Text="Lembrar-me" /><br /><br />
+                                <asp:LinkButton ID="btnEntrarLogin" OnClick="btnEntrarLogin_Click" runat="server" CssClass="btn btn-default btn-success btn-block"><i class="fa fa-power-off"></i>&nbsp;Entrar</asp:LinkButton>                            
                                 </LayoutTemplate></asp:Login>
                             </div>
                         </div>
@@ -58,34 +57,25 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 style="color:red;"><span class="glyphicon glyphicon-floppy-saved"></span> Cadastrar</h4>
+                        <h4 style="color:red;"><span class="fa fa-user-plus"></span> Cadastrar</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>                        
                     </div>
                     <div class="modal-body">
                         <div role="form">
                             <div class="form-group">
-                                <label for="usrname"><span class="glyphicon glyphicon-user"></span> Nome</label><br />
-                                <asp:TextBox runat="server" TextMode="SingleLine" class="form-control" id="txtCadastrarNome" placeholder="Digte o Nome"/> 
+                                <label for="usrname"><span class="fa fa-user"></span> Nome</label><br />
+                                <asp:TextBox runat="server" TextMode="SingleLine" class="form-control" id="txtCadastrarNome" placeholder="Digte o Nome"/>
+                                <br />
 
-                                <label for="usrname"><span class="glyphicon glyphicon-envelope"></span> E-mail</label><br />
+                                <label for="usrname"><span class="fa fa-envelope"></span> E-mail</label><br />
                                 <asp:TextBox runat="server" TextMode="Email" class="form-control" ID="txtCadastrarEmail" placeholder="Digite o E-mail"/>
                                 <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ControlToValidate="txtCadastrarEmail" ErrorMessage="E-mail inválido." ForeColor="Red" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"></asp:RegularExpressionValidator>
-                                 <br />
-
-                                <label for="usrname"><span class="glyphicon glyphicon-calendar"></span> Data Nascimento</label><br />
-                                <asp:TextBox runat="server" Width="50%" class="form-control" TextMode="Date" ID="txtDtNasc" placeholder="01/01/2000"></asp:TextBox>
-                                 <br />
-
-                                <label for="usrname"><span class="glyphicon glyphicon-home"></span> Cidade - UF</label>
-                                <asp:DropDownList ID="ddlCidade" runat="server" Width="50%" CssClass="form-control" DataSourceID="DsCidade"  DataTextField="NomeCidade" DataValueField="NomeCidade" AppendDataBoundItems="true">
-                                    <asp:ListItem Text=""></asp:ListItem>
-                                </asp:DropDownList> 
-                                <asp:SqlDataSource ID="DsCidade" runat="server" ConnectionString="<%$ ConnectionStrings:AggregareBD %>" SelectCommand="SELECT DISTINCT NomeCidade FROM Cidades ORDER BY NomeCidade ASC"></asp:SqlDataSource><br />
+                                <br />
                                 
-                                <label for="psw"><span class="glyphicon glyphicon-eye-open"></span> Senha</label><br />
+                                <label for="psw"><span class="fa fa-key"></span> Senha</label><br />
                                 <asp:TextBox runat="server" TextMode="Password" class="form-control" id="txtCadastrarSenha" placeholder="Digite a senha"/> <br />
                             </div>                            
-                            <asp:LinkButton ID="btnCadastrar" OnClick="btnCadastrarUsuario_Click" runat="server" CssClass="btn btn-default btn-success btn-block"><i class="glyphicon glyphicon-off"></i>&nbsp;Cadastrar</asp:LinkButton>
+                            <asp:LinkButton ID="btnCadastrar" OnClick="btnCadastrarUsuario_Click" runat="server" CssClass="btn btn-default btn-success btn-block"><i class="fa fa-power-off"></i>&nbsp;Cadastrar</asp:LinkButton>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -104,18 +94,18 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
+                        <h4 style="color:red;"><span class="fa fa-recycle"></span> Recuperar Senha</h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 style="color:red;"><span class="glyphicon glyphicon-wrench"></span> Recuperar Senha</h4>
                     </div>
                     <div class="modal-body">
                         <div role="form">
                             <div class="form-group">          
-                                <label for="usrname"><span class="glyphicon glyphicon-envelope"></span> E-mail</label><br />
+                                <label for="usrname"><span class="fa fa-envelope"></span> E-mail</label><br />
                                 <asp:TextBox runat="server" TextMode="Email" class="form-control" ID="txtEmailRecuperar" placeholder="Digite o E-mail"/>
                                 <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ControlToValidate="txtEmailRecuperar" ErrorMessage="E-mail inválido." ForeColor="Red" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"></asp:RegularExpressionValidator>
                                  <br />
                             </div>                            
-                            <asp:LinkButton ID="btnRecuperarSenha" OnClick="btnRecuperarSenha_Click" runat="server" CssClass="btn btn-default btn-success btn-block"><i class="glyphicon glyphicon-off"></i>&nbsp;Cadastrar</asp:LinkButton>
+                            <asp:LinkButton ID="btnRecuperarSenha" OnClick="btnRecuperarSenha_Click" runat="server" CssClass="btn btn-default btn-success btn-block"><i class="fa fa-power-off"></i>&nbsp;Enviar</asp:LinkButton>
                         </div>
                     </div>                    
                 </div>
@@ -159,8 +149,8 @@
             <div class="speaker">
               <img src="img/speakers/1.jpg" alt="Speaker 1" class="img-fluid">
               <div class="details">
-                <h3><a href="speaker-details.html">Brenden Legros</a></h3>
-                <p>Quas alias incidunt</p>
+                <h3><a href="speaker-details.html">Lucas Matarazzo</a></h3>
+                <p>O outro incidente</p>
                 <div class="social">
                   <a href=""><i class="fa fa-twitter"></i></a>
                   <a href=""><i class="fa fa-facebook"></i></a>
@@ -174,8 +164,8 @@
             <div class="speaker">
               <img src="img/speakers/2.jpg" alt="Speaker 2" class="img-fluid">
               <div class="details">
-                <h3><a href="speaker-details.html">Hubert Hirthe</a></h3>
-                <p>Consequuntur odio aut</p>
+                <h3><a href="speaker-details.html">Hebert Diluc</a></h3>
+                <p>Seguindo em frente</p>
                 <div class="social">
                   <a href=""><i class="fa fa-twitter"></i></a>
                   <a href=""><i class="fa fa-facebook"></i></a>
@@ -189,8 +179,8 @@
             <div class="speaker">
               <img src="img/speakers/3.jpg" alt="Speaker 3" class="img-fluid">
               <div class="details">
-                <h3><a href="speaker-details.html">Cole Emmerich</a></h3>
-                <p>Fugiat laborum et</p>
+                <h3><a href="speaker-details.html">Mariana Lucat</a></h3>
+                <p>Evite carboidratos</p>
                 <div class="social">
                   <a href=""><i class="fa fa-twitter"></i></a>
                   <a href=""><i class="fa fa-facebook"></i></a>
@@ -204,8 +194,8 @@
             <div class="speaker">
               <img src="img/speakers/4.jpg" alt="Speaker 4" class="img-fluid">
               <div class="details">
-                <h3><a href="speaker-details.html">Jack Christiansen</a></h3>
-                <p>Debitis iure vero</p>
+                <h3><a href="speaker-details.html">josefh malaquias</a></h3>
+                <p>Vida financeira</p>
                 <div class="social">
                   <a href=""><i class="fa fa-twitter"></i></a>
                   <a href=""><i class="fa fa-facebook"></i></a>
@@ -219,8 +209,8 @@
             <div class="speaker">
               <img src="img/speakers/5.jpg" alt="Speaker 5" class="img-fluid">
               <div class="details">
-                <h3><a href="speaker-details.html">Alejandrin Littel</a></h3>
-                <p>Qui molestiae natus</p>
+                <h3><a href="speaker-details.html">Alexandre Exequiel</a></h3>
+                <p>Se livrando do aborrecimento</p>
                 <div class="social">
                   <a href=""><i class="fa fa-twitter"></i></a>
                   <a href=""><i class="fa fa-facebook"></i></a>
@@ -234,8 +224,8 @@
             <div class="speaker">
               <img src="img/speakers/6.jpg" alt="Speaker 6" class="img-fluid">
               <div class="details">
-                <h3><a href="speaker-details.html">Willow Trantow</a></h3>
-                <p>Non autem dicta</p>
+                <h3><a href="speaker-details.html">William noruega</a></h3>
+                <p>O chamado da atualidade</p>
                 <div class="social">
                   <a href=""><i class="fa fa-twitter"></i></a>
                   <a href=""><i class="fa fa-facebook"></i></a>
@@ -272,8 +262,8 @@
           </li>
         </ul>
 
-        <h3 class="sub-heading">Voluptatem nulla veniam soluta et corrupti consequatur neque eveniet officia. Eius
-          necessitatibus voluptatem quis labore perspiciatis quia.</h3>
+        <h3 class="sub-heading">Não, nem vai ocorrer, virei para cumprir as funções dos fracos e corruptos, prazer.
+          Quem precisa de um prazer, trabalhar você o encontra.</h3>
 
         <div class="tab-content row justify-content-center">
 
@@ -599,71 +589,56 @@
     </section>
 
     <!--==========================
-      F.A.Q Section
+      Sessão Perguntas Frequentes
     ============================-->
     <section id="faq" class="wow fadeInUp">
-
       <div class="container">
-
         <div class="section-header">
-          <h2>F.A.Q </h2>
+          <h2>Perguntas Frequentes </h2>
         </div>
-
         <div class="row justify-content-center">
           <div class="col-lg-9">
               <ul id="faq-list">
 
                 <li>
-                  <a data-toggle="collapse" class="collapsed" href="#faq1">Non consectetur a erat nam at lectus urna duis? <i class="fa fa-minus-circle"></i></a>
+                  <a data-toggle="collapse" class="collapsed" href="#faq1">Não consigo comparecer ao seminário no horário agendado. Posso assistir mais tarde? <i class="fa fa-minus-circle"></i></a>
                   <div id="faq1" class="collapse" data-parent="#faq-list">
-                    <p>
-                      Feugiat pretium nibh ipsum consequat. Tempus iaculis urna id volutpat lacus laoreet non curabitur gravida. Venenatis lectus magna fringilla urna porttitor rhoncus dolor purus non.
-                    </p>
+                    <p>Sim, a menos que seja um evento somente ao vivo (declarado na descrição do evento), iremos gravá-lo e postar a gravação de vídeo e slides online posteriormente.</p>
                   </div>
                 </li>
-      
+                  
                 <li>
-                  <a data-toggle="collapse" href="#faq2" class="collapsed">Feugiat scelerisque varius morbi enim nunc faucibus a pellentesque? <i class="fa fa-minus-circle"></i></a>
+                  <a data-toggle="collapse" href="#faq2" class="collapsed">Como faço o cadastro no site Aggregate? <i class="fa fa-minus-circle"></i></a>
                   <div id="faq2" class="collapse" data-parent="#faq-list">
-                    <p>
-                      Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.
-                    </p>
+                    <p>No cabeçalho da página inicial, acesse o formulário de cadastro através do botão "logon", em seguida clique em "Não possuí cadastro. Preencha os campos com seus dados, ao pressionar o botão "Cadastrar" um link de confirmação será enviado para o seu e-mail. </p>
                   </div>
                 </li>
       
                 <li>
-                  <a data-toggle="collapse" href="#faq3" class="collapsed">Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi? <i class="fa fa-minus-circle"></i></a>
+                  <a data-toggle="collapse" href="#faq3" class="collapsed">Eu preciso me silenciar no webinar? <i class="fa fa-minus-circle"></i></a>
                   <div id="faq3" class="collapse" data-parent="#faq-list">
-                    <p>
-                      Eleifend mi in nulla posuere sollicitudin aliquam ultrices sagittis orci. Faucibus pulvinar elementum integer enim. Sem nulla pharetra diam sit amet nisl suscipit. Rutrum tellus pellentesque eu tincidunt. Lectus urna duis convallis convallis tellus. Urna molestie at elementum eu facilisis sed odio morbi quis
-                    </p>
+                    <p>Não, nós cuidaremos disso para você. Como participante, você é silenciado automaticamente.</p>
                   </div>
                 </li>
       
                 <li>
-                  <a data-toggle="collapse" href="#faq4" class="collapsed">Ac odio tempor orci dapibus. Aliquam eleifend mi in nulla? <i class="fa fa-minus-circle"></i></a>
+                  <a data-toggle="collapse" href="#faq4" class="collapsed">Preciso estar logado no Aggregate para ter acesso aos vídeos de Webinar? <i class="fa fa-minus-circle"></i></a>
                   <div id="faq4" class="collapse" data-parent="#faq-list">
-                    <p>
-                      Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.
-                    </p>
+                    <p>Sim, precisamos das informações básicas dos usuários, para fornecemos um certificado aos mesmos presentes no webinar.</p>
                   </div>
-                </li>
+                </li>               
       
                 <li>
-                  <a data-toggle="collapse" href="#faq5" class="collapsed">Tempus quam pellentesque nec nam aliquam sem et tortor consequat? <i class="fa fa-minus-circle"></i></a>
-                  <div id="faq5" class="collapse" data-parent="#faq-list">
-                    <p>
-                      Molestie a iaculis at erat pellentesque adipiscing commodo. Dignissim suspendisse in est ante in. Nunc vel risus commodo viverra maecenas accumsan. Sit amet nisl suscipit adipiscing bibendum est. Purus gravida quis blandit turpis cursus in
-                    </p>
-                  </div>
-                </li>
-      
-                <li>
-                  <a data-toggle="collapse" href="#faq6" class="collapsed">Tortor vitae purus faucibus ornare. Varius vel pharetra vel turpis nunc eget lorem dolor? <i class="fa fa-minus-circle"></i></a>
+                  <a data-toggle="collapse" href="#faq6" class="collapsed">Tem algum custo para ter acesso aos acervos com webinar e eventos gravados? <i class="fa fa-minus-circle"></i></a>
                   <div id="faq6" class="collapse" data-parent="#faq-list">
-                    <p>
-                      Laoreet sit amet cursus sit amet dictum sit amet justo. Mauris vitae ultricies leo integer malesuada nunc vel. Tincidunt eget nullam non nisi est sit amet. Turpis nunc eget lorem dolor sed. Ut venenatis tellus in metus vulputate eu scelerisque. Pellentesque diam volutpat commodo sed egestas egestas fringilla phasellus faucibus. Nibh tellus molestie nunc non blandit massa enim nec.
-                    </p>
+                    <p>Não, queremos que todos consigam acessar o acervo, você só precisa ter realizado o Login para assistir.</p>
+                  </div>
+                </li>
+
+                  <li>
+                  <a data-toggle="collapse" href="#faq5" class="collapsed">Quem devo contatar se ainda tiver dúvidas? <i class="fa fa-minus-circle"></i></a>
+                  <div id="faq5" class="collapse" data-parent="#faq-list">
+                    <p>Para perguntas gerais, entre em contato através de alguns de nossos meios de contato. <a href="#contact">Clique aqui</a> Para ser direcionado à área de contato.
                   </div>
                 </li>
       
@@ -676,26 +651,23 @@
     </section>
 
     <!--==========================
-      Sessão Receber Noticias
+      Sessão Subscribe
     ============================-->
     <section id="subscribe">
-      <div class="container wow fadeInUp">
+      <div class="container">
         <div class="section-header">
           <h2>A gente te avisa</h2>
           <p>Nos informe seu e-mail para receber informações com novos seminários e eventos.</p>
         </div>
-
-        <form method="POST" action="#">
-          <div class="form-row justify-content-center">
+        <div class="form-row justify-content-center">
             <div class="col-auto">
-              <input type="text" class="form-control" placeholder="Enter your Email">
+              <asp:TextBox ID="txtEnviarEmail" runat="server" TextMode="Email" class="form-control" placeholder="Digite o E-mail" />
+            <br />
             </div>
             <div class="col-auto">
-              <button type="submit">Enviar</button>
+              <asp:LinkButton ID="btnEnviarNotificacao" OnClick="btnEnviarNotificacao_Click" runat="server" CssClass="btn btn-outline-danger" LogoutAction="Refresh" PostBackUrl="#subscribe"><i class="fa fa-external-link"></i>&nbsp;Inscrever-se</asp:LinkButton>                
             </div>
           </div>
-        </form>
-
       </div>
     </section>
 
@@ -733,7 +705,7 @@
             <div class="contact-email">
               <i class="ion-ios-email-outline"></i>
               <h3>E-mail</h3>
-              <p><a href="mailto:info@example.com">info@example.com</a></p>
+              <p><a href="mailto:sender.email.validation@gmail.com">sender.email.validation@gmail.com</a></p>
             </div>
           </div>
 
@@ -742,29 +714,28 @@
         <div class="form">
           <div id="sendmessage">Sua mensagem foi enviada, obrigado!</div>
           <div id="errormessage"></div>
-          <form action="" method="post" role="form" class="contactForm">
+          <div class="contactForm">
             <div class="form-row">
               <div class="form-group col-md-6">
-                <input type="text" name="name" class="form-control" id="name" placeholder="Seu nome" data-rule="minlen:4" data-msg="Por favor insira ao menos 4 caracteres para o nome." />
-                <div class="validation"></div>
+                <asp:TextBox runat="server" TextMode="SingleLine" CssClass="form-control" ID="txtNomeContato" placeholder="Seu nome" data-rule="minlen:4" data-msg="Por favor insira ao menos 4 caracteres para o nome."></asp:TextBox>
               </div>
               <div class="form-group col-md-6">
-                <input type="email" class="form-control" name="email" id="email" placeholder="Seu E-mail" data-rule="email" data-msg="por favor insira um e-mail válido." />
-                <div class="validation"></div>
+                <asp:TextBox runat="server" TextMode="Email" CssClass="form-control" name="email" ID="txtEmailContato" placeholder="Seu E-mail" data-rule="email" data-msg="por favor insira um e-mail válido." />
               </div>
             </div>
             <div class="form-group">
-              <input type="text" class="form-control" name="subject" id="subject" placeholder="Titulo" data-rule="minlen:4" data-msg="Por favor insira ao menos 8 caracteres para o titulo." />
-              <div class="validation"></div>
+                <asp:TextBox runat="server" TextMode="SingleLine" CssClass="form-control" name="subject" ID="txtTituloContato" placeholder="Titulo" data-rule="minlen:4" data-msg="Por favor insira ao menos 8 caracteres para o titulo." />
             </div>
             <div class="form-group">
-              <textarea class="form-control" name="message" rows="5" data-rule="required" data-msg="por favor escreva algo para nós." placeholder="Mensagem"></textarea>
-              <div class="validation"></div>
+                <asp:TextBox runat="server" TextMode="MultiLine" CssClass="form-control" name="message" ID="txtMensagemContato" rows="5" data-rule="required" data-msg="por favor escreva algo para nós." placeholder="Mensagem" />
             </div>
-            <div class="text-center"><button type="submit">Enviar Mensagem</button></div>
-          </form>
+            <div class="text-center">
+                <asp:Label runat="server" ID="lblContato"></asp:Label><br />
+                <asp:LinkButton ID="btnEnviarMensagemContato" OnClick="btnEnviarMensagemContato_Click" runat="server" CssClass="btn btn-danger" LogoutAction="Refresh" PostBackUrl="#contact"><i class="fa fa-send"></i>&nbsp;Enviar Mensagem</asp:LinkButton>                
+            </div>
+          </div>
         </div>
-
       </div>
-    </section><!-- #contact -->
+        <br />
+    </section>
 </asp:Content>

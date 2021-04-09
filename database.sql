@@ -1,8 +1,7 @@
-﻿--Criando banco de dados com nome AggregareBD--
-CREATE DATABASE AggregareBD
+﻿CREATE DATABASE AggregateBD
 GO
 
-USE AggregareBD
+USE AggregateBD
 GO
 
 SET ANSI_NULLS ON
@@ -14,13 +13,10 @@ GO
 CREATE TABLE [dbo].[Users](
 	UserId int IDENTITY(1,1) NOT NULL,
 	Username nvarchar(40) NOT NULL,
-	City varchar(100) NOT NULL,
-	NascDate date NOT NULL,
 	[Password] varchar(32) NOT NULL,
 	Email varchar(100) NOT NULL,
 	CreatedDate datetime NOT NULL,
 	LastLoginDate datetime NULL,
-	Ativo bit not null,
 	
  CONSTRAINT PK_Users PRIMARY KEY CLUSTERED 
 (
@@ -29,22 +25,15 @@ CREATE TABLE [dbo].[Users](
 ) ON [PRIMARY]
 
 GO
-usE AggregareBD
 
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
-select * from Users
-select * from UserActivation
-delete from UserActivation
-delete from Users
 
 CREATE PROCEDURE [dbo].[Insert_User]
 	@Username VARCHAR(40),
-	@City VARCHAR(100),
-	@NascDate DATE,
 	@Password VARCHAR(32),
 	@Email VARCHAR(100)
 AS
@@ -61,16 +50,12 @@ BEGIN
 	ELSE
 	BEGIN
 		INSERT INTO [Users]
-			   ([Username]
-			   ,[City]
-			   ,[NascDate]			   
+			   ([Username]		   
 			   ,[Password]
 			   ,[Email]
 			   ,[CreatedDate])
 		VALUES
 			   (@Username
-			   ,@City
-			   ,@NascDate
 			   ,@Password
 			   ,@Email
 			   ,GETDATE())
@@ -126,13 +111,13 @@ CREATE TABLE [dbo].[UserActivation](
 	[UserId] ASC
 )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 ) ON [PRIMARY]
-
 GO
 
 --Criando tabela Cidades--
 CREATE TABLE Cidades(
 IDCidade int not null PRIMARY KEY,
 NomeCidade varchar(50) not null)
+GO
 
 INSERT INTO Cidades (IDCidade, NomeCidade) VALUES
 (1, 'Afonso Cláudio - ES'),
@@ -2137,7 +2122,6 @@ INSERT INTO Cidades (IDCidade, NomeCidade) VALUES
 (1998, 'Laranjal - MG'),
 (1999, 'Lassance - MG');
 GO
-
 INSERT INTO Cidades (IDCidade, NomeCidade) VALUES
 (2000, 'Lavras - MG'),
 (2001, 'Leandro Ferreira - MG'),
@@ -5710,6 +5694,86 @@ INSERT INTO Cidades (IDCidade, NomeCidade) VALUES
 (5562, 'Tupiratins - TO'),
 (5563, 'Wanderlândia - TO'),
 (5564, 'Xambioá - TO');
+GO
 
-drop procedure Validate_User
+CREATE TABLE Convidados(
+	IDConvidado int PRIMARY KEY IDENTITY not null,
+	UserId int FOREIGN KEY REFERENCES Users(UserId),
+	FotoConvidado varbinary(max),
+	ConvidadoBioP1 varchar(600),
+	ConvidadoDtNasc date,
+	ConvidadoCidadeUF varchar(100),
+	ConvidadoFormacao varchar(300),
+	ConvidadoReceberEmail bit
+)
+GO
+
+CREATE TABLE Palestrantes(
+	IDPalestrante int PRIMARY KEY IDENTITY not null,
+	UserId int FOREIGN KEY REFERENCES Users(UserId),
+	PalestranteFoto varbinary(max),
+	PalestranteDtNasc date,
+	PalestranteCidadeUF varchar(100),
+	PalestranteFormacao varchar(300),
+	PalestranteEspecialidade varchar(100),
+	PalestranteBioP1 varchar(600),
+	PalestranteBioP2 varchar(600)
+)
+GO
+
+CREATE TABLE Moderadores(
+	IDModerador int PRIMARY KEY IDENTITY not null,
+	UserId int FOREIGN KEY REFERENCES Users(UserId),
+)
+GO
+
+CREATE TABLE Administradores(
+	IDAdm int PRIMARY KEY IDENTITY not null,
+	UserId int FOREIGN KEY REFERENCES Users(UserId),
+)
+GO
+
+CREATE TABLE Palestras(
+	IDPalestra int PRIMARY KEY IDENTITY not null,
+	IDPalestrante int FOREIGN KEY REFERENCES Palestrantes(IDPalestrante),
+	PalestraCriador int FOREIGN KEY REFERENCES Users(UserId),
+	PalestraLink varchar(200),
+	PalestraDtCriacao date DEFAULT getdate() not null, 
+	PalestraCapa varbinary(max),
+	PalestraCategoria varchar(100),
+	PalestraTitulo varchar(100),
+	PalestraSubTitulo varchar(100),
+	PalestraSinopseP1 varchar(600),
+	PalestraSinopseP2 varchar(600),
+	PalestraSinopseP3 varchar(600),
+	PalestraSinopseP4 varchar(600),
+	PalestraDuracao time
+)
+GO
+
+CREATE TABLE Eventos(
+	IDEvento int PRIMARY KEY IDENTITY not null,
+	IDAdm int FOREIGN KEY REFERENCES Administradores(IDAdm),
+	IDPalestrante int FOREIGN KEY REFERENCES Palestrantes(IDPalestrante),
+	IDPalestra int FOREIGN KEY REFERENCES Palestras(IDPalestra),
+	EventoTitulo varchar(100),
+	EventoSubTitulo varchar(100),
+	EventoSinopseP1 varchar(600),
+	EventoSinopseP2 varchar(600),
+	EventoDt date,
+)
+GO
+
+CREATE TABLE NotificarEvento(
+	IDNotificar int PRIMARY KEY IDENTITY not null,
+	NotificarEmail varchar(200) not null
+)
+GO
+
+CREATE TABLE Solicitacoes(
+	IDSolicitacao int PRIMARY KEY IDENTITY not null,
+	Solicitacao varchar(100) not null
+)
+GO
+
 

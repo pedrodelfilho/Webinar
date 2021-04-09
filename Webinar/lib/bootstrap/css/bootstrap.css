@@ -2527,9 +2527,10 @@ fieldset:disabled a.btn {
 }
 
 .btn-danger {
-  color: #fff;
-  background-color: #dc3545;
-  border-color: #dc3545;
+    color: #fff;
+    background-color: #dc3545;
+    border-color: #dc3545;
+    border-radius: 50px
 }
 
 .btn-danger:hover {
@@ -5339,15 +5340,16 @@ button.close {
 }
 
 .modal {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 1050;
-  display: none;
-  overflow: hidden;
-  outline: 0;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1050;
+    display: none;
+    overflow: hidden;
+    -webkit-overflow-scrolling: touch;    
+    outline: 0;
 }
 
 .modal-open .modal {
@@ -5358,17 +5360,19 @@ button.close {
 .modal-dialog {
     position: relative;
     width: auto;
-    margin: 0.5rem;
-    pointer-events: none;
-    height: 100%;
+    margin: 10px;
 }
 
 .modal.fade .modal-dialog {
-  transition: -webkit-transform 0.3s ease-out;
-  transition: transform 0.3s ease-out;
-  transition: transform 0.3s ease-out, -webkit-transform 0.3s ease-out;
-  -webkit-transform: translate(0, -25%);
-  transform: translate(0, -25%);
+    -webkit-transform: translate(0,-25%);
+    -ms-transform: translate(0,-25%);
+    -o-transform: translate(0,-25%);
+    transform: translate(0,-25%);
+    -webkit-transition: -webkit-transform .3s ease-out;
+    -o-transition: -o-transform .3s ease-out;
+    transition: -webkit-transform .3s ease-out;
+    transition: transform .3s ease-out;
+    transition: transform .3s ease-out,-webkit-transform .3s ease-out,-o-transform .3s ease-out;
 }
 
 @media screen and (prefers-reduced-motion: reduce) {
@@ -5400,8 +5404,11 @@ button.close {
     pointer-events: auto;
     background-color: #fff;
     background-clip: padding-box;
-    border: 1px solid rgba(0, 0, 0, 0.2);
-    border-radius: 0.3rem;
+    border: 1px solid #999;
+    border: 1px solid rgba(0,0,0,.2);
+    border-radius: 6px;
+    -webkit-box-shadow: 0 3px 9px rgba(0,0,0,.5);
+    box-shadow: 0 3px 9px rgba(0,0,0,.5);
     outline: 0;
     max-height: 100%;
 }
@@ -5417,7 +5424,8 @@ button.close {
 }
 
 .modal-backdrop.fade {
-  opacity: 0;
+    filter: alpha(opacity=0);
+    opacity: 0
 }
 
 .modal-backdrop.show {
@@ -5425,21 +5433,20 @@ button.close {
 }
 
 .modal-header {
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-align: start;
-  align-items: flex-start;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  padding: 1rem;
-  border-bottom: 1px solid #e9ecef;
-  border-top-left-radius: 0.3rem;
-  border-top-right-radius: 0.3rem;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: start;
+    align-items: flex-start;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    padding: 15px;
+    border-bottom: 1px solid #e5e5e5;
+    border-top-left-radius: 0.3rem;
+    border-top-right-radius: 0.3rem;
 }
 
 .modal-header .close {
-  padding: 1rem;
-  margin: -1rem -1rem -1rem auto;
+    margin-top: -2px
 }
 
 .modal-title {
@@ -5451,7 +5458,7 @@ button.close {
     position: relative;
     -ms-flex: 1 1 auto;
     flex: 1 1 auto;
-    padding: 1rem;
+    padding: 15px;
     overflow: auto;
 }
 

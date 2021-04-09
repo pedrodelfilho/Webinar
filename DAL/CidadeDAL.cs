@@ -12,7 +12,7 @@ namespace DAL
 {
     public class CidadeDAL
     {
-        private string connectionString = ConfigurationManager.ConnectionStrings["AggregareBD"].ConnectionString;
+        private string connectionString = ConfigurationManager.ConnectionStrings["AggregateBD"].ConnectionString;
         public List<Cidade> ListarCidades(string uf)
         {
             List<Cidade> listarCidades = new List<Cidade>();

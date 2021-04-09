@@ -16,7 +16,7 @@ namespace Webinar
         {
             if (!this.IsPostBack)
             {
-                string constr = ConfigurationManager.ConnectionStrings["AggregareBD"].ConnectionString;
+                string constr = ConfigurationManager.ConnectionStrings["AggregateBD"].ConnectionString;
                 string activationCode = !string.IsNullOrEmpty(Request.QueryString["ActivationCode"]) ? Request.QueryString["ActivationCode"] : Guid.Empty.ToString();
                 using (SqlConnection con = new SqlConnection(constr))
                 {
