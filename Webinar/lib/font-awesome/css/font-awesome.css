@@ -69,6 +69,7 @@
 }
 .fa-pull-right {
   float: right;
+  margin-left: 10px;
 }
 .fa.fa-pull-left {
   margin-right: .3em;
@@ -78,7 +79,8 @@
 }
 /* Deprecated as of 4.4.0 */
 .pull-right {
-  float: right;
+    float: right;
+    margin-left: .3em;
 }
 .pull-left {
   float: left;

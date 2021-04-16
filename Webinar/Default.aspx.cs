@@ -13,11 +13,12 @@ using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using DAL;
+using Microsoft.AspNet.Identity;
 using Models;
 
 namespace Webinar
 {
-    public partial class Home : System.Web.UI.Page
+    public partial class Default : System.Web.UI.Page
     {
         public static bool IsValidEmail(string email)
         {
@@ -55,8 +56,10 @@ namespace Webinar
                 return false;
             }
         }
+
         protected void Page_Load(object sender, EventArgs e)
         {
+            
         }       
 
         protected void btnCadastrarUsuario_Click(object sender, EventArgs e)
@@ -69,10 +72,12 @@ namespace Webinar
                 {
                     using (SqlDataAdapter sda = new SqlDataAdapter())
                     {
+                        string tipo = "Convidado";
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.AddWithValue("@Username", txtCadastrarNome.Text.Trim());
                         cmd.Parameters.AddWithValue("@Password", Criptografia.GetMD5Hash(txtCadastrarSenha.Text.Trim()));
                         cmd.Parameters.AddWithValue("@Email", txtCadastrarEmail.Text.Trim());
+                        cmd.Parameters.AddWithValue("@Tipo", tipo);
                         cmd.Connection = con;
                         con.Open();
                         userId = Convert.ToInt32(cmd.ExecuteScalar());
@@ -91,10 +96,20 @@ namespace Webinar
                     default:
                         message = "Registro bem sucedido. O e-mail de ativação foi enviado. Verifique em sua caixa de entrada.";
                         SendActivationEmail(userId);
+                        CadastrarConvidado(userId);
                         break;
                 }
                 ClientScript.RegisterStartupScript(GetType(), "alert", "alert('" + message + "');", true);
             }
+        }
+
+        protected void CadastrarConvidado(int id)
+        {
+            Convidado objConvidado = new Convidado();
+            objConvidado.UserId = id;
+
+            UsuarioDAL uDAL = new UsuarioDAL();
+            uDAL.InserirConvidado(objConvidado);
         }
 
         private void SendActivationEmail(int userId)
@@ -116,13 +131,45 @@ namespace Webinar
                         con.Close();
                     }
                 }
-            }
+            }          
             using (MailMessage mm = new MailMessage("sender@gmail.com", txtCadastrarEmail.Text))
+            {
+                try { 
+                    mm.Subject = "Atiavação de conta";
+                    string body = "Olá " + txtCadastrarNome.Text + ",";
+                    body += "<br /><br />Clique no link a seguir para ativar sua conta";
+                    body += "<br /><a href = 'http://localhost:54970/Activation.aspx?ActivationCode=" + activationCode + "'>Clique aqui para ativar sua conta.</a>";
+                    body += "<br /><br />Obrigado";
+                    mm.Body = body;
+                    mm.IsBodyHtml = true;
+                    SmtpClient smtp = new SmtpClient();
+                    smtp.Host = "smtp.gmail.com";
+                    smtp.EnableSsl = true;
+                    smtp.UseDefaultCredentials = true;
+                    NetworkCredential NetworkCred = new NetworkCredential("sender.email.validation@gmail.com", "P@ssw0rd2021");                
+                    smtp.Credentials = NetworkCred;
+                    smtp.Port = 587;
+                    smtp.Send(mm);
+                }
+                catch { ClientScript.RegisterStartupScript(GetType(), "alert", "alert('Ocorreu um erro ao eniar o e-mail para validação da conta. Tente realizar o Login com o e-mail e senha que realizou o cadastro.');", true); }
+            }
+        }
+
+        private void ReSendActivationEmail(int userId, string mail)
+        {
+            string constr = ConfigurationManager.ConnectionStrings["AggregateBD"].ConnectionString;
+            string activationCode = Guid.NewGuid().ToString();
+
+            UsuarioDAL uDAL = new UsuarioDAL();
+            Usuario usuario = uDAL.BuscarCODE(userId);
+
+
+            using (MailMessage mm = new MailMessage("sender@gmail.com", mail))
             {
                 mm.Subject = "Atiavação de conta";
                 string body = "Olá " + txtCadastrarNome.Text + ",";
                 body += "<br /><br />Clique no link a seguir para ativar sua conta";
-                body += "<br /><a href = 'http://localhost:54970/Activation.aspx?ActivationCode=" + activationCode + "'>Clique aqui para ativar sua conta.</a>";
+                body += "<br /><a href = 'http://localhost:54970/Activation.aspx?ActivationCode=" + usuario.ActivationCode + "'>Clique aqui para ativar sua conta.</a>";
                 body += "<br /><br />Obrigado";
                 mm.Body = body;
                 mm.IsBodyHtml = true;
@@ -130,11 +177,18 @@ namespace Webinar
                 smtp.Host = "smtp.gmail.com";
                 smtp.EnableSsl = true;
                 smtp.UseDefaultCredentials = true;
-                NetworkCredential NetworkCred = new NetworkCredential("sender.email.validation@gmail.com", "P@ssw0rd2021");                
+                NetworkCredential NetworkCred = new NetworkCredential("sender.email.validation@gmail.com", "P@ssw0rd2021");
                 smtp.Credentials = NetworkCred;
                 smtp.Port = 587;
                 smtp.Send(mm);
             }
+        }
+
+        private void BuscarID(string mail)
+        {
+            UsuarioDAL uDAL = new UsuarioDAL();
+            Usuario usuario = uDAL.BuscarID(mail);
+            ReSendActivationEmail(usuario.UserId, mail);            
         }
 
         protected void btnEntrarLogin_Click(object sender, EventArgs e)
@@ -160,11 +214,21 @@ namespace Webinar
                         message = "Credencial incorreta, tente novamente.";
                         break;
                     case -2:
-                        message = "Credencial pendente de validação.";
+                        message = "Você não validou sua conta. Novo link de validação enviado para seu e-mail.";
+                        BuscarID(Login1.UserName);
                         break;
                     default:
-                        message = "Login realizado, bem vindo de volta.";
-                        //FormsAuthentication.RedirectFromLoginPage(Login1.UserName, Login1.RememberMeSet);
+                        if (!string.IsNullOrEmpty(Request.QueryString["ReturnUrl"]))
+                        {
+                            message = "Login realizado, bem vindo de volta.";
+                            FormsAuthentication.SetAuthCookie(Login1.UserName, Login1.RememberMeSet);
+                            Response.Redirect(Request.QueryString["ReturnUrl"]);                                
+                        }
+                        else
+                        {
+                            message = "Login realizado, bem vindo de volta.";
+                            FormsAuthentication.RedirectFromLoginPage(Login1.UserName, Login1.RememberMeSet);
+                        }
                         break;
                 }
                 ClientScript.RegisterStartupScript(GetType(), "alert", "alert('" + message + "');", true);
@@ -314,9 +378,9 @@ namespace Webinar
             }
             else {
                 Notificar objNotificar = new Notificar();
-                objNotificar.NotificarEmail = txtEnviarEmail.Text;
+                string email = txtEnviarEmail.Text;
                 NotificarDAL nDAL = new NotificarDAL();
-                nDAL.CadastrarEmailNotificar(objNotificar);
+                nDAL.CadastrarEmailNotificar(email);
                 ClientScript.RegisterStartupScript(GetType(), "alert", "alert('E-mail cadastrado, obrigado.');", true);
             }
         }

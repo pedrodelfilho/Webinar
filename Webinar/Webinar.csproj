@@ -65,10 +65,10 @@
       <HintPath>..\packages\Fluent.Infrastructure.2.0.0-beta-01\lib\net461\Fluent.Infrastructure.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.3\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.3\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Owin, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
@@ -166,8 +166,9 @@
     <Content Include="Activation.aspx" />
     <Content Include="contactform\contactform.js" />
     <Content Include="css\style.css" />
-    <Content Include="Home.aspx" />
+    <Content Include="Default.aspx" />
     <Content Include="img\about-bg.jpg" />
+    <Content Include="img\anonimo.jpg" />
     <Content Include="img\apple-touch-icon.png" />
     <Content Include="img\favicon.png" />
     <Content Include="img\gallery\1.jpg" />
@@ -240,7 +241,11 @@
     <Content Include="lib\venobox\venobox.min.js" />
     <Content Include="lib\wow\wow.js" />
     <Content Include="lib\wow\wow.min.js" />
-    <Content Include="readme.txt" />
+    <Content Include="PainelAdministrador.aspx" />
+    <Content Include="PainelModerador.aspx" />
+    <Content Include="PainelPalestrante.aspx" />
+    <Content Include="PainelUsuario.aspx" />
+    <Content Include="Teste.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -255,12 +260,12 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Context\DbContextLocal.cs" />
     <Compile Include="Controllers\ForumController.cs" />
-    <Compile Include="Home.aspx.cs">
-      <DependentUpon>Home.aspx</DependentUpon>
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Home.aspx.designer.cs">
-      <DependentUpon>Home.aspx</DependentUpon>
+    <Compile Include="Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
     <Compile Include="Mapper\ForumMap.cs" />
     <Compile Include="Master.Master.cs">
@@ -271,8 +276,43 @@
       <DependentUpon>Master.Master</DependentUpon>
     </Compile>
     <Compile Include="Models\Forum.cs" />
+    <Compile Include="PainelAdministrador.aspx.cs">
+      <DependentUpon>PainelAdministrador.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PainelAdministrador.aspx.designer.cs">
+      <DependentUpon>PainelAdministrador.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PainelModerador.aspx.cs">
+      <DependentUpon>PainelModerador.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PainelModerador.aspx.designer.cs">
+      <DependentUpon>PainelModerador.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PainelPalestrante.aspx.cs">
+      <DependentUpon>PainelPalestrante.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PainelPalestrante.aspx.designer.cs">
+      <DependentUpon>PainelPalestrante.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="PainelUsuario.aspx.cs">
+      <DependentUpon>PainelUsuario.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PainelUsuario.aspx.designer.cs">
+      <DependentUpon>PainelUsuario.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Teste.aspx.cs">
+      <DependentUpon>Teste.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Teste.aspx.designer.cs">
+      <DependentUpon>Teste.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Master.Master" />

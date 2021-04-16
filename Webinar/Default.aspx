@@ -1,6 +1,6 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="Home.aspx.cs" Inherits="Webinar.Home" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Webinar.Default" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <link href="css/style.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">    
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <!--==========================
@@ -35,7 +35,7 @@
                                 <asp:TextBox runat="server" class="form-control" ID="UserName" placeholder="Informe o E-mail"/><br />                               
                                 <label for="psw"><span class="fa fa-key"></span> Senha</label>
                                 <asp:TextBox runat="server" class="form-control" ID="Password" TextMode="Password" placeholder="Informe a senha"/>                                
-                                <asp:CheckBox CssClass="checkbox-inline" runat="server" ID="RememberMe" Text="Lembrar-me" /><br /><br />
+                                <asp:CheckBox CssClass="checkbox-inline" runat="server" ID="RememberMeSet" Text="Lembrar-me" /><br /><br />
                                 <asp:LinkButton ID="btnEntrarLogin" OnClick="btnEntrarLogin_Click" runat="server" CssClass="btn btn-default btn-success btn-block"><i class="fa fa-power-off"></i>&nbsp;Entrar</asp:LinkButton>                            
                                 </LayoutTemplate></asp:Login>
                             </div>

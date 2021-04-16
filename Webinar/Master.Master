@@ -45,24 +45,36 @@
   ============================-->
   <header id="header">
     <div class="container">
-
       <div id="logo" class="pull-left">
         <a href="#intro" class="scrollto"><img src="img/logo.png" alt="" title=""></a>
       </div>
-
+        <asp:LoginView runat="server" ID="LoginView1" ViewStateMode="Disabled">
+            <AnonymousTemplate>
+                <ul style="list-style: none" class="pull-right">
+                    <li class="btn-link"><asp:LinkButton runat="server" ID="btnEntrar" data-toggle="modal" data-target="#login">Entrar</asp:LinkButton></li>
+                    <li class="btn-link"><asp:LinkButton runat="server" ID="btnRegistrar" data-toggle="modal" data-target="#cadastrar">Registrar</asp:LinkButton></li>
+                </ul>
+            </AnonymousTemplate>
+            <LoggedInTemplate>
+                <ul style="list-style: none" class="pull-right">
+                    <li><asp:Label ForeColor="Red" runat="server" ID="lblOla" /></li>
+                    <li><asp:LinkButton CssClass="fa fa-gear" runat="server" ID="btnGerenciar" OnClick="btnGerenciar_Click" title="Gerenciar sua conta">Gerenciar Conta&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</asp:LinkButton>
+                    <asp:LoginStatus runat="server" LogoutAction="Redirect" LogoutPageUrl="~/Default.aspx" LogoutText="Sair" class="fa fa-sign-out" /></li>
+                </ul>
+            </LoggedInTemplate>
+        </asp:LoginView>
       <nav id="nav-menu-container">
         <ul class="nav-menu">
-          <li class="menu-active"><a href="Home.aspx">Página Inicial</a></li>
+          <li class="menu-active"><a href="Default.aspx">Página Inicial</a></li>
           <li><a href="#about">Sobre</a></li>
           <li><a href="#speakers">Palestrantes</a></li>
           <li><a href="#schedule">Eventos</a></li>
           <li><a href="#gallery">Acervo</a></li>
           <li><a href="#contact">Contato</a></li>
-            <li class="btn btn-outline-danger"><asp:LoginStatus runat="server" LoginText="Entrar" LogoutText="Sair" class="btn btn-default btn-lg" id="LoginStatus1" data-toggle="modal" LogoutAction="Refresh" data-target="#login"  /></li>
-        </ul>       
-      </nav><!-- #nav-menu-container -->
-    </div>
-  </header><!-- #header -->
+        </ul>    
+      </nav>
+        </div>
+    </header>
     
   
     <article>

@@ -13,7 +13,28 @@ namespace DAL
     {
         private string connectionString = ConfigurationManager.ConnectionStrings["AggregateBD"].ConnectionString;
 
-        public void CadastrarEmailNotificar(Notificar objNotificar)
+        public Notificar VerificarEmail(string mail)
+        {
+            Notificar email = null;
+            SqlConnection conn = new SqlConnection(connectionString);
+            conn.Open();
+
+            string sql = "SELECT * FROM NotificarEvento WHERE NotificarEmail = @mail";
+            SqlCommand cmd = new SqlCommand(sql, conn);
+            cmd.Parameters.AddWithValue("@mail", mail);
+
+            SqlDataReader dr = cmd.ExecuteReader();
+
+            if(dr.HasRows && dr.Read())
+            {
+                email = new Notificar();
+                email.NotificarEmail = dr["NotificarEmail"].ToString();
+            }
+            conn.Close();
+            return email;
+
+        }
+        public void CadastrarEmailNotificar(string mail)
         {
             SqlConnection conn = new SqlConnection(connectionString);
 
@@ -21,7 +42,7 @@ namespace DAL
 
             string sql = "INSERT INTO NotificarEvento(NotificarEmail) VALUES(@mail)";
             SqlCommand cmd = new SqlCommand(sql, conn);
-            cmd.Parameters.AddWithValue("@mail", objNotificar.NotificarEmail);
+            cmd.Parameters.AddWithValue("@mail", mail);
 
             cmd.ExecuteNonQuery();
             conn.Close();

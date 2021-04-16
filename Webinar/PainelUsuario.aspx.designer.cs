@@ -11,160 +11,151 @@ namespace Webinar
 {
 
 
-    public partial class Home
+    public partial class PainelUsuario
     {
 
         /// <summary>
-        /// Controle Login1.
+        /// Controle imgUsuario.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Login Login1;
+        protected global::System.Web.UI.WebControls.Image imgUsuario;
 
         /// <summary>
-        /// Controle txtCadastrarNome.
+        /// Controle fuUsuario.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCadastrarNome;
+        protected global::System.Web.UI.WebControls.FileUpload fuUsuario;
 
         /// <summary>
-        /// Controle txtCadastrarEmail.
+        /// Controle lblNome.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCadastrarEmail;
+        protected global::System.Web.UI.WebControls.Label lblNome;
 
         /// <summary>
-        /// Controle RegularExpressionValidator1.
+        /// Controle lblEmail.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator1;
+        protected global::System.Web.UI.WebControls.Label lblEmail;
 
         /// <summary>
-        /// Controle txtCadastrarSenha.
+        /// Controle lblCidade.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCadastrarSenha;
+        protected global::System.Web.UI.WebControls.Label lblCidade;
 
         /// <summary>
-        /// Controle btnCadastrar.
+        /// Controle txtNome.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnCadastrar;
+        protected global::System.Web.UI.WebControls.TextBox txtNome;
 
         /// <summary>
-        /// Controle txtEmailRecuperar.
+        /// Controle txtDtNasc.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtEmailRecuperar;
+        protected global::System.Web.UI.WebControls.TextBox txtDtNasc;
 
         /// <summary>
-        /// Controle RegularExpressionValidator2.
+        /// Controle ddlCidade.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator2;
+        protected global::System.Web.UI.WebControls.DropDownList ddlCidade;
 
         /// <summary>
-        /// Controle btnRecuperarSenha.
+        /// Controle DsCidade.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnRecuperarSenha;
+        protected global::System.Web.UI.WebControls.SqlDataSource DsCidade;
 
         /// <summary>
-        /// Controle txtEnviarEmail.
+        /// Controle ddlSexo.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtEnviarEmail;
+        protected global::System.Web.UI.WebControls.DropDownList ddlSexo;
 
         /// <summary>
-        /// Controle btnEnviarNotificacao.
+        /// Controle ddlEscolaridade.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnEnviarNotificacao;
+        protected global::System.Web.UI.WebControls.DropDownList ddlEscolaridade;
 
         /// <summary>
-        /// Controle txtNomeContato.
+        /// Controle DescEscolaridade.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtNomeContato;
+        protected global::System.Web.UI.WebControls.SqlDataSource DescEscolaridade;
 
         /// <summary>
-        /// Controle txtEmailContato.
+        /// Controle txtBio.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtEmailContato;
+        protected global::System.Web.UI.WebControls.TextBox txtBio;
 
         /// <summary>
-        /// Controle txtTituloContato.
+        /// Controle cbReceberEmail.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtTituloContato;
+        protected global::System.Web.UI.WebControls.CheckBox cbReceberEmail;
 
         /// <summary>
-        /// Controle txtMensagemContato.
+        /// Controle btnSalvarPerfil.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtMensagemContato;
+        protected global::System.Web.UI.WebControls.LinkButton btnSalvarPerfil;
 
         /// <summary>
-        /// Controle lblContato.
+        /// Controle labelerror.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblContato;
-
-        /// <summary>
-        /// Controle btnEnviarMensagemContato.
-        /// </summary>
-        /// <remarks>
-        /// Campo gerado automaticamente.
-        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnEnviarMensagemContato;
+        protected global::System.Web.UI.WebControls.Label labelerror;
     }
 }

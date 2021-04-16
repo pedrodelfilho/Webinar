@@ -24,13 +24,13 @@ namespace Webinar
         protected global::System.Web.UI.WebControls.ContentPlaceHolder head;
 
         /// <summary>
-        /// Controle LoginStatus1.
+        /// Controle LoginView1.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LoginStatus LoginStatus1;
+        protected global::System.Web.UI.WebControls.LoginView LoginView1;
 
         /// <summary>
         /// Controle ContentPlaceHolder1.

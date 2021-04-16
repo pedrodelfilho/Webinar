@@ -41,9 +41,7 @@
          <header id="header">
             <div class="container">
               <div id="logo" class="pull-left">
-                <!-- Uncomment below if you prefer to use a text logo -->
-                <!-- <h1><a href="#main">C<span>o</span>nf</a></h1>-->
-                <a href="home.aspx" class="scrollto"><img src="img/logo.png" alt="" title=""></a>
+                <a href="Default.aspx" class="scrollto"><img src="img/logo.png" alt="" title=""></a>
               </div>
 
               <nav id="nav-menu-container">
@@ -56,7 +54,7 @@
         <section id="intro">
     <div class="intro-container wow fadeIn">
       <h1 class="mb-4 pb-0"><span><asp:Literal ID="ltMessage" runat="server" /></span></h1>
-      <a href="home.aspx" class="about-btn scrollto">Acessar página inicial</a>
+      <a href="Default.aspx" class="about-btn scrollto">Acessar página inicial</a>
     </div>
   </section>
         
