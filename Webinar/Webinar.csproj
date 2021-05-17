@@ -170,7 +170,6 @@
     <Content Include="img\about-bg.jpg" />
     <Content Include="img\anonimo.jpg" />
     <Content Include="img\apple-touch-icon.png" />
-    <Content Include="img\delete.png" />
     <Content Include="img\favicon.png" />
     <Content Include="img\gallery\1.jpg" />
     <Content Include="img\gallery\2.jpg" />
@@ -184,7 +183,7 @@
     <Content Include="img\hotels\2.jpg" />
     <Content Include="img\hotels\3.jpg" />
     <Content Include="img\intro-bg.jpg" />
-    <Content Include="img\AthonLogo.png" />
+    <Content Include="img\logo.png" />
     <Content Include="img\speakers\1.jpg" />
     <Content Include="img\speakers\2.jpg" />
     <Content Include="img\speakers\3.jpg" />
@@ -201,7 +200,6 @@
     <Content Include="img\sponsors\7.png" />
     <Content Include="img\sponsors\8.png" />
     <Content Include="img\subscribe-bg.jpg" />
-    <Content Include="img\Users.png" />
     <Content Include="img\venue-gallery\1.jpg" />
     <Content Include="img\venue-gallery\2.jpg" />
     <Content Include="img\venue-gallery\3.jpg" />
@@ -243,16 +241,11 @@
     <Content Include="lib\venobox\venobox.min.js" />
     <Content Include="lib\wow\wow.js" />
     <Content Include="lib\wow\wow.min.js" />
-    <Content Include="NewPalestra.aspx" />
     <Content Include="PainelAdministrador.aspx" />
     <Content Include="PainelModerador.aspx" />
     <Content Include="PainelPalestrante.aspx" />
     <Content Include="PainelUsuario.aspx" />
-    <Content Include="frmPalestra.aspx" />
-    <Content Include="PreviewHome.aspx" />
-    <Content Include="PreviewPalestra.aspx" />
-    <Content Include="PreviewPalestrante.aspx" />
-    <Content Include="PreviewUsuarios.aspx" />
+    <Content Include="Teste.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -283,13 +276,6 @@
       <DependentUpon>Master.Master</DependentUpon>
     </Compile>
     <Compile Include="Models\Forum.cs" />
-    <Compile Include="NewPalestra.aspx.cs">
-      <DependentUpon>NewPalestra.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="NewPalestra.aspx.designer.cs">
-      <DependentUpon>NewPalestra.aspx</DependentUpon>
-    </Compile>
     <Compile Include="PainelAdministrador.aspx.cs">
       <DependentUpon>PainelAdministrador.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -311,41 +297,6 @@
     <Compile Include="PainelPalestrante.aspx.designer.cs">
       <DependentUpon>PainelPalestrante.aspx</DependentUpon>
     </Compile>
-    <Compile Include="frmPalestra.aspx.cs">
-      <DependentUpon>frmPalestra.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="frmPalestra.aspx.designer.cs">
-      <DependentUpon>frmPalestra.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="PreviewHome.aspx.cs">
-      <DependentUpon>PreviewHome.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="PreviewHome.aspx.designer.cs">
-      <DependentUpon>PreviewHome.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="PreviewPalestra.aspx.cs">
-      <DependentUpon>PreviewPalestra.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="PreviewPalestra.aspx.designer.cs">
-      <DependentUpon>PreviewPalestra.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="PreviewPalestrante.aspx.cs">
-      <DependentUpon>PreviewPalestrante.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="PreviewPalestrante.aspx.designer.cs">
-      <DependentUpon>PreviewPalestrante.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="PreviewUsuarios.aspx.cs">
-      <DependentUpon>PreviewUsuarios.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="PreviewUsuarios.aspx.designer.cs">
-      <DependentUpon>PreviewUsuarios.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="PainelUsuario.aspx.cs">
@@ -354,6 +305,13 @@
     </Compile>
     <Compile Include="PainelUsuario.aspx.designer.cs">
       <DependentUpon>PainelUsuario.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Teste.aspx.cs">
+      <DependentUpon>Teste.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Teste.aspx.designer.cs">
+      <DependentUpon>Teste.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

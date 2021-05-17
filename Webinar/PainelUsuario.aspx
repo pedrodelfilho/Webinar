@@ -3,8 +3,11 @@
     <link href="css/style.css" rel="stylesheet">    
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-
- <div style="background: rgba(6, 12, 34, 0.8);" id="intro-container"><br /><br />
+    <!--==========================
+    Intro Section
+  ============================-->
+<div id="intro">
+    <div class="intro-container wow fadeIn">
         <div class="mt-5 mb-5">
             <div class="row">
                 <div class="col-md-3">
@@ -74,21 +77,7 @@
                     </div>
                 </div>                
             </div>
-        </div><br /><br /><br /><br /><br />
+        </div>
     </div>
-    <script>
-         $("#<%=fuUsuario.ClientID%>").on('change', function () {
-             if (this.files[0].type.indexOf("image") > -1) {
-                 var reader = new FileReader();
-                 reader.onload = function (e) {
-                     $('#<%=imgUsuario.ClientID%>').attr('src', e.target.result);
-            }
-            reader.readAsDataURL(this.files[0]);
-        }
-        else {                
-            $('#<%=imgUsuario.ClientID%>').attr('src', '');
-                alert('Não é uma imagem válida')
-            }
-        });
-    </script>
+</div>
 </asp:Content>

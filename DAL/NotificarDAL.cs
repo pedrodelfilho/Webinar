@@ -25,10 +25,11 @@ namespace DAL
 
             SqlDataReader dr = cmd.ExecuteReader();
 
-            
-            email = new Notificar();
-            try { email.NotificarEmail = dr["NotificarEmail"].ToString(); } catch { email.NotificarEmail = null; }
-
+            if(dr.HasRows && dr.Read())
+            {
+                email = new Notificar();
+                email.NotificarEmail = dr["NotificarEmail"].ToString();
+            }
             conn.Close();
             return email;
 

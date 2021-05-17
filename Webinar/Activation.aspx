@@ -41,7 +41,7 @@
          <header id="header">
             <div class="container">
               <div id="logo" class="pull-left">
-                <a href="Default.aspx" class="scrollto"><img src="img/AthonLogo.png" alt="" title=""></a>
+                <a href="Default.aspx" class="scrollto"><img src="img/logo.png" alt="" title=""></a>
               </div>
 
               <nav id="nav-menu-container">
