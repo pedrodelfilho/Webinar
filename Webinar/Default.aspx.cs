@@ -11,6 +11,7 @@ using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Security;
 using System.Web.UI;
+using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using DAL;
 using Microsoft.AspNet.Identity;
@@ -27,8 +28,7 @@ namespace Webinar
 
             try
             {
-                email = Regex.Replace(email, @"(@)(.+)$", DomainMapper,
-                                      RegexOptions.None, TimeSpan.FromMilliseconds(200));
+                email = Regex.Replace(email, @"(@)(.+)$", DomainMapper, RegexOptions.None, TimeSpan.FromMilliseconds(200));
                 string DomainMapper(Match match)
                 {
                     var idn = new IdnMapping();
@@ -40,27 +40,81 @@ namespace Webinar
             {
                 return false;
             }
-            catch (ArgumentException e)
-            {
-                return false;
-            }
+            catch (ArgumentException e) { return false; }
 
-            try
-            {
-                return Regex.IsMatch(email,
-                    @"^[^@\s]+@[^@\s]+\.[^@\s]+$",
-                    RegexOptions.IgnoreCase, TimeSpan.FromMilliseconds(250));
-            }
-            catch (RegexMatchTimeoutException)
-            {
-                return false;
-            }
+            try { return Regex.IsMatch(email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$", RegexOptions.IgnoreCase, TimeSpan.FromMilliseconds(250)); }
+            catch (RegexMatchTimeoutException) { return false; }
         }
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            
-        }       
+            CarregarHome();
+        }
+
+        protected void CarregarHome()
+        {
+            HomeDAL hDAL = new HomeDAL();
+            Home objHome = hDAL.PreencherHome();
+
+            string titulo = objHome.Titulo;
+            string destaque = objHome.TituloDestaque;
+
+            int total = titulo.Length;
+            int alvo = destaque.Length;
+            int primeiro = titulo.LastIndexOf(destaque);
+            int segundo1 = alvo + primeiro;
+            int segundo2 = total - segundo1;
+
+            string titulo1 = titulo.Substring(0, primeiro);
+            string titulo2 = titulo.Substring(segundo1, segundo2);
+
+            var i = new HtmlGenericControl("i");
+            i.Attributes["class"] = "fa fa-minus-circle";
+            var ii = new HtmlGenericControl("i");
+            ii.Attributes["class"] = "fa fa-minus-circle";
+            var iii = new HtmlGenericControl("i");
+            iii.Attributes["class"] = "fa fa-minus-circle";
+            var iiii = new HtmlGenericControl("i");
+            iiii.Attributes["class"] = "fa fa-minus-circle";
+            var iiiii = new HtmlGenericControl("i");
+            iiiii.Attributes["class"] = "fa fa-minus-circle";
+
+            var span = new HtmlGenericControl("span");
+            span.InnerHtml = "<br />" + destaque;
+
+            var span1 = new HtmlGenericControl("span");
+            span1.InnerHtml = titulo2;
+            span1.Attributes["style"] = "color:white";
+
+            lblTitulo.InnerText = titulo1;
+            lblTitulo.Controls.Add(span);
+            lblTitulo.Controls.Add(span1);
+            lblSubTitulo.InnerText = objHome.SubTitulo;
+            lblLink.Attributes["href"] = objHome.LinkIntro;
+            lblQuemSomos.InnerText = objHome.QuemSomos;
+            lblQuando.InnerText = objHome.Quando;
+            lblOnde.InnerText = objHome.Onde;
+            lblPergunta1.InnerHtml = objHome.Pergunta1;
+            lblResposta1.InnerText = objHome.Responsta1;
+            lblPergunta2.InnerHtml = objHome.Pergunta2;
+            lblResposta2.InnerText = objHome.Responsta2;
+            lblPergunta3.InnerHtml = objHome.Pergunta3;
+            lblResposta3.InnerText = objHome.Responsta3;
+            lblPergunta4.InnerHtml = objHome.Pergunta4;
+            lblResposta4.InnerText = objHome.Responsta4;
+            lblPergunta5.InnerHtml = objHome.Pergunta5;
+            lblResposta5.InnerText = objHome.Responsta5;
+            lblEndereco.InnerText = objHome.Endereco;
+            lblTelefone.InnerText = objHome.Telefone;
+            lblTelefone.Attributes["href"] = "tel:+55" + objHome.Telefone;
+            lblEmail.InnerText = objHome.Email;
+            lblEmail.Attributes["href"] = "mailto:" + objHome.Email;
+            lblPergunta1.Controls.Add(i);
+            lblPergunta2.Controls.Add(ii);
+            lblPergunta3.Controls.Add(iii);
+            lblPergunta4.Controls.Add(iiii);
+            lblPergunta5.Controls.Add(iiiii);
+        }
 
         protected void btnCadastrarUsuario_Click(object sender, EventArgs e)
         {
@@ -151,7 +205,7 @@ namespace Webinar
                     smtp.Port = 587;
                     smtp.Send(mm);
                 }
-                catch { ClientScript.RegisterStartupScript(GetType(), "alert", "alert('Ocorreu um erro ao eniar o e-mail para validação da conta. Tente realizar o Login com o e-mail e senha que realizou o cadastro.');", true); }
+                catch { ClientScript.RegisterStartupScript(GetType(), "alert", "alert('Ocorreu um erro ao enviar o e-mail para validação da conta. Tente realizar o Login com o e-mail e senha que realizou o cadastro.');", true); }
             }
         }
 

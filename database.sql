@@ -1,4 +1,5 @@
-﻿CREATE DATABASE AggregateBD
+﻿
+CREATE DATABASE AggregateBD
 GO
 
 USE AggregateBD
@@ -17,7 +18,7 @@ CREATE TABLE [dbo].[Users](
 	Email varchar(100) NOT NULL,
 	CreatedDate datetime NOT NULL,
 	LastLoginDate datetime NULL,
-	Tipo varchar(13) not null,
+	Tipo varchar(100) not null,
 	
  CONSTRAINT PK_Users PRIMARY KEY CLUSTERED 
 (
@@ -37,7 +38,7 @@ CREATE PROCEDURE [dbo].[Insert_User]
 	@Username VARCHAR(40),
 	@Password VARCHAR(32),
 	@Email VARCHAR(100),
-	@Tipo varchar(13)
+	@Tipo varchar(100)
 AS
 BEGIN
 	SET NOCOUNT ON;
@@ -5700,9 +5701,43 @@ INSERT INTO Cidades (IDCidade, NomeCidade) VALUES
 (5564, 'Xambioá - TO');
 GO
 
-CREATE TABLE Convidados(
-	IDConvidado int PRIMARY KEY IDENTITY not null,
+CREATE TABLE Home(
+	IDHome int PRIMARY KEY IDENTITY not null,
 	UserId int FOREIGN KEY REFERENCES Users(UserId),
+	DtHome datetime DEFAULT GETDATE() not null,
+	Titulo varchar(200) not null,
+	TituloDestaque varchar(50) null,
+	SubTitulo varchar(100) not null,
+	LinkIntro varchar(200) not null,
+	QuemSomos varchar(600) not null,
+	Quando varchar(600) not null,
+	Onde varchar(600) not null,
+	Pergunta1 varchar(400) not null,
+	Resposta1 varchar(400) not null,
+	Pergunta2 varchar(400) not null,
+	Resposta2 varchar(400) not null,
+	Pergunta3 varchar(400) not null,
+	Resposta3 varchar(400) not null,
+	Pergunta4 varchar(400) not null,
+	Resposta4 varchar(400) not null,
+	Pergunta5 varchar(400) not null,
+	Resposta5 varchar(400) not null,
+	Endereco varchar(400) not null,
+	Telefone varchar(400) not null,
+	Email varchar(200) not null,
+	EmailADM varchar(200) not null	
+)
+GO
+
+INSERT INTO Home(Titulo, TituloDestaque, SubTitulo,LinkIntro,QuemSomos,Quando,Onde,Pergunta1,Resposta1,Pergunta2,Resposta2,Pergunta3,Resposta3,Pergunta4,Resposta4,Pergunta5,Resposta5,Endereco,Telefone,Email,EmailADM) VALUES('Pensar positivo é agregar valor em seu potencial', 'agregar', 'Aggregate Webinar. A hora é agora.', 
+'https://www.youtube.com/watch?v=jDDaplaOz7Q', 'A melhor e mais envolvente plataforma de palestras para fins educacionais', 'Palestras realizadas em tempo real, acesso a conteúdos gravados',
+'Empresa localizada em Sorocaba SP/Brasil', 'Não consigo comparecer ao seminário no horário agendado. Posso assistir mais tarde?','Sim, a menos que seja um evento somente ao vivo (declarado na descrição do evento), iremos gravá-lo e postar a gravação de vídeo e slides online posteriormente.',
+'Como faço o cadastro no site Aggregate?','No cabeçalho da página inicial, acesse o formulário de cadastro através do botão "logon", em seguida clique em "Não possuí cadastro. Preencha os campos com seus dados, ao pressionar o botão "Cadastrar" um link de confirmação será enviado para o seu e-mail.',
+'Eu preciso me silenciar no webinar?', 'Não, nós cuidaremos disso para você. Como participante, você é silenciado automaticamente.','Preciso estar logado no Aggregate para ter acesso aos vídeos de Webinar?','Sim, precisamos das informações básicas dos usuários, para fornecemos um certificado aos mesmos presentes no webinar.',
+'Tem algum custo para ter acesso aos acervos com webinar e eventos gravados?','Não, queremos que todos consigam acessar o acervo, você só precisa ter realizado o Login para assistir.','Rua da Penha, 1181 - Centro, Sorocaba - SP, Brasil','+55 15 3232 3232','sender.email.validation@gmail.com','sender.email.validation@gmail.com')
+
+CREATE TABLE Convidados(
+	IDConvidados int FOREIGN KEY REFERENCES Users(UserId),
 	FotoConvidado varbinary(max),
 	SexoConvidado char(1),
 	EscolaridadeConvidado varchar(100),
@@ -5713,75 +5748,81 @@ CREATE TABLE Convidados(
 )
 GO
 
+CREATE TABLE ConEmpresarial(
+	IDConEmpresarial int PRIMARY KEY IDENTITY not null,
+	NmConEmpresarial varchar(50) not null,
+	LogoConEmpresarial varbinary(max) not null,
+	DtIniConEmpresarial datetime DEFAULT getdate() not null
+)
+GO
+
 CREATE TABLE Palestrantes(
-	IDPalestrante int PRIMARY KEY IDENTITY not null,
-	UserId int FOREIGN KEY REFERENCES Users(UserId),
+	IDPalestrante int FOREIGN KEY REFERENCES Users(UserId),
 	PalestranteFoto varbinary(max),
-	PalestranteDtNasc date,
+	PalestranteDtNasc datetime,
 	PalestranteCidadeUF varchar(100),
 	PalestranteSexo char(1),
 	PalestranteFormacao varchar(300),
 	PalestranteEspecialidade varchar(100),
 	PalestranteBioP1 varchar(600),
 	PalestranteBioP2 varchar(600),
-	PerfilAprovado bit
+	PerfilAprovado bit,
+	PalestranteReceberEmail bit,
+	PalestranteAutoriza bit,
+	PalestranteTwiter varchar(200),
+	PalestranteFacebook varchar(200),
+	PalestranteGoogle varchar(200),
+	PalestranteLinkedin varchar(200)
 )
 GO
 
 CREATE TABLE Moderadores(
-	IDModerador int PRIMARY KEY IDENTITY not null,
-	UserId int FOREIGN KEY REFERENCES Users(UserId),
+	IDModerador int FOREIGN KEY REFERENCES Users(UserId),
 )
 GO
 
 CREATE TABLE Administradores(
-	IDAdm int PRIMARY KEY IDENTITY not null,
-	UserId int FOREIGN KEY REFERENCES Users(UserId),
+	IDAdministrador int FOREIGN KEY REFERENCES Users(UserId),
 )
 GO
 
 CREATE TABLE Palestras(
 	IDPalestra int PRIMARY KEY IDENTITY not null,
-	IDPalestrante int FOREIGN KEY REFERENCES Palestrantes(IDPalestrante),
-	PalestraCriador int FOREIGN KEY REFERENCES Users(UserId),
-	PalestraLink varchar(200),
-	PalestraDtCriacao date DEFAULT getdate() not null, 
-	PalestraCapa varbinary(max),
-	PalestraCategoria varchar(100),
-	PalestraTitulo varchar(100),
-	PalestraSubTitulo varchar(100),
-	PalestraSinopseP1 varchar(600),
+	IDPalestrante int FOREIGN KEY REFERENCES Users(UserId) not null,
+	PalestraCriador int FOREIGN KEY REFERENCES Users(UserId) not null,
+	PalestraLink varchar(200) not null,
+	PalestraDtCriacao datetime DEFAULT getdate() not null, 
+	PalestraCapa varbinary(max) not null,
+	PalestraCategoria varchar(100) not null,
+	PalestraTitulo varchar(100) not null,
+	PalestraSubTitulo varchar(100) not null,
+	PalestraSinopseP1 varchar(600) not null,
 	PalestraSinopseP2 varchar(600),
 	PalestraSinopseP3 varchar(600),
 	PalestraSinopseP4 varchar(600),
-	PalestaDemonstrar bit,
-	PalestraDuracao time,
-	PalestraAprovada bit
+	PalestraDuracao varchar(5) not null,
+	PalestraData datetime not null,
+	PalestraAutoriza bit not null,
+	PalestraAprovada bit not null
 )
 GO
 
 CREATE TABLE Eventos(
 	IDEvento int PRIMARY KEY IDENTITY not null,
-	IDAdm int FOREIGN KEY REFERENCES Administradores(IDAdm),
-	IDPalestrante int FOREIGN KEY REFERENCES Palestrantes(IDPalestrante),
-	IDPalestra int FOREIGN KEY REFERENCES Palestras(IDPalestra),
-	EventoTitulo varchar(100),
-	EventoSubTitulo varchar(100),
-	EventoSinopseP1 varchar(600),
+	IDAdm int FOREIGN KEY REFERENCES Users(UserId) not null,
+	IDPalestrante int FOREIGN KEY REFERENCES Users(UserId) not null,
+	IDPalestra int FOREIGN KEY REFERENCES Palestras(IDPalestra) not null,
+	EventoTitulo varchar(100) not null,
+	EventoSubTitulo varchar(100) not null,
+	EventoSinopseP1 varchar(600) not null,
 	EventoSinopseP2 varchar(600),
-	EventoDt date,
+	EventoDt datetime not null,
 )
 GO
 
 CREATE TABLE NotificarEvento(
 	IDNotificar int PRIMARY KEY IDENTITY not null,
 	NotificarEmail varchar(200) not null
-)
-GO
-
-CREATE TABLE Solicitacoes(
-	IDSolicitacao int PRIMARY KEY IDENTITY not null,
-	Solicitacao varchar(100) not null
 )
 GO
 
@@ -6244,23 +6285,28 @@ INSERT INTO Cursos(DsCurso) VALUES
 ('Viticultura e Enologia')
 GO
 
+INSERT Users(Username, Password, Email, CreatedDate, Tipo) VALUES(
+'Gabriel Toledo', 'svkLRj9nYEgZo7gWDJD5IQ==', 'gabrieltoledo@gmail.com', GETDATE(), 'Convidado'), 
+('Admin',	'svkLRj9nYEgZo7gWDJD5IQ==',	'admin@gmail.com', '2021-05-11 16:02:18.057', 'Administrador'),
+('Pedro Del Antonio Filho',	'svkLRj9nYEgZo7gWDJD5IQ==',	'pedro.dell16@gmail.com', '2021-05-12 17:10:36.067', 'Convidado'),
+('Marcelo',	'svkLRj9nYEgZo7gWDJD5IQ==',	'marcelosales@gmail.com', '2021-05-13 09:01:09.737', 'Convidado'),
+('Ana Claudia','svkLRj9nYEgZo7gWDJD5IQ==','anaclaudia@gmail.com','2021-05-13 09:01:09.737', 'Convidado'),
+('Fabio Fernandez','svkLRj9nYEgZo7gWDJD5IQ==','fabiofernandez@gmail.com','2021-05-13 09:01:09.737', 'Convidado'),
+('Rodrigo Andrade','svkLRj9nYEgZo7gWDJD5IQ==','rodrigoandrade@gmail.com','2021-05-13 09:01:09.737', 'Convidado'),
+('Cristovão Colombo','svkLRj9nYEgZo7gWDJD5IQ==','cristovaocolombo@gmail.com','2021-05-13 09:01:09.737', 'Convidado'),
+('José Maria','svkLRj9nYEgZo7gWDJD5IQ==','josemaria@gmail.com','2021-05-13 09:01:09.737', 'Convidado'),
+('Patricia Chiarato','svkLRj9nYEgZo7gWDJD5IQ==','patriciachiarato@gmail.com','2021-05-13 09:01:09.737', 'Convidado'),
+('Fernanda Abreu','svkLRj9nYEgZo7gWDJD5IQ==','fernandaabreu@gmail.com','2021-05-13 09:01:09.737', 'Convidado'),
+('Roberta Farias','svkLRj9nYEgZo7gWDJD5IQ==','robertafarias@gmail.com','2021-05-13 09:01:09.737', 'Convidado'),
+('Steve Jobs','svkLRj9nYEgZo7gWDJD5IQ==','stevejobs@gmail.com','2021-05-13 09:01:09.737', 'Convidado'),
+('Fabian Takaki','svkLRj9nYEgZo7gWDJD5IQ==','ftakaki@gmail.com','2021-05-13 09:01:09.737', 'Convidado'),
+('Cristiane Troina Ferreira','svkLRj9nYEgZo7gWDJD5IQ==','cristroina@gmail.com','2021-05-13 09:01:09.737', 'Convidado'),
+('Adriana Lobo Müller','svkLRj9nYEgZo7gWDJD5IQ==','adrianalobo@gmail.com','2021-05-13 09:01:09.737', 'Convidado'),
+('Samara Xavier','svkLRj9nYEgZo7gWDJD5IQ==','samara xavier@gmail.com','2021-05-13 09:01:09.737', 'Convidado'),
+('André Senador','svkLRj9nYEgZo7gWDJD5IQ==','andresenador@gmail.com','2021-05-13 09:01:09.737', 'Convidado'),
+('Marilena Aparecida de Souza Rosalen','svkLRj9nYEgZo7gWDJD5IQ==','marilenaaparecida@gmail.com','2021-05-13 09:01:09.737', 'Convidado'),
+('Damaris de Melo Pádua Vieira','svkLRj9nYEgZo7gWDJD5IQ==','damarismelo@gmail.com','2021-05-13 09:01:09.737', 'Convidado')
+GO
 
---select * from Users
-select * from Convidados
---select * from UserActivation
---delete Users
---delete Convidados
---delete UserActivation
-
---select Users.Username, Users.Email FROM Users INNER JOIN Convidados ON Users.UserId=4 AND Convidados.UserId=4
-
---update Users set Users.Username = 'Pedro Del' where Users.UserId = 4 AND Convidados.UserId = 4
-
---SELECT convert varchar(100) ActivationCode FROM UserActivation WHERE UserId = 1
---SELECT ActivationCode FROM UserActivation WHERE UserId = 1
---select * from Users
---select * from Convidados
---select * from UserActivation
---select convert(varchar(10), getdate(), 103)
-
-UPDATE Convidados SET SexoConvidado = 'Masculino', ConvidadoBioP1 = 'Ola Mundo', ConvidadoDtNasc = '15/05/1989', EscolaridadeConvidado = 'Fundamental - Incompleto', ConvidadoCidadeUF = 'Sorocaba - SP' , ConvidadoReceberEmail = 'true' WHERE UserId = 1
+select * from Palestrantes
+select * from Users

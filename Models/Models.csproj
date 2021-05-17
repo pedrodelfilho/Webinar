@@ -61,8 +61,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Cidade.cs" />
+    <Compile Include="Conexao.cs" />
     <Compile Include="Criptografia.cs" />
+    <Compile Include="Home.cs" />
     <Compile Include="Notificar.cs" />
+    <Compile Include="Palestra.cs" />
     <Compile Include="Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

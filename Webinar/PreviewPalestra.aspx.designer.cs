@@ -11,8 +11,17 @@ namespace Webinar
 {
 
 
-    public partial class Default
+    public partial class PreviewPalestra
     {
+
+        /// <summary>
+        /// Controle imgPalestra.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image imgPalestra;
 
         /// <summary>
         /// Controle lblTitulo.
@@ -21,7 +30,7 @@ namespace Webinar
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblTitulo;
+        protected global::System.Web.UI.WebControls.Label lblTitulo;
 
         /// <summary>
         /// Controle lblSubTitulo.
@@ -30,250 +39,97 @@ namespace Webinar
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblSubTitulo;
+        protected global::System.Web.UI.WebControls.Label lblSubTitulo;
 
         /// <summary>
-        /// Controle lblLink.
+        /// Controle lblCategoria.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor lblLink;
+        protected global::System.Web.UI.WebControls.Label lblCategoria;
 
         /// <summary>
-        /// Controle Login1.
+        /// Controle lblDataExibir.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Login Login1;
+        protected global::System.Web.UI.WebControls.Label lblDataExibir;
 
         /// <summary>
-        /// Controle txtCadastrarNome.
+        /// Controle lblDuracao.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCadastrarNome;
+        protected global::System.Web.UI.WebControls.Label lblDuracao;
 
         /// <summary>
-        /// Controle txtCadastrarEmail.
+        /// Controle lblSinopseP1.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCadastrarEmail;
+        protected global::System.Web.UI.WebControls.Label lblSinopseP1;
 
         /// <summary>
-        /// Controle RegularExpressionValidator1.
+        /// Controle lblSinopseP2.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator1;
+        protected global::System.Web.UI.WebControls.Label lblSinopseP2;
 
         /// <summary>
-        /// Controle txtCadastrarSenha.
+        /// Controle lblSinopseP3.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCadastrarSenha;
+        protected global::System.Web.UI.WebControls.Label lblSinopseP3;
 
         /// <summary>
-        /// Controle btnCadastrar.
+        /// Controle lblSinopseP4.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnCadastrar;
+        protected global::System.Web.UI.WebControls.Label lblSinopseP4;
 
         /// <summary>
-        /// Controle txtEmailRecuperar.
+        /// Controle lblAutoriza.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtEmailRecuperar;
+        protected global::System.Web.UI.WebControls.Label lblAutoriza;
 
         /// <summary>
-        /// Controle RegularExpressionValidator2.
+        /// Controle imgPalestrante.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator2;
+        protected global::System.Web.UI.WebControls.Image imgPalestrante;
 
         /// <summary>
-        /// Controle btnRecuperarSenha.
+        /// Controle lblNome.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnRecuperarSenha;
-
-        /// <summary>
-        /// Controle lblQuemSomos.
-        /// </summary>
-        /// <remarks>
-        /// Campo gerado automaticamente.
-        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblQuemSomos;
-
-        /// <summary>
-        /// Controle lblQuando.
-        /// </summary>
-        /// <remarks>
-        /// Campo gerado automaticamente.
-        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblQuando;
-
-        /// <summary>
-        /// Controle lblOnde.
-        /// </summary>
-        /// <remarks>
-        /// Campo gerado automaticamente.
-        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblOnde;
-
-        /// <summary>
-        /// Controle lblPergunta1.
-        /// </summary>
-        /// <remarks>
-        /// Campo gerado automaticamente.
-        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor lblPergunta1;
-
-        /// <summary>
-        /// Controle lblResposta1.
-        /// </summary>
-        /// <remarks>
-        /// Campo gerado automaticamente.
-        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblResposta1;
-
-        /// <summary>
-        /// Controle lblPergunta2.
-        /// </summary>
-        /// <remarks>
-        /// Campo gerado automaticamente.
-        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor lblPergunta2;
-
-        /// <summary>
-        /// Controle lblResposta2.
-        /// </summary>
-        /// <remarks>
-        /// Campo gerado automaticamente.
-        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblResposta2;
-
-        /// <summary>
-        /// Controle lblPergunta3.
-        /// </summary>
-        /// <remarks>
-        /// Campo gerado automaticamente.
-        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor lblPergunta3;
-
-        /// <summary>
-        /// Controle lblResposta3.
-        /// </summary>
-        /// <remarks>
-        /// Campo gerado automaticamente.
-        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblResposta3;
-
-        /// <summary>
-        /// Controle lblPergunta4.
-        /// </summary>
-        /// <remarks>
-        /// Campo gerado automaticamente.
-        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor lblPergunta4;
-
-        /// <summary>
-        /// Controle lblResposta4.
-        /// </summary>
-        /// <remarks>
-        /// Campo gerado automaticamente.
-        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblResposta4;
-
-        /// <summary>
-        /// Controle lblPergunta5.
-        /// </summary>
-        /// <remarks>
-        /// Campo gerado automaticamente.
-        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor lblPergunta5;
-
-        /// <summary>
-        /// Controle lblResposta5.
-        /// </summary>
-        /// <remarks>
-        /// Campo gerado automaticamente.
-        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblResposta5;
-
-        /// <summary>
-        /// Controle txtEnviarEmail.
-        /// </summary>
-        /// <remarks>
-        /// Campo gerado automaticamente.
-        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtEnviarEmail;
-
-        /// <summary>
-        /// Controle vbtnEnviarNotificacao.
-        /// </summary>
-        /// <remarks>
-        /// Campo gerado automaticamente.
-        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton vbtnEnviarNotificacao;
-
-        /// <summary>
-        /// Controle lblEndereco.
-        /// </summary>
-        /// <remarks>
-        /// Campo gerado automaticamente.
-        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblEndereco;
-
-        /// <summary>
-        /// Controle lblTelefone.
-        /// </summary>
-        /// <remarks>
-        /// Campo gerado automaticamente.
-        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblTelefone;
+        protected global::System.Web.UI.WebControls.Label lblNome;
 
         /// <summary>
         /// Controle lblEmail.
@@ -282,60 +138,123 @@ namespace Webinar
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblEmail;
+        protected global::System.Web.UI.WebControls.Label lblEmail;
 
         /// <summary>
-        /// Controle lblContato.
+        /// Controle lblCidade.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblContato;
+        protected global::System.Web.UI.WebControls.Label lblCidade;
 
         /// <summary>
-        /// Controle txtNomeContato.
+        /// Controle lblIdade.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtNomeContato;
+        protected global::System.Web.UI.WebControls.Label lblIdade;
 
         /// <summary>
-        /// Controle txtEmailContato.
+        /// Controle lblEspecialidade.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtEmailContato;
+        protected global::System.Web.UI.WebControls.Label lblEspecialidade;
 
         /// <summary>
-        /// Controle txtTituloContato.
+        /// Controle lblBio1.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtTituloContato;
+        protected global::System.Web.UI.WebControls.Label lblBio1;
 
         /// <summary>
-        /// Controle txtMensagemContato.
+        /// Controle lblBio2.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtMensagemContato;
+        protected global::System.Web.UI.WebControls.Label lblBio2;
 
         /// <summary>
-        /// Controle btnEnviarMensagemContato.
+        /// Controle btnTWT.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnEnviarMensagemContato;
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor btnTWT;
+
+        /// <summary>
+        /// Controle btnFACE.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor btnFACE;
+
+        /// <summary>
+        /// Controle btnGG.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor btnGG;
+
+        /// <summary>
+        /// Controle btnIN.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor btnIN;
+
+        /// <summary>
+        /// Controle btnAutorizarPalestra.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnAutorizarPalestra;
+
+        /// <summary>
+        /// Controle btnNegarPalestra.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnNegarPalestra;
+
+        /// <summary>
+        /// Controle btnSalvarPalestra.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnSalvarPalestra;
+
+        /// <summary>
+        /// Controle btnEditarPalestra.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnEditarPalestra;
     }
 }

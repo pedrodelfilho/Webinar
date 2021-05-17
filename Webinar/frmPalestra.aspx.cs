@@ -7,8 +7,10 @@ using System.Web.UI.WebControls;
 
 namespace Webinar
 {
-    public partial class Teste : System.Web.UI.Page
+    public partial class frmPalestra : System.Web.UI.Page
     {
+        internal int IDPalestrante;
+
         protected void Page_Load(object sender, EventArgs e)
         {
 

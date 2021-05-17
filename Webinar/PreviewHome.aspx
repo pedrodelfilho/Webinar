@@ -1,32 +1,8 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Webinar.Default" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="PreviewHome.aspx.cs" Inherits="Webinar.PreviewHome" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <style>
-    .botao {
-        background: #ef4136;
-        border: 0;
-        padding: 10px 40px;
-        color: #fff;
-        transition: 0.4s;
-        border-radius: 50px;
-        cursor: pointer;
-    }
-    .botaosub {
-          color: #fff;
-          background: transparent;
-          padding: 7px 22px;
-          border-radius: 50px;
-          border: 2px solid #ef4136;
-          transition: all ease-in-out 0.3s;
-          font-weight: 500;
-          margin-left: 8px;
-          margin-top: 2px;
-          line-height: 1;
-          font-size: 14px;
-        }
-    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <!--==========================
+        <!--==========================
     Intro Section
   ============================-->
   <section id="intro">
@@ -39,104 +15,7 @@
     </div>
   </section>
 
-    <!--==========================
-        Sessão Entrar
-    ============================-->
    
-        <section id="login" class="modal fade">
-            <div class="modal-dialog modal-login">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <div class="avatar">
-                            <img src="img/Users.png" alt="Avatar" />
-                        </div>
-                        <h4 class="modal-title"><span class="fa fa-unlock-alt"></span> Login</h4>
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>                        
-                    </div>
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <asp:Login ID="Login1" runat="server" Width="100%"><LayoutTemplate>
-                            <label for="usrname"><span class="fa fa-envelope"></span> E-mail</label>
-                            <asp:TextBox runat="server" class="form-control" ID="UserName" placeholder="Informe o E-mail"/><br />                               
-                            <label for="psw"><span class="fa fa-key"></span> Senha</label>
-                            <asp:TextBox runat="server" class="form-control" ID="Password" TextMode="Password" placeholder="Informe a senha"/><br />
-                            <asp:LinkButton ID="btnEntrarLogin" OnClick="btnEntrarLogin_Click" runat="server" BackColor="Green" CssClass="btn btn-primary btn-lg btn-block login-btn"><i class="fa fa-power-off"></i>&nbsp;Entrar</asp:LinkButton>                            
-                            </LayoutTemplate></asp:Login>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <ul style="list-style:none; margin-left:-40px">
-                            <li><a class="pull-left" data-dismiss="modal" data-toggle="modal" href="#cadastrar">Não possuí cadastro?</a></li>
-                            <li><a>▬</a><br /></li>
-                            <li><a class="pull-left" data-dismiss="modal" data-toggle="modal" href="#recuperar">Esqueceu a Senha?</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-    <!--==========================
-        Sessão Cadastrar
-    ============================-->
-
-    <section id="cadastrar" class="modal fade">
-            <div class="modal-dialog modal-login">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <div class="avatar">
-                            <img src="img/Users.png" alt="Avatar" />
-                        </div>
-                        <h4 class="modal-title"><span class="fa fa-user-plus"></span> Cadastrar</h4>
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>                        
-                    </div>
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label for="usrname"><span class="fa fa-user"></span> Nome</label><br />
-                            <asp:TextBox runat="server" TextMode="SingleLine" class="form-control" id="txtCadastrarNome" placeholder="Digte o Nome"/>
-                            <br />
-                            <label for="usrname"><span class="fa fa-envelope"></span> E-mail</label><br />
-                            <asp:TextBox runat="server" TextMode="Email" class="form-control" ID="txtCadastrarEmail" placeholder="Digite o E-mail"/>
-                            <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ControlToValidate="txtCadastrarEmail" ErrorMessage="E-mail inválido." ForeColor="Red" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"></asp:RegularExpressionValidator>
-                            <br />                                
-                            <label for="psw"><span class="fa fa-key"></span> Senha</label><br />
-                            <asp:TextBox runat="server" TextMode="Password" class="form-control" id="txtCadastrarSenha" placeholder="Digite a senha"/>
-                        </div>                            
-                        <asp:LinkButton ID="btnCadastrar" OnClick="btnCadastrarUsuario_Click" runat="server" CssClass="btn btn-primary btn-lg btn-block login-btn"><i class="fa fa-power-off"></i>&nbsp;Cadastrar</asp:LinkButton>                        
-                    </div>
-                    <div class="modal-footer">
-                        <a class="pull-left" data-dismiss="modal" data-toggle="modal" href="#login">Já possuí cadastro?</a>                        
-                    </div>
-                </div>
-            </div>
-        </section>
-
-    <!--==========================
-      Sessão Recuperar Senha
-    ============================-->
-
-    <section id="recuperar" class="modal fade">
-            <div class="modal-dialog modal-login">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <div class="avatar">
-                            <img src="img/Users.png" alt="Avatar" />
-                        </div>
-                        <h4 class="modal-title"><span class="fa fa-recycle"></span> Recuperar Senha</h4>
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="form-group">          
-                            <label for="usrname"><span class="fa fa-envelope"></span> E-mail</label><br />
-                            <asp:TextBox runat="server" TextMode="Email" class="form-control" ID="txtEmailRecuperar" placeholder="Digite o E-mail"/>
-                            <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ControlToValidate="txtEmailRecuperar" ErrorMessage="E-mail inválido." ForeColor="Red" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"></asp:RegularExpressionValidator>
-                                <br />
-                        </div>                            
-                        <asp:LinkButton ID="btnRecuperarSenha" OnClick="btnRecuperarSenha_Click" runat="server" CssClass="btn btn-primary btn-lg btn-block login-btn"><i class="fa fa-power-off"></i>&nbsp;Enviar</asp:LinkButton>                        
-                    </div>                    
-                </div>
-            </div>
-        </section>
-
     <!--==========================
       Sessão Sobre
     ============================-->
@@ -174,7 +53,7 @@
             <div class="speaker">
               <img src="img/speakers/1.jpg" alt="Speaker 1" class="img-fluid">
               <div class="details">
-                <h3><a href="speaker-details.html">Lucas Matarazzo</a></h3>
+                <h3><a href="#">Lucas Matarazzo</a></h3>
                 <p>O outro incidente</p>
                 <div class="social">
                   <a href=""><i class="fa fa-twitter"></i></a>
@@ -189,7 +68,7 @@
             <div class="speaker">
               <img src="img/speakers/2.jpg" alt="Speaker 2" class="img-fluid">
               <div class="details">
-                <h3><a href="speaker-details.html">Hebert Diluc</a></h3>
+                <h3><a href="#">Hebert Diluc</a></h3>
                 <p>Seguindo em frente</p>
                 <div class="social">
                   <a href=""><i class="fa fa-twitter"></i></a>
@@ -204,7 +83,7 @@
             <div class="speaker">
               <img src="img/speakers/3.jpg" alt="Speaker 3" class="img-fluid">
               <div class="details">
-                <h3><a href="speaker-details.html">Mariana Lucat</a></h3>
+                <h3><a href="#">Mariana Lucat</a></h3>
                 <p>Evite carboidratos</p>
                 <div class="social">
                   <a href=""><i class="fa fa-twitter"></i></a>
@@ -219,7 +98,7 @@
             <div class="speaker">
               <img src="img/speakers/4.jpg" alt="Speaker 4" class="img-fluid">
               <div class="details">
-                <h3><a href="speaker-details.html">josefh malaquias</a></h3>
+                <h3><a href="#">josefh malaquias</a></h3>
                 <p>Vida financeira</p>
                 <div class="social">
                   <a href=""><i class="fa fa-twitter"></i></a>
@@ -234,7 +113,7 @@
             <div class="speaker">
               <img src="img/speakers/5.jpg" alt="Speaker 5" class="img-fluid">
               <div class="details">
-                <h3><a href="speaker-details.html">Alexandre Exequiel</a></h3>
+                <h3><a href="#">Alexandre Exequiel</a></h3>
                 <p>Se livrando do aborrecimento</p>
                 <div class="social">
                   <a href=""><i class="fa fa-twitter"></i></a>
@@ -249,7 +128,7 @@
             <div class="speaker">
               <img src="img/speakers/6.jpg" alt="Speaker 6" class="img-fluid">
               <div class="details">
-                <h3><a href="speaker-details.html">William noruega</a></h3>
+                <h3><a href="#">William noruega</a></h3>
                 <p>O chamado da atualidade</p>
                 <div class="social">
                   <a href=""><i class="fa fa-twitter"></i></a>
@@ -626,35 +505,35 @@
               <ul id="faq-list">
 
                 <li>
-                  <a data-toggle="collapse" class="collapsed" href="#faq1" runat="server" id="lblPergunta1"></a>
+                  <a data-toggle="collapse" class="collapsed" href="#faq1" runat="server" id="lblPergunta1"><i class="fa fa-minus-circle"></i></a>
                   <div id="faq1" class="collapse" data-parent="#faq-list">
                     <p runat="server" id="lblResposta1"></p>
                   </div>
                 </li>
                   
                 <li>
-                  <a runat="server" data-toggle="collapse" href="#faq2" class="collapsed" id="lblPergunta2"></a>
+                  <a runat="server" data-toggle="collapse" href="#faq2" class="collapsed" id="lblPergunta2"><i class="fa fa-minus-circle"></i></a>
                   <div id="faq2" class="collapse" data-parent="#faq-list">
                     <p runat="server" id="lblResposta2"></p>
                   </div>
                 </li>
       
                 <li>
-                  <a runat="server" data-toggle="collapse" href="#faq3" class="collapsed" id="lblPergunta3"></a>
+                  <a runat="server" data-toggle="collapse" href="#faq3" class="collapsed" id="lblPergunta3"><i class="fa fa-minus-circle"></i></a>
                   <div id="faq3" class="collapse" data-parent="#faq-list">
                     <p runat="server" id="lblResposta3"></p>
                   </div>
                 </li>
       
                 <li>
-                  <a runat="server" data-toggle="collapse" href="#faq4" class="collapsed" id="lblPergunta4"></a>
+                  <a runat="server" data-toggle="collapse" href="#faq4" class="collapsed" id="lblPergunta4"><i class="fa fa-minus-circle"></i></a>
                   <div id="faq4" class="collapse" data-parent="#faq-list">
                     <p runat="server" id="lblResposta4"></p>
                   </div>
                 </li>               
       
                 <li>
-                  <a runat="server" data-toggle="collapse" href="#faq6" class="collapsed" id="lblPergunta5"></a>
+                  <a runat="server" data-toggle="collapse" href="#faq6" class="collapsed" id="lblPergunta5"><i class="fa fa-minus-circle"></i></a>
                   <div id="faq6" class="collapse" data-parent="#faq-list">
                     <p runat="server" id="lblResposta5"></p>
                   </div>
@@ -687,12 +566,10 @@
         <div class="form-row justify-content-center">
             <div class="col-auto">
               <asp:TextBox ID="txtEnviarEmail" runat="server" TextMode="Email" class="form-control" placeholder="Digite o E-mail" />
+            <br />
             </div>
-        </div><br />
-        <div class="form-row justify-content-center">
             <div class="col-auto">
-                <%--<asp:Button runat="server" ID="btnEnviarNotificacao" OnClick="btnEnviarNotificacao_Click" CssClass="botao" LogoutAction="Refresh" PostBackUrl="#subscribe" Text="Inscrever-se" />--%>
-              <asp:LinkButton ID="vbtnEnviarNotificacao" OnClick="btnEnviarNotificacao_Click" runat="server" CssClass="botaosub" LogoutAction="Refresh" PostBackUrl="#subscribe">Inscrever-se</asp:LinkButton>                
+              <asp:LinkButton ID="btnEnviarNotificacao" runat="server" CssClass="btn btn-outline-danger" LogoutAction="Refresh"><i class="fa fa-external-link"></i>&nbsp;Inscrever-se</asp:LinkButton>                
             </div>
           </div>
       </div>
@@ -724,7 +601,7 @@
             <div class="contact-phone">
               <i class="ion-ios-telephone-outline"></i>
               <h3>Telefone</h3>
-              <p runat="server" id="lblTelefone"><a id="lblTelefone1"</a></p>
+              <p runat="server" id="lblTelefone"><a id="lblTelefone1" href="#"></a></p>
             </div>
           </div>
 
@@ -732,20 +609,23 @@
             <div class="contact-email">
               <i class="ion-ios-email-outline"></i>
               <h3>E-mail</h3>
-              <p runat="server" id="lblEmail"><a id="lblEmail1"></a></p>
+              <p runat="server" id="lblEmail"><a id="lblEmail1" href="#"></a></p>
             </div>
           </div>
 
         </div>
-        <div class="text-center"><asp:Label runat="server" ID="lblContato"></asp:Label><br /><br /></div>        
-        <div class="contactForm">
+
+        <div class="form">
+          <div id="sendmessage">Sua mensagem foi enviada, obrigado!</div>
+          <div id="errormessage"></div>
+          <div class="contactForm">
             <div class="form-row">
-                <div class="form-group col-md-6">
-                    <asp:TextBox runat="server" TextMode="SingleLine" CssClass="form-control" ID="txtNomeContato" placeholder="Seu nome" data-rule="minlen:4" data-msg="Por favor insira ao menos 4 caracteres para o nome."></asp:TextBox>
-                </div>
-                <div class="form-group col-md-6">
-                    <asp:TextBox runat="server" TextMode="Email" CssClass="form-control" name="email" ID="txtEmailContato" placeholder="Seu E-mail" data-rule="email" data-msg="por favor insira um e-mail válido." />
-                </div>
+              <div class="form-group col-md-6">
+                <asp:TextBox runat="server" TextMode="SingleLine" CssClass="form-control" ID="txtNomeContato" placeholder="Seu nome" data-rule="minlen:4" data-msg="Por favor insira ao menos 4 caracteres para o nome."></asp:TextBox>
+              </div>
+              <div class="form-group col-md-6">
+                <asp:TextBox runat="server" TextMode="Email" CssClass="form-control" name="email" ID="txtEmailContato" placeholder="Seu E-mail" data-rule="email" data-msg="por favor insira um e-mail válido." />
+              </div>
             </div>
             <div class="form-group">
                 <asp:TextBox runat="server" TextMode="SingleLine" CssClass="form-control" name="subject" ID="txtTituloContato" placeholder="Titulo" data-rule="minlen:4" data-msg="Por favor insira ao menos 8 caracteres para o titulo." />
@@ -754,10 +634,12 @@
                 <asp:TextBox runat="server" TextMode="MultiLine" CssClass="form-control" name="message" ID="txtMensagemContato" rows="5" data-rule="required" data-msg="por favor escreva algo para nós." placeholder="Mensagem" />
             </div>
             <div class="text-center">
-                <asp:Button runat="server" CssClass="botao" OnClick="btnEnviarMensagemContato_Click" ID="btnEnviarMensagemContato" PostBackUrl="#contact" Text="Enviar Mensagem" />              
+                <asp:Label runat="server" ID="lblContato"></asp:Label><br />
+                <asp:LinkButton ID="btnEnviarMensagemContato" runat="server" CssClass="btn btn-outline-danger"><i class="fa fa-send"></i>&nbsp;Enviar Mensagem</asp:LinkButton>                
             </div>
           </div>
         </div>
+      </div>
         <br />
     </section>
 </asp:Content>

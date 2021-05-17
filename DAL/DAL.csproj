@@ -57,7 +57,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CidadeDAL.cs" />
+    <Compile Include="ConexaoDAL.cs" />
+    <Compile Include="HomeDAL.cs" />
     <Compile Include="NotificarDAL.cs" />
+    <Compile Include="PalestraDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UsuarioDAL.cs" />
   </ItemGroup>
