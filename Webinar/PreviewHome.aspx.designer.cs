@@ -11,7 +11,7 @@ namespace Webinar
 {
 
 
-    public partial class Default
+    public partial class PreviewHome
     {
 
         /// <summary>
@@ -40,87 +40,6 @@ namespace Webinar
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlAnchor lblLink;
-
-        /// <summary>
-        /// Controle Login1.
-        /// </summary>
-        /// <remarks>
-        /// Campo gerado automaticamente.
-        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Login Login1;
-
-        /// <summary>
-        /// Controle txtCadastrarNome.
-        /// </summary>
-        /// <remarks>
-        /// Campo gerado automaticamente.
-        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCadastrarNome;
-
-        /// <summary>
-        /// Controle txtCadastrarEmail.
-        /// </summary>
-        /// <remarks>
-        /// Campo gerado automaticamente.
-        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCadastrarEmail;
-
-        /// <summary>
-        /// Controle RegularExpressionValidator1.
-        /// </summary>
-        /// <remarks>
-        /// Campo gerado automaticamente.
-        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator1;
-
-        /// <summary>
-        /// Controle txtCadastrarSenha.
-        /// </summary>
-        /// <remarks>
-        /// Campo gerado automaticamente.
-        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCadastrarSenha;
-
-        /// <summary>
-        /// Controle btnCadastrar.
-        /// </summary>
-        /// <remarks>
-        /// Campo gerado automaticamente.
-        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnCadastrar;
-
-        /// <summary>
-        /// Controle txtEmailRecuperar.
-        /// </summary>
-        /// <remarks>
-        /// Campo gerado automaticamente.
-        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtEmailRecuperar;
-
-        /// <summary>
-        /// Controle RegularExpressionValidator2.
-        /// </summary>
-        /// <remarks>
-        /// Campo gerado automaticamente.
-        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator2;
-
-        /// <summary>
-        /// Controle btnRecuperarSenha.
-        /// </summary>
-        /// <remarks>
-        /// Campo gerado automaticamente.
-        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnRecuperarSenha;
 
         /// <summary>
         /// Controle lblQuemSomos.
@@ -249,13 +168,13 @@ namespace Webinar
         protected global::System.Web.UI.WebControls.TextBox txtEnviarEmail;
 
         /// <summary>
-        /// Controle vbtnEnviarNotificacao.
+        /// Controle btnEnviarNotificacao.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton vbtnEnviarNotificacao;
+        protected global::System.Web.UI.WebControls.LinkButton btnEnviarNotificacao;
 
         /// <summary>
         /// Controle lblEndereco.
@@ -283,15 +202,6 @@ namespace Webinar
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblEmail;
-
-        /// <summary>
-        /// Controle lblContato.
-        /// </summary>
-        /// <remarks>
-        /// Campo gerado automaticamente.
-        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblContato;
 
         /// <summary>
         /// Controle txtNomeContato.
@@ -330,12 +240,21 @@ namespace Webinar
         protected global::System.Web.UI.WebControls.TextBox txtMensagemContato;
 
         /// <summary>
+        /// Controle lblContato.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblContato;
+
+        /// <summary>
         /// Controle btnEnviarMensagemContato.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnEnviarMensagemContato;
+        protected global::System.Web.UI.WebControls.LinkButton btnEnviarMensagemContato;
     }
 }

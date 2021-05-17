@@ -30,8 +30,7 @@
   <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
 
   <!-- Main Stylesheet File -->
-  <link href="css/style.css" rel="stylesheet">
-  <%--<link href="css/login.css" rel="stylesheet">--%>
+  <link href="css/style.css?v={random number/string}" rel="stylesheet">
 
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
@@ -46,35 +45,38 @@
   <header id="header">
     <div class="container">
       <div id="logo" class="pull-left">
-        <a href="#intro" class="scrollto"><img src="img/logo.png" alt="" title=""></a>
+        <a href="#intro" class="scrollto"><img src="img/AthonLogo.png" alt="" title=""></a>
       </div>
-        <asp:LoginView runat="server" ID="LoginView1" ViewStateMode="Disabled">
-            <AnonymousTemplate>
-                <ul style="list-style: none" class="pull-right">
-                    <li class="btn-link"><asp:LinkButton runat="server" ID="btnEntrar" data-toggle="modal" data-target="#login">Entrar</asp:LinkButton></li>
-                    <li class="btn-link"><asp:LinkButton runat="server" ID="btnRegistrar" data-toggle="modal" data-target="#cadastrar">Registrar</asp:LinkButton></li>
-                </ul>
-            </AnonymousTemplate>
-            <LoggedInTemplate>
-                <ul style="list-style: none" class="pull-right">
-                    <li><asp:Label ForeColor="Red" runat="server" ID="lblOla" /></li>
-                    <li><asp:LinkButton CssClass="fa fa-gear" runat="server" ID="btnGerenciar" OnClick="btnGerenciar_Click" title="Gerenciar sua conta">Gerenciar Conta&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</asp:LinkButton>
-                    <asp:LoginStatus runat="server" LogoutAction="Redirect" LogoutPageUrl="~/Default.aspx" LogoutText="Sair" class="fa fa-sign-out" /></li>
-                </ul>
-            </LoggedInTemplate>
-        </asp:LoginView>
-      <nav id="nav-menu-container">
-        <ul class="nav-menu">
-          <li class="menu-active"><a href="Default.aspx">Página Inicial</a></li>
-          <li><a href="#about">Sobre</a></li>
-          <li><a href="#speakers">Palestrantes</a></li>
-          <li><a href="#schedule">Eventos</a></li>
-          <li><a href="#gallery">Acervo</a></li>
-          <li><a href="#contact">Contato</a></li>
-        </ul>    
-      </nav>
-        </div>
-    </header>
+         <nav id="nav-menu-container">                     
+            <ul class="nav-menu">
+                <li class="menu-active"><a href="Default.aspx">Página Inicial</a></li>
+                <li><a href="#about">Sobre</a></li>
+                <li><a href="#speakers">Palestrantes</a></li>
+                <li><a href="#schedule">Eventos</a></li>
+                <li><a href="#gallery">Acervo</a></li>
+                <li><a href="#contact">Contato</a></li>
+                <asp:LoginView runat="server" ID="LoginView1" ViewStateMode="Disabled">
+                    <AnonymousTemplate>
+                        <li class="an-login"><asp:LinkButton runat="server" ForeColor="white" Font-Bold="true" ID="btnEntrar" data-toggle="modal" data-target="#login">Login</asp:LinkButton>
+                    </AnonymousTemplate>
+                    <LoggedInTemplate>
+                        <li class="dropdown" style="margin-left:50px">
+                            <asp:Image runat="server" ID="imgLogin" Width="35" Height="35" CssClass="rounded-circle" />
+                            <asp:Label runat="server" ForeColor="#ef4136" Font-Size="16px" Font-Bold="true" ID="lblOla"></asp:Label>
+						    <ul class="dropdown">
+						        <li><a runat="server" id="EditarPerfil">Editar Perfil</a></li>
+							    <li><a runat="server" id="GerenciarConta" href="#">Gerenciar Conta</a></li>
+                                <li runat="server" visible="false" id="PainelAdm"><a href="PainelAdministrador.aspx">Painel Administrador</a></li>
+                                <li runat="server" visible="false" id="PainelMod"><a href="PainelModerador.aspx">Painel Moderador</a></li>
+							    <li><asp:LoginStatus ForeColor="Red" runat="server" LogoutAction="Redirect" LogoutPageUrl="~/Default.aspx" LogoutText="Sair"  /></li>
+						    </ul>
+					    </li>
+                    </LoggedInTemplate>
+                </asp:LoginView>          
+            </ul>    
+        </nav>
+    </div>
+</header>
     
   
     <article>
@@ -85,7 +87,7 @@
   <!--==========================
     Footer
   ============================-->
-  <footer id="footer">    
+  <footer id="footer" style="position:relative">    
     <div class="container">
       <div class="copyright">
         &copy; Copyright <strong>Aggregate</strong>. All Rights Reserved

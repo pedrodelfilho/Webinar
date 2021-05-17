@@ -11,448 +11,331 @@ namespace Webinar
 {
 
 
-    public partial class PainelAdministrador
+    public partial class NewPalestra
     {
 
         /// <summary>
-        /// Controle btnUsuarios.
+        /// Controle imgPalestra.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnUsuarios;
+        protected global::System.Web.UI.WebControls.Image imgPalestra;
 
         /// <summary>
-        /// Controle btnEventos.
+        /// Controle txtTituloPalestra.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnEventos;
+        protected global::System.Web.UI.WebControls.TextBox txtTituloPalestra;
 
         /// <summary>
-        /// Controle btnPalestras.
+        /// Controle rfv1.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnPalestras;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfv1;
 
         /// <summary>
-        /// Controle btnPendencias.
+        /// Controle RegularExpressionValidator1.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnPendencias;
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator1;
 
         /// <summary>
-        /// Controle btnPaginaInicial.
+        /// Controle txtSubTituloPalestra.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnPaginaInicial;
+        protected global::System.Web.UI.WebControls.TextBox txtSubTituloPalestra;
 
         /// <summary>
-        /// Controle btnAdicionarEvento.
+        /// Controle rfv2.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAdicionarEvento;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfv2;
 
         /// <summary>
-        /// Controle btnAdicionarPalestra.
+        /// Controle RegularExpressionValidator2.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAdicionarPalestra;
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator2;
 
         /// <summary>
-        /// Controle PanelUsuarios.
+        /// Controle txtLinkPalestra.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel PanelUsuarios;
+        protected global::System.Web.UI.WebControls.TextBox txtLinkPalestra;
 
         /// <summary>
-        /// Controle lblRes1.
+        /// Controle RequiredFieldValidator1.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblRes1;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator1;
 
         /// <summary>
-        /// Controle gvUsuarios.
+        /// Controle RegularExpressionValidator3.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvUsuarios;
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator3;
 
         /// <summary>
-        /// Controle PanelEventos.
+        /// Controle ddlCategoria.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel PanelEventos;
+        protected global::System.Web.UI.WebControls.DropDownList ddlCategoria;
 
         /// <summary>
-        /// Controle PanelPalestras.
+        /// Controle DsCategoria.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel PanelPalestras;
+        protected global::System.Web.UI.WebControls.SqlDataSource DsCategoria;
 
         /// <summary>
-        /// Controle lblResPalestras.
+        /// Controle RequiredFieldValidator2.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblResPalestras;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator2;
 
         /// <summary>
-        /// Controle gvPalestras.
+        /// Controle txtSinopseP1Palestra.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvPalestras;
+        protected global::System.Web.UI.WebControls.TextBox txtSinopseP1Palestra;
 
         /// <summary>
-        /// Controle PanelPendencias.
+        /// Controle RequiredFieldValidator3.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel PanelPendencias;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator3;
 
         /// <summary>
-        /// Controle lblResPalestrantes.
+        /// Controle RegularExpressionValidator4.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblResPalestrantes;
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator4;
 
         /// <summary>
-        /// Controle lblResPalestrante.
+        /// Controle txtSinopseP2Palestra.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblResPalestrante;
+        protected global::System.Web.UI.WebControls.TextBox txtSinopseP2Palestra;
 
         /// <summary>
-        /// Controle gvPalestrante.
+        /// Controle RegularExpressionValidator5.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvPalestrante;
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator5;
 
         /// <summary>
-        /// Controle lblResPalestra.
+        /// Controle txtSinopseP3Palestra.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblResPalestra;
+        protected global::System.Web.UI.WebControls.TextBox txtSinopseP3Palestra;
 
         /// <summary>
-        /// Controle gvPalestra.
+        /// Controle RegularExpressionValidator6.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvPalestra;
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator6;
 
         /// <summary>
-        /// Controle PanelPaginaInicial.
+        /// Controle txtSinopseP4Palestra.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel PanelPaginaInicial;
+        protected global::System.Web.UI.WebControls.TextBox txtSinopseP4Palestra;
 
         /// <summary>
-        /// Controle txtTitulo.
+        /// Controle RegularExpressionValidator7.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtTitulo;
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator7;
 
         /// <summary>
-        /// Controle txtDestaque.
+        /// Controle ddlPalestrantes.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDestaque;
+        protected global::System.Web.UI.WebControls.DropDownList ddlPalestrantes;
 
         /// <summary>
-        /// Controle txtSubTitulo.
+        /// Controle dsPalestrante.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtSubTitulo;
+        protected global::System.Web.UI.WebControls.SqlDataSource dsPalestrante;
 
         /// <summary>
-        /// Controle txtLink.
+        /// Controle RequiredFieldValidator4.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtLink;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator4;
 
         /// <summary>
-        /// Controle txtQuemSomos.
+        /// Controle txtTempoPalestra.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtQuemSomos;
+        protected global::System.Web.UI.WebControls.TextBox txtTempoPalestra;
 
         /// <summary>
-        /// Controle txtQuando.
+        /// Controle RequiredFieldValidator5.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtQuando;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator5;
 
         /// <summary>
-        /// Controle txtOnde.
+        /// Controle txtDataPalestra.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtOnde;
+        protected global::System.Web.UI.WebControls.TextBox txtDataPalestra;
 
         /// <summary>
-        /// Controle txtNomeConexaoHome.
+        /// Controle RequiredFieldValidator6.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtNomeConexaoHome;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator6;
 
         /// <summary>
-        /// Controle fuLogoConexaoEmpresarial.
+        /// Controle cbAutorizarPalestra.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload fuLogoConexaoEmpresarial;
+        protected global::System.Web.UI.WebControls.CheckBox cbAutorizarPalestra;
 
         /// <summary>
-        /// Controle imgConexaoEmpresarialHome.
+        /// Controle lblcb.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image imgConexaoEmpresarialHome;
+        protected global::System.Web.UI.WebControls.Label lblcb;
 
         /// <summary>
-        /// Controle lblResConEmpresarial.
+        /// Controle fuImageCapa.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblResConEmpresarial;
+        protected global::System.Web.UI.WebControls.FileUpload fuImageCapa;
 
         /// <summary>
-        /// Controle gvConEmpresarial.
+        /// Controle RequiredFieldValidator7.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvConEmpresarial;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator7;
 
         /// <summary>
-        /// Controle txtPergunta1.
+        /// Controle btnSalvarPalestra.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPergunta1;
+        protected global::System.Web.UI.WebControls.LinkButton btnSalvarPalestra;
 
         /// <summary>
-        /// Controle txtResposta1.
+        /// Controle btnVoltarPerfil.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtResposta1;
+        protected global::System.Web.UI.WebControls.LinkButton btnVoltarPerfil;
 
         /// <summary>
-        /// Controle txtPergunta2.
+        /// Controle btnVisualizar.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPergunta2;
-
-        /// <summary>
-        /// Controle txtResposta2.
-        /// </summary>
-        /// <remarks>
-        /// Campo gerado automaticamente.
-        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtResposta2;
-
-        /// <summary>
-        /// Controle txtPergunta3.
-        /// </summary>
-        /// <remarks>
-        /// Campo gerado automaticamente.
-        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPergunta3;
-
-        /// <summary>
-        /// Controle txtResposta3.
-        /// </summary>
-        /// <remarks>
-        /// Campo gerado automaticamente.
-        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtResposta3;
-
-        /// <summary>
-        /// Controle txtPergunta4.
-        /// </summary>
-        /// <remarks>
-        /// Campo gerado automaticamente.
-        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPergunta4;
-
-        /// <summary>
-        /// Controle txtResposta4.
-        /// </summary>
-        /// <remarks>
-        /// Campo gerado automaticamente.
-        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtResposta4;
-
-        /// <summary>
-        /// Controle txtPergunta5.
-        /// </summary>
-        /// <remarks>
-        /// Campo gerado automaticamente.
-        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPergunta5;
-
-        /// <summary>
-        /// Controle txtResposta5.
-        /// </summary>
-        /// <remarks>
-        /// Campo gerado automaticamente.
-        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtResposta5;
-
-        /// <summary>
-        /// Controle txtEndereco.
-        /// </summary>
-        /// <remarks>
-        /// Campo gerado automaticamente.
-        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtEndereco;
-
-        /// <summary>
-        /// Controle txtTelefone.
-        /// </summary>
-        /// <remarks>
-        /// Campo gerado automaticamente.
-        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtTelefone;
-
-        /// <summary>
-        /// Controle txtEmail.
-        /// </summary>
-        /// <remarks>
-        /// Campo gerado automaticamente.
-        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtEmail;
-
-        /// <summary>
-        /// Controle txtEmailADM.
-        /// </summary>
-        /// <remarks>
-        /// Campo gerado automaticamente.
-        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtEmailADM;
-
-        /// <summary>
-        /// Controle btnVisualizarPagInicial.
-        /// </summary>
-        /// <remarks>
-        /// Campo gerado automaticamente.
-        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnVisualizarPagInicial;
-
-        /// <summary>
-        /// Controle btnAplicarPagInicial.
-        /// </summary>
-        /// <remarks>
-        /// Campo gerado automaticamente.
-        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnAplicarPagInicial;
+        protected global::System.Web.UI.WebControls.LinkButton btnVisualizar;
     }
 }

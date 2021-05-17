@@ -23,19 +23,30 @@ namespace Webinar
 
         protected void btnSalvarPerfil_Click(object sender, EventArgs e)
         {
-            string empFilename = Path.GetFileName(fuUsuario.PostedFile.FileName);
-            string FilecontentType = fuUsuario.PostedFile.ContentType;
-            Stream s = fuUsuario.PostedFile.InputStream;
-            BinaryReader br = new BinaryReader(s);
-            byte[] Databytes = br.ReadBytes((Int32)s.Length);
-
             string cod = HttpContext.Current.User.Identity.Name;
             UsuarioDAL uDAL = new UsuarioDAL();
             Usuario usuario = uDAL.BuscarID(cod);
+            Usuario objUsuario = new Usuario();
+
+            objUsuario.UserId = usuario.UserId;
+            objUsuario.Username = txtNome.Text;
+            uDAL.AtualizarNomeUsuario(objUsuario);
 
             Convidado objConvidado = new Convidado();
             objConvidado.UserId = usuario.UserId;
-            objConvidado.FotoConvidado = Databytes;
+
+            if(fuUsuario.HasFile)
+            {
+                string empFilename = Path.GetFileName(fuUsuario.PostedFile.FileName);
+                string FilecontentType = fuUsuario.PostedFile.ContentType;
+                Stream s = fuUsuario.PostedFile.InputStream;
+                BinaryReader br = new BinaryReader(s);
+                byte[] Databytes = br.ReadBytes((Int32)s.Length);
+                objConvidado.FotoConvidado = Databytes;
+            }
+            else { objConvidado.FotoConvidado = null; }
+
+            
             switch (ddlSexo.SelectedValue)
             {
                 case "Masculino":
@@ -62,7 +73,7 @@ namespace Webinar
                 NotificarDAL nDAL = new NotificarDAL();
                 Notificar email = nDAL.VerificarEmail(cod);
 
-                if(email.NotificarEmail != null)
+                if(email.NotificarEmail == null)
                 {
                     nDAL.CadastrarEmailNotificar(cod);
                 }
