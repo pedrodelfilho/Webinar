@@ -27,9 +27,8 @@
     </style> 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">    
-<div style="background: rgba(6, 12, 34, 0.8);" id="intro-container"><br /><br /><br />
-        <div class="mt-5 mb-5">
-            <div class="row">
+<div style="background: rgba(25, 31, 32, 0.8);" id="intro-container"><br /><br /><br />
+        <div class="row">
                 <div class="col-md-3">
                     <div class="d-flex flex-column align-items-center text-center p-3 py-5">
                         <asp:Image runat="server" ID="imgPalestra" width="300px" />                      
@@ -134,9 +133,7 @@
                 <div class="col-md-4">
                     <div class="p-3 py-5">
                         <br /><br /><br /><br /><br /><br /><br /><br />
-                        <div class="d-flex flex-row mt-3 exp-container">
-                            <asp:LinkButton ID="btnVoltarPerfil" runat="server" OnClick="btnVoltarPerfil_Click" Width="180" CssClass="botao" ><i class="fa fa-reply"></i>&nbsp;Voltar</asp:LinkButton>
-                        </div>
+                        
                         <div class="d-flex flex-row mt-3 exp-container">
                             <asp:LinkButton ID="btnVisualizar" OnClick="btnVisualizar_Click" runat="server" Width="180" CssClass="botao"><i class="fa fa-eye"></i>&nbsp;Visualizar</asp:LinkButton>
                         </div>
@@ -144,7 +141,6 @@
                     </div>
                 </div>                                
             </div>
-        </div>
     </div>
     <script>
         $("#<%=fuImageCapa.ClientID%>").on('change', function () {

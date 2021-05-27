@@ -40,12 +40,9 @@ namespace Webinar
             string cod = HttpContext.Current.User.Identity.Name;
             UsuarioDAL uDAL = new UsuarioDAL();
             PalestraDAL pDAL = new PalestraDAL();
-            
-            
 
             Usuario usuario = uDAL.BuscarID(cod);
 
-            
             int criador = usuario.UserId;
             Usuario usuario1 = uDAL.BuscarName(ddlPalestrantes.SelectedValue); 
             Usuario usuario2 = uDAL.BuscarID(usuario1.Email);

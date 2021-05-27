@@ -27,7 +27,7 @@
     </style> 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div style="background: rgba(6, 12, 34, 0.8);" id="intro-container"><br /><br /><br />
+    <div style="background: rgba(25, 31, 32, 0.8);" id="intro-container"><br /><br /><br />
     <asp:Panel ID="PanelPalestrante" Visible="false" runat="server">
         <div class="mt-5 mb-5">
             <div class="row">
@@ -153,7 +153,7 @@
                 <div class="col-md-7">
                     <div class="p-3 py-5">
                         <div class="d-flex justify-content-between align-items-center mb-2">
-                            <h4 style="color:red;"><span class="fa fa-user-o"></span> Usuário</h4>
+                            <h4 style="color:red;"><span class="fa fa-user-o"></span> Convidado</h4>
                         </div>
                         <div class="row mt-1">
                             <div class="col-md-12">

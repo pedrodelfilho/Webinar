@@ -27,16 +27,32 @@
     </style>    
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div style="background: rgba(6, 12, 34, 0.8);" id="intro-container"><br /><br /><br />
+    <div style="background: rgba(25, 31, 32, 0.8);" id="intro-container"><br /><br /><br />
     <asp:Panel ID="PanelPerfil" runat="server">
         <div class="mt-5 mb-5">
             <div class="row">
                 <div class="col-md-3">
                     <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-                        <asp:Image runat="server" ID="imgPalestrante" CssClass="rounded-circle mt-5" width="250" /> 
+                        <asp:Image runat="server" ID="imgPalestrante" CssClass="rounded-circle mt-5" width="250" />                        
                         <asp:Label runat="server" ID="lblNome" style="color: white" class="font-weight-bold" />
                         <asp:Label runat="server" ID="lblEmail" style="color: white" />
                         <asp:Label runat="server" ID="lblCidade" style="color: white" />
+                        <div id="speakers">
+                            <div class="speaker" style="width: 350px; height: 350px;">
+                            <label style="color: white" class="labels">Estilo de apresentação na página inicial</label>
+                                <img runat="server" id="imgPalestrante1"  src="#" alt="Speaker 1" class="img-fluid" >
+                                <div class="details">
+                                    <h3><a runat="server" id="aPalestrante1" href="#"></a></h3>
+                                    <p runat="server" id="pPalestrante1"></p>
+                                    <div class="social">
+                                        <a runat="server" id="twtPalestrante1" href="#"><i class="fa fa-twitter"></i></a>
+                                        <a runat="server" id="facePalestrante1" href="#"><i class="fa fa-facebook"></i></a>
+                                        <a runat="server" id="ggPalestrante1" href="#"><i class="fa fa-google-plus"></i></a>
+                                        <a runat="server" id="inPalestrante1" href="#"><i class="fa fa-linkedin"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>   
                     </div>
                 </div>
                 <div class="col-md-5">
@@ -104,17 +120,19 @@
                                 <asp:TextBox runat="server"  CssClass="form-control" TextMode="MultiLine" ID="txtBio2" Width="100%" MaxLength="600" placeholder="Digite algo sobre você" Rows="3"></asp:TextBox>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server" ControlToValidate="txtBio2" ErrorMessage="Biografia 2 é obrigatório." ForeColor="Red"></asp:RequiredFieldValidator>
                                 <asp:RegularExpressionValidator runat="server" ID="RegularExpressionValidator4" Display="Dynamic" ForeColor="Red" ControlToValidate="txtBio2" ValidationExpression="^[\s\S]{0,600}$" ErrorMessage="Limite de 600 caracteres excedido."></asp:RegularExpressionValidator>
-                            </div>                            
-                        </div>                            
-                        <div class="row mt-2">
+                            </div>
+                            <div class="col-md-12">
+                                <label style="color: white" class="labels">Alterar foto de perfil</label>
+                                <input runat="server" class="form-control" type="file" id="formFile">
+                                <asp:Label runat="server" ForeColor="Red" ID="lblFoto" Visible="false" Text="Foto é obrigatório"></asp:Label>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
                             <div style="margin-left: 15px">
                                 <asp:CheckBox runat="server" ID="cbReceberEmail" style="color: white" Text="Receber e-mail com notificações sobre novos eventos/seminários." /><br />
                                 <asp:CheckBox runat="server" ID="cbAutorizarPerfil" style="color: white" Text="Autorizo a exibição do meu perfil ao público."/><asp:Label ID="lblcb" runat="server" ForeColor="Red" Text="&nbsp;Precisamos de sua autorização" Font-Size="16px" Visible="false"></asp:Label>
                             </div>                            
                         </div>
-                            <label style="color: white; font-size:medium;" class="labels">Alterar foto de perfil:</label>
-                            <asp:FileUpload ID="fuPalestrante" runat="server" style="color: white; font-size:small" Width="122px"/><asp:Label ID="lblFoto" runat="server" ForeColor="Red" Text="&nbsp;Foto é obrigatório" Font-Size="16px" Visible="false"></asp:Label>                            
-                            <asp:Label runat="server" ID="LabelFuPalestrante"></asp:Label>
                         <div class="mt-5 text-center">
                             <asp:LinkButton ID="btnSalvarPerfil" OnClick="btnSalvarPerfil_Click" runat="server" CssClass="botaosub"><i class="fa fa-save"></i>&nbsp;Salvar</asp:LinkButton>                
                         </div>
@@ -161,7 +179,7 @@
         <br />
     </div>
     <script>
-    $("#<%=fuPalestrante.ClientID%>").on('change', function () {
+        $('#<%=formFile.ClientID%>').on('change', function () {
         if (this.files[0].type.indexOf("image") > -1) {
             var reader = new FileReader();
             reader.onload = function (e) {
@@ -174,5 +192,21 @@
             alert('Não é uma imagem válida')
         }
     });
-    </script>    
+    </script>
+    <script>
+        $('#<%=formFile.ClientID%>').on('change', function () {
+            if (this.files[0].type.indexOf("image") > -1) {                
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#<%=imgPalestrante1.ClientID%>').attr('src', e.target.result);                    
+                }
+
+            reader.readAsDataURL(this.files[0]);
+        }
+        else {                
+            $('#<%=imgPalestrante1.ClientID%>').attr('src', '');
+                alert('Não é uma imagem válida')
+            }
+        });
+    </script> 
 </asp:Content>

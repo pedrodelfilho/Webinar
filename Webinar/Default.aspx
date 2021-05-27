@@ -1,5 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Webinar.Default" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    
     <style>
     .botao {
         background: #ef4136;
@@ -29,7 +30,7 @@
     <!--==========================
     Intro Section
   ============================-->
-  <section id="intro">
+    <section id="intro">
     <div class="intro-container wow fadeIn">
       <h1 runat="server" id="lblTitulo"></h1>
       <p runat="server" class="mb-4 pb-0" id="lblSubTitulo"></p>
@@ -42,8 +43,7 @@
     <!--==========================
         Sessão Entrar
     ============================-->
-   
-        <section id="login" class="modal fade">
+    <section id="login" class="modal fade">
             <div class="modal-dialog modal-login">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -78,7 +78,6 @@
     <!--==========================
         Sessão Cadastrar
     ============================-->
-
     <section id="cadastrar" class="modal fade">
             <div class="modal-dialog modal-login">
                 <div class="modal-content">
@@ -113,7 +112,6 @@
     <!--==========================
       Sessão Recuperar Senha
     ============================-->
-
     <section id="recuperar" class="modal fade">
             <div class="modal-dialog modal-login">
                 <div class="modal-content">
@@ -158,11 +156,97 @@
         </div>
       </div>
     </section>
+    
+    <!--==========================
+      Sessão Eventos
+    ============================-->
+    <section id="venue" class="wow fadeInUp">
+
+      <div class="container-fluid">
+
+        <div class="section-header">
+          <h2>Eventos</h2>
+          <p>Galeria</p>
+        </div>        
+
+      </div>
+
+      <div class="container-fluid venue-gallery-container">
+        <div class="row no-gutters">
+
+          <div class="col-lg-3 col-md-4">
+            <div class="venue-gallery">
+              <a href="img/venue-gallery/1.jpg" class="venobox" data-gall="venue-gallery">
+                <img src="img/venue-gallery/1.jpg" alt="" class="img-fluid">
+              </a>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-4">
+            <div class="venue-gallery">
+              <a href="img/venue-gallery/2.jpg" class="venobox" data-gall="venue-gallery">
+                <img src="img/venue-gallery/2.jpg" alt="" class="img-fluid">
+              </a>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-4">
+            <div class="venue-gallery">
+              <a href="img/venue-gallery/3.jpg" class="venobox" data-gall="venue-gallery">
+                <img src="img/venue-gallery/3.jpg" alt="" class="img-fluid">
+              </a>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-4">
+            <div class="venue-gallery">
+              <a href="img/venue-gallery/4.jpg" class="venobox" data-gall="venue-gallery">
+                <img src="img/venue-gallery/4.jpg" alt="" class="img-fluid">
+              </a>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-4">
+            <div class="venue-gallery">
+              <a href="img/venue-gallery/5.jpg" class="venobox" data-gall="venue-gallery">
+                <img src="img/venue-gallery/5.jpg" alt="" class="img-fluid">
+              </a>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-4">
+            <div class="venue-gallery">
+              <a href="img/venue-gallery/6.jpg" class="venobox" data-gall="venue-gallery">
+                <img src="img/venue-gallery/6.jpg" alt="" class="img-fluid">
+              </a>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-4">
+            <div class="venue-gallery">
+              <a href="img/venue-gallery/7.jpg" class="venobox" data-gall="venue-gallery">
+                <img src="img/venue-gallery/7.jpg" alt="" class="img-fluid">
+              </a>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-4">
+            <div class="venue-gallery">
+              <a href="img/venue-gallery/8.jpg" class="venobox" data-gall="venue-gallery">
+                <img src="img/venue-gallery/8.jpg" alt="" class="img-fluid">
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </section>
 
     <!--==========================
       Sessão Palestrantes
     ============================-->
-    <section id="speakers" class="wow fadeInUp">
+    <section id="speakers">
       <div class="container">
         <div class="section-header">
           <h2>Palestrantes</h2>
@@ -171,104 +255,104 @@
 
         <div class="row">
           <div class="col-lg-4 col-md-6">
-            <div class="speaker">
-              <img src="img/speakers/1.jpg" alt="Speaker 1" class="img-fluid">
+            <div class="speaker" style="width: 350px; height: 350px;">
+              <img runat="server" id="imgPalestrante1"  src="#" alt="Speaker 1" class="img-fluid" >
               <div class="details">
-                <h3><a href="speaker-details.html">Lucas Matarazzo</a></h3>
-                <p>O outro incidente</p>
+                <h3><a runat="server" id="aPalestrante1" href="#"></a></h3>
+                <p runat="server" id="pPalestrante1">O outro incidente</p>
                 <div class="social">
-                  <a href=""><i class="fa fa-twitter"></i></a>
-                  <a href=""><i class="fa fa-facebook"></i></a>
-                  <a href=""><i class="fa fa-google-plus"></i></a>
-                  <a href=""><i class="fa fa-linkedin"></i></a>
+                  <a runat="server" id="twtPalestrante1" href="#"><i class="fa fa-twitter"></i></a>
+                  <a runat="server" id="facePalestrante1" href="#"><i class="fa fa-facebook"></i></a>
+                  <a runat="server" id="ggPalestrante1" href="#"><i class="fa fa-google-plus"></i></a>
+                  <a runat="server" id="inPalestrante1" href="#"><i class="fa fa-linkedin"></i></a>
                 </div>
               </div>
             </div>
           </div>
           <div class="col-lg-4 col-md-6">
-            <div class="speaker">
-              <img src="img/speakers/2.jpg" alt="Speaker 2" class="img-fluid">
+            <div class="speaker" style="width: 350px; height: 350px;">
+              <img runat="server" id="imgPalestrante2" src="#" alt="Speaker 2" class="img-fluid">
               <div class="details">
-                <h3><a href="speaker-details.html">Hebert Diluc</a></h3>
-                <p>Seguindo em frente</p>
+                <h3><a runat="server" id="aPalestrante2" href="#"></a></h3>
+                <p runat="server" id="pPalestrante2"></p>
                 <div class="social">
-                  <a href=""><i class="fa fa-twitter"></i></a>
-                  <a href=""><i class="fa fa-facebook"></i></a>
-                  <a href=""><i class="fa fa-google-plus"></i></a>
-                  <a href=""><i class="fa fa-linkedin"></i></a>
+                  <a runat="server" id="twtPalestrante2" href="#"><i class="fa fa-twitter"></i></a>
+                  <a runat="server" id="facePalestrante2" href="#"><i class="fa fa-facebook"></i></a>
+                  <a runat="server" id="ggPalestrante2" href="#"><i class="fa fa-google-plus"></i></a>
+                  <a runat="server" id="inPalestrante2" href="#"><i class="fa fa-linkedin"></i></a>
                 </div>
               </div>
             </div>
           </div>
           <div class="col-lg-4 col-md-6">
-            <div class="speaker">
-              <img src="img/speakers/3.jpg" alt="Speaker 3" class="img-fluid">
+            <div class="speaker" style="width: 350px; height: 350px;">
+              <img runat="server" id="imgPalestrante3" src="#" alt="Speaker 3" class="img-fluid">
               <div class="details">
-                <h3><a href="speaker-details.html">Mariana Lucat</a></h3>
-                <p>Evite carboidratos</p>
+                <h3><a runat="server" id="aPalestrante3" href="#"></a></h3>
+                <p runat="server" id="pPalestrante3"></p>
                 <div class="social">
-                  <a href=""><i class="fa fa-twitter"></i></a>
-                  <a href=""><i class="fa fa-facebook"></i></a>
-                  <a href=""><i class="fa fa-google-plus"></i></a>
-                  <a href=""><i class="fa fa-linkedin"></i></a>
+                  <a runat="server" id="twtPalestrante3" href="#"><i class="fa fa-twitter"></i></a>
+                  <a runat="server" id="facePalestrante3" href="#"><i class="fa fa-facebook"></i></a>
+                  <a runat="server" id="ggPalestrante3" href="#"><i class="fa fa-google-plus"></i></a>
+                  <a runat="server" id="inPalestrante3" href="#"><i class="fa fa-linkedin"></i></a>
                 </div>
               </div>
             </div>
           </div>
           <div class="col-lg-4 col-md-6">
-            <div class="speaker">
-              <img src="img/speakers/4.jpg" alt="Speaker 4" class="img-fluid">
+            <div class="speaker" style="width: 350px; height: 350px;">
+              <img runat="server" id="imgPalestrante4" src="#" alt="Speaker 4" class="img-fluid">
               <div class="details">
-                <h3><a href="speaker-details.html">josefh malaquias</a></h3>
-                <p>Vida financeira</p>
+                <h3><a runat="server" id="aPalestrante4" href="#"></a></h3>
+                <p runat="server" id="pPalestrante4"></p>
                 <div class="social">
-                  <a href=""><i class="fa fa-twitter"></i></a>
-                  <a href=""><i class="fa fa-facebook"></i></a>
-                  <a href=""><i class="fa fa-google-plus"></i></a>
-                  <a href=""><i class="fa fa-linkedin"></i></a>
+                  <a runat="server" id="twtPalestrante4" href="#"><i class="fa fa-twitter"></i></a>
+                  <a runat="server" id="facePalestrante4" href="#"><i class="fa fa-facebook"></i></a>
+                  <a runat="server" id="ggPalestrante4" href="#"><i class="fa fa-google-plus"></i></a>
+                  <a runat="server" id="inPalestrante4" href="#"><i class="fa fa-linkedin"></i></a>
                 </div>
               </div>
             </div>
           </div>
           <div class="col-lg-4 col-md-6">
-            <div class="speaker">
-              <img src="img/speakers/5.jpg" alt="Speaker 5" class="img-fluid">
+            <div class="speaker" style="width: 350px; height: 350px;">
+              <img runat="server" id="imgPalestrante5" src="#" alt="Speaker 5" class="img-fluid">
               <div class="details">
-                <h3><a href="speaker-details.html">Alexandre Exequiel</a></h3>
-                <p>Se livrando do aborrecimento</p>
+                <h3><a runat="server" id="aPalestrante5" href="#"></a></h3>
+                <p runat="server" id="pPalestrante5"></p>
                 <div class="social">
-                  <a href=""><i class="fa fa-twitter"></i></a>
-                  <a href=""><i class="fa fa-facebook"></i></a>
-                  <a href=""><i class="fa fa-google-plus"></i></a>
-                  <a href=""><i class="fa fa-linkedin"></i></a>
+                  <a runat="server" id="twtPalestrante5" href="#"><i class="fa fa-twitter"></i></a>
+                  <a runat="server" id="facePalestrante5" href="#"><i class="fa fa-facebook"></i></a>
+                  <a runat="server" id="ggPalestrante5" href="#"><i class="fa fa-google-plus"></i></a>
+                  <a runat="server" id="inPalestrante5" href="#"><i class="fa fa-linkedin"></i></a>
                 </div>
               </div>
             </div>
           </div>
           <div class="col-lg-4 col-md-6">
-            <div class="speaker">
-              <img src="img/speakers/6.jpg" alt="Speaker 6" class="img-fluid">
+            <div class="speaker" style="width: 350px; height: 350px;">
+              <img runat="server" id="imgPalestrante6" src="#" alt="Speaker 6" class="img-fluid">
               <div class="details">
-                <h3><a href="speaker-details.html">William noruega</a></h3>
-                <p>O chamado da atualidade</p>
+                <h3><a runat="server" id="aPalestrante6" href="#"></a></h3>
+                <p runat="server" id="pPalestrante6"></p>
                 <div class="social">
-                  <a href=""><i class="fa fa-twitter"></i></a>
-                  <a href=""><i class="fa fa-facebook"></i></a>
-                  <a href=""><i class="fa fa-google-plus"></i></a>
-                  <a href=""><i class="fa fa-linkedin"></i></a>
+                  <a runat="server" id="twtPalestrante6" href="#"><i class="fa fa-twitter"></i></a>
+                  <a runat="server" id="facePalestrante6" href="#"><i class="fa fa-facebook"></i></a>
+                  <a runat="server" id="ggPalestrante6" href="#"><i class="fa fa-google-plus"></i></a>
+                  <a runat="server" id="inPalestrante6" href="#"><i class="fa fa-linkedin"></i></a>
                 </div>
               </div>
             </div>
           </div>
+    <br /><br />
         </div>
       </div>
-
     </section>
 
     <!--==========================
       Sessão Calendário
     ============================-->
-    <section id="schedule" class="section-with-bg">
+    <%--<section id="schedule" class="section-with-bg">
       <div class="container wow fadeInUp">
         <div class="section-header">
           <h2>Calendário de Eventos</h2>
@@ -520,16 +604,15 @@
 
       </div>
 
-    </section>
+    </section>--%>
 
     <!--==========================
       Sessão Acervo
     ============================-->
     <section id="gallery" class="wow fadeInUp">
-
       <div class="container">
         <div class="section-header">
-          <h2>Acervos</h2>
+          <h2>Acervo</h2>
           <p>Aqui está nosso acervo com palestras gravadas e eventos já ocorridos</p>
         </div>
       </div>
@@ -546,7 +629,7 @@
       </div>
 
     </section>
-
+    
     <!--==========================
       Sessão Conexão Empresarial
     ============================-->

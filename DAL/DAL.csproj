@@ -56,8 +56,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CertificadoDAL.cs" />
     <Compile Include="CidadeDAL.cs" />
     <Compile Include="ConexaoDAL.cs" />
+    <Compile Include="EventoDAL.cs" />
     <Compile Include="HomeDAL.cs" />
     <Compile Include="NotificarDAL.cs" />
     <Compile Include="PalestraDAL.cs" />

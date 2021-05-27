@@ -25,7 +25,7 @@ namespace Webinar
         public void SolicitacaoPalestrante()
         {
             UsuarioDAL uDAL = new UsuarioDAL();
-            gvPalestrante.DataSource = uDAL.PalestrantePendente();
+            gvPalestrante.DataSource = uDAL.ListarPalestrantePendente();
             gvPalestrante.DataBind();
             ViewState["sortOrder"] = "";
             BindGridView("", "");
@@ -33,7 +33,7 @@ namespace Webinar
         public void SolicitacaoPalestra()
         { 
             PalestraDAL pDAL = new PalestraDAL();
-            gvPalestra.DataSource = pDAL.PalestraPendente();
+            gvPalestra.DataSource = pDAL.ListarPalestrasPendetes();
             gvPalestra.DataBind();
             ViewState["sortOrder"] = "";
             BindGridView2("", "");
@@ -71,8 +71,8 @@ namespace Webinar
         }
         public void BindGridView2(string sortExp, string sortDir)
         {
-            UsuarioDAL uDAL = new UsuarioDAL();
-            DataTable dt = uDAL.ListarPalestraPendente();
+            PalestraDAL pDAL = new PalestraDAL();
+            DataTable dt = pDAL.ListarPalestrasPendetes();
 
             if (dt.Rows.Count > 0)
             {

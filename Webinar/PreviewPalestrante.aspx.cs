@@ -18,13 +18,15 @@ namespace Webinar
             int id = Convert.ToInt32(Session["id"]);
             if (!IsPostBack)
             {
+                if (Session["HomePage"].Equals("SIM")) { btnAutorizarPerfil.Visible = false; btnNegarPerfil.Visible = false; id = Convert.ToInt32(HttpContext.Current.Request.QueryString["a"]); }
                 UsuarioDAL uDAL = new UsuarioDAL();
                 Usuario objUsuario = uDAL.ObterUsuario(id);
                 Palestrante objPalestrante = uDAL.ObterPalestrante(id);
 
                 if (objPalestrante == null)
                 {
-                    ClientScript.RegisterStartupScript(GetType(), "alert", "alert('Algo deu errado, tente novamente.');", true);
+                    ClientScript.RegisterStartupScript(GetType(), "alert", "alert('Algo deu errado, tente novamente.'" + id + ");", true);
+                    Response.Redirect("Default.aspx");
                 }
                 else
                 {
