@@ -51,8 +51,8 @@
             <ul class="nav-menu">
                 <li class="menu-active"><a href="Default.aspx">Página Inicial</a></li>
                 <li><a href="#about">Sobre</a></li>
-                <li><a href="#speakers">Palestrantes</a></li>
-                <li><a href="#schedule">Eventos</a></li>
+                <li><a href="#venue">Eventos</a></li>
+                <li><a href="#speakers">Palestrantes</a></li>                
                 <li><a href="#gallery">Acervo</a></li>
                 <li><a href="#contact">Contato</a></li>
                 <asp:LoginView runat="server" ID="LoginView1" ViewStateMode="Disabled">
@@ -65,7 +65,7 @@
                             <asp:Label runat="server" ForeColor="#ef4136" Font-Size="16px" Font-Bold="true" ID="lblOla"></asp:Label>
 						    <ul class="dropdown">
 						        <li><a runat="server" id="EditarPerfil">Editar Perfil</a></li>
-							    <li><a runat="server" id="GerenciarConta" href="#">Gerenciar Conta</a></li>
+							    <li><a runat="server" id="GerenciarConta" href="GerenciarConta.aspx">Gerenciar Conta</a></li>
                                 <li runat="server" visible="false" id="PainelAdm"><a href="PainelAdministrador.aspx">Painel Administrador</a></li>
                                 <li runat="server" visible="false" id="PainelMod"><a href="PainelModerador.aspx">Painel Moderador</a></li>
 							    <li><asp:LoginStatus ForeColor="Red" runat="server" LogoutAction="Redirect" LogoutPageUrl="~/Default.aspx" LogoutText="Sair"  /></li>

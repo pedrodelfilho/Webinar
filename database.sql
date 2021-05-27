@@ -1,11 +1,41 @@
-﻿select * from Users
+﻿
 select * from Palestrantes
+select * from Users
+select * from Palestras
+select * from Eventos
+select * from Moderadores
+select * from Convidados
+select * from Certificados
 
-update Palestrantes set PerfilAprovado = 'false' where IDPalestrante = 20
-update Users set Email = 'samaraxavier@gmail.com' where UserId = 17
+insert into Certificados(userId, IDPalestra, DtInicio, DtFinal, Finalizado) Values(1, 2, '2021-05-17 16:52:55.753', '2021-05-26 16:52:55.753', 'true')
 
+SELECT Users.Username, Palestrantes.PalestranteFoto FROM Palestras
+LEFT JOIN Users ON Users.UserId = Palestras.IDPalestrante
+LEFT JOIN Palestrantes ON Palestrantes.IDPalestrante = Palestras.IDPalestrante WHERE Palestras.PalestraTitulo = 'Programação Neolinguística'
+
+update Users Set Password = '202cb962ac59075b964b07152d234b70'
+
+SELECT Certificados.IDCertificado, Eventos.EventoTitulo, Palestras.PalestraTitulo, convert(varchar(10), Certificados.DtInicio, 103) AS DtInicio, convert(varchar(10), Certificados.DtFinal, 103) AS DtFinal, Certificados.Finalizado FROM Certificados
+LEFT JOIN Eventos ON Certificados.IDEvento = Eventos.IDEvento
+LEFT JOIN Palestras ON Certificados.IDPalestra = Palestras.IDPalestra WHERE Certificados.UserId = 1 AND Certificados.Finalizado = 'true'
+
+insert into Convidados(IDConvidados) VALUES(1),(2),(3),(4),(5),(6),(7),(8),(9),(10),(11),(12),(13),(14),(15),(16),(17),(18),(19)
+
+SELECT Eventos.IDEvento, Users.Username, Eventos.EventoTitulo, Eventos.EventoSubTitulo, convert(varchar(10), Eventos.EventoDtIni, 103), convert(varchar(10), Eventos.EventoDtTer, 103) FROM Eventos
+LEFT JOIN Users ON Eventos.IDAdm = Users.UserId
+
+SELECT Users.Username FROM Moderadores LEFT JOIN Users ON Moderadores.IDModerador = Users.UserId ORDER BY Users.Username ASC
+
+select top 6 IDPalestrante FROM Palestrantes WHERE PerfilAprovado = 'true' AND IDPalestrante != 17 order by newid() 
+
+SELECT Palestras.IDPalestra, Users.Username, convert(varchar(10), Palestras.PalestraDtCriacao, 103), Palestras.PalestraAutoriza FROM Palestras
+LEFT JOIN Users ON Palestras.IDPalestrante = Users.UserId WHERE Palestras.PalestraAprovada = 'false'
+SELECT * FROM Palestras WHERE PalestraAprovada IS NULL OR PalestraAprovada = 'false'
+SELECT u.UserId, u.Username, u.Email, convert(varchar(10), u.CreatedDate, 103) + ' ' + convert(varchar(8), u.CreatedDate, 14) AS CreatedDate, convert(varchar(10), u.LastLoginDate, 103) + ' ' + convert(varchar(8), u.LastLoginDate, 14) AS LastLoginDate FROM Users AS u, Palestrantes AS p WHERE p.PerfilAprovado = 'false' OR p.PerfilAprovado IS NULL
 CREATE DATABASE AggregateBD
 GO
+SELECT Top 6 * FROM Palestrantes WHERE PerfilAprovado = 'true' AND PalestranteFoto IS NOT NULL ORDER BY NEWID()
+update Users set Tipo = 'Convidado, Administrador' where UserId = 2
 
 USE AggregateBD
 GO
@@ -5783,6 +5813,7 @@ GO
 
 CREATE TABLE Moderadores(
 	IDModerador int FOREIGN KEY REFERENCES Users(UserId),
+	IDEvento int ForeIGN KEY REFERENCES Eventos(IDEvento) null
 )
 GO
 
@@ -5790,6 +5821,16 @@ CREATE TABLE Administradores(
 	IDAdministrador int FOREIGN KEY REFERENCES Users(UserId),
 )
 GO
+
+CREATE TABLE Certificados(
+	IDCertificado int PRIMARY KEY IDENTITY not null,
+	UserId int FOREIGN KEY REFERENCES Users(UserId) not null,
+	IDPalestra int FOREIGN KEY REFERENCES Palestras(IDPalestra),
+	IDEvento int FOREIGN KEY REFERENCES Eventos(IDEvento),
+	DtInicio datetime not null,
+	DtFinal datetime,
+	Finalizado bit not null
+)
 
 CREATE TABLE Palestras(
 	IDPalestra int PRIMARY KEY IDENTITY not null,
@@ -5808,20 +5849,21 @@ CREATE TABLE Palestras(
 	PalestraDuracao varchar(5) not null,
 	PalestraData datetime not null,
 	PalestraAutoriza bit not null,
-	PalestraAprovada bit not null
+	PalestraAprovada bit not null,
+	IDEvento int ForeIGN KEY REFERENCES Eventos(IDEvento) null
 )
 GO
 
 CREATE TABLE Eventos(
 	IDEvento int PRIMARY KEY IDENTITY not null,
 	IDAdm int FOREIGN KEY REFERENCES Users(UserId) not null,
-	IDPalestrante int FOREIGN KEY REFERENCES Users(UserId) not null,
-	IDPalestra int FOREIGN KEY REFERENCES Palestras(IDPalestra) not null,
+	EventoCapa varbinary(max) not null,
 	EventoTitulo varchar(100) not null,
 	EventoSubTitulo varchar(100) not null,
 	EventoSinopseP1 varchar(600) not null,
 	EventoSinopseP2 varchar(600),
-	EventoDt datetime not null,
+	EventoDtIni datetime not null,
+	EventoDtTer datetime not null
 )
 GO
 

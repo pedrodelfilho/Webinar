@@ -27,7 +27,7 @@
     </style> 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div style="background: rgba(6, 12, 34, 0.8); align-content: center"><br /><br /><br /><br /><br /><br /><br />
+    <div style="background: rgba(25, 31, 32, 0.8); align-content: center"><br /><br /><br /><br /><br /><br /><br />
                 
         <asp:Panel runat="server" HorizontalAlign="Center">
             <div class="mx-auto" style="width: 800px;">

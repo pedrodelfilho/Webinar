@@ -167,7 +167,9 @@
     <Content Include="contactform\contactform.js" />
     <Content Include="css\style.css" />
     <Content Include="Default.aspx" />
+    <Content Include="GerenciarConta.aspx" />
     <Content Include="img\about-bg.jpg" />
+    <Content Include="img\add.png" />
     <Content Include="img\anonimo.jpg" />
     <Content Include="img\apple-touch-icon.png" />
     <Content Include="img\delete.png" />
@@ -185,6 +187,7 @@
     <Content Include="img\hotels\3.jpg" />
     <Content Include="img\intro-bg.jpg" />
     <Content Include="img\AthonLogo.png" />
+    <Content Include="img\rem.png" />
     <Content Include="img\speakers\1.jpg" />
     <Content Include="img\speakers\2.jpg" />
     <Content Include="img\speakers\3.jpg" />
@@ -243,12 +246,14 @@
     <Content Include="lib\venobox\venobox.min.js" />
     <Content Include="lib\wow\wow.js" />
     <Content Include="lib\wow\wow.min.js" />
+    <Content Include="NewEvento.aspx" />
     <Content Include="NewPalestra.aspx" />
     <Content Include="PainelAdministrador.aspx" />
     <Content Include="PainelModerador.aspx" />
     <Content Include="PainelPalestrante.aspx" />
     <Content Include="PainelUsuario.aspx" />
     <Content Include="frmPalestra.aspx" />
+    <Content Include="PreviewEventos.aspx" />
     <Content Include="PreviewHome.aspx" />
     <Content Include="PreviewPalestra.aspx" />
     <Content Include="PreviewPalestrante.aspx" />
@@ -274,6 +279,13 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="GerenciarConta.aspx.cs">
+      <DependentUpon>GerenciarConta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GerenciarConta.aspx.designer.cs">
+      <DependentUpon>GerenciarConta.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Mapper\ForumMap.cs" />
     <Compile Include="Master.Master.cs">
       <DependentUpon>Master.Master</DependentUpon>
@@ -283,6 +295,13 @@
       <DependentUpon>Master.Master</DependentUpon>
     </Compile>
     <Compile Include="Models\Forum.cs" />
+    <Compile Include="NewEvento.aspx.cs">
+      <DependentUpon>NewEvento.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NewEvento.aspx.designer.cs">
+      <DependentUpon>NewEvento.aspx</DependentUpon>
+    </Compile>
     <Compile Include="NewPalestra.aspx.cs">
       <DependentUpon>NewPalestra.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -317,6 +336,13 @@
     </Compile>
     <Compile Include="frmPalestra.aspx.designer.cs">
       <DependentUpon>frmPalestra.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PreviewEventos.aspx.cs">
+      <DependentUpon>PreviewEventos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PreviewEventos.aspx.designer.cs">
+      <DependentUpon>PreviewEventos.aspx</DependentUpon>
     </Compile>
     <Compile Include="PreviewHome.aspx.cs">
       <DependentUpon>PreviewHome.aspx</DependentUpon>

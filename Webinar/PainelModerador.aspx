@@ -2,7 +2,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-     <div style="background: rgba(6, 12, 34, 0.8);" id="intro-container"><br /><br /><br /><br /><br /><br /><br /><br />
+     <div style="background: rgba(25, 31, 32, 0.8);" id="intro-container"><br /><br /><br /><br /><br /><br /><br /><br />
         <asp:Panel runat="server" HorizontalAlign="Center">
             <div class="align-items-center">
                 <h4 style="color:red; font-size:28px"><span class="fa fa-exclamation-triangle"></span> Solicitações pendentes de aprovação</h4>
@@ -46,7 +46,7 @@
             
                     </Columns>            
                     <FooterStyle BackColor="#CCCCCC" />
-                    <HeaderStyle BackColor="#060C22" Font-Bold="True" Font-Underline="true" ForeColor="White" />
+                    <HeaderStyle BackColor="#231F20" Font-Bold="True" Font-Underline="true" ForeColor="White" />
                     <PagerStyle BackColor="#999999" ForeColor="White" HorizontalAlign="Center" />
                     <SelectedRowStyle BackColor="#000099" Font-Bold="True" ForeColor="White" />
                     <SortedAscendingCellStyle BackColor="#F1F1F1" />
@@ -98,7 +98,7 @@
             
             </Columns>            
             <FooterStyle BackColor="#CCCCCC" />
-            <HeaderStyle BackColor="#060C22" Font-Bold="True" Font-Underline="true" ForeColor="White" />
+            <HeaderStyle BackColor="#231F20" Font-Bold="True" Font-Underline="true" ForeColor="White" />
             <PagerStyle BackColor="#999999" ForeColor="White" HorizontalAlign="Center" />
             <SelectedRowStyle BackColor="#000099" Font-Bold="True" ForeColor="White" />
             <SortedAscendingCellStyle BackColor="#F1F1F1" />

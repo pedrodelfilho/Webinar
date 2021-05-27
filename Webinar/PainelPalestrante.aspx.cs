@@ -24,7 +24,6 @@ namespace Webinar
         {
             Response.Redirect("NewPalestra.aspx");
         }
-
         protected void btnEditTwiter_Click(object sender, EventArgs e)
         {
             txtTwiter.Enabled = true;
@@ -78,31 +77,26 @@ namespace Webinar
             Palestrante objPalestrante = new Palestrante();
             objPalestrante.IDPalestrante = usuario.UserId;
 
-            if (fuPalestrante.HasFile)
+            if (formFile.PostedFile.ContentLength > 0)
             {
-                string empFilename = Path.GetFileName(fuPalestrante.PostedFile.FileName);
-                string FilecontentType = fuPalestrante.PostedFile.ContentType;
-                Stream s = fuPalestrante.PostedFile.InputStream;
+                string empFilename = Path.GetFileName(formFile.PostedFile.FileName);
+                string FilecontentType = formFile.PostedFile.ContentType;
+                Stream s = formFile.PostedFile.InputStream;
                 BinaryReader br = new BinaryReader(s);
                 byte[] Databytes = br.ReadBytes((Int32)s.Length);
                 objPalestrante.PalestranteFoto = Databytes;
                 objPalestrante.PerfilAprovado = false;
             }
-            else 
-            {   
-                if (Session["FotoPalestrante"] == null)
+            else
+            {
+                Palestrante objPalestrante1 = uDAL.ObterPalestrante(objPalestrante.IDPalestrante);
+                if (objPalestrante1.PalestranteFoto == null)
                 {
-                    lblcb.Visible = true;
+                    lblFoto.Visible = true;
                     return;
                 }
                 else
-                {
-                    lblcb.Visible = false;
-                    byte[] bytes = (byte[])Session["FotoPalestrante"];
-                    string base64String = Convert.ToBase64String(bytes, 0, bytes.Length);
-                    objPalestrante.PalestranteFoto = bytes;
-                    objPalestrante.PerfilAprovado = false;
-                }
+                { lblFoto.Visible = false; }
             }
 
             objPalestrante.PalestranteDtNasc = Convert.ToDateTime(txtDtNasc.Text);
@@ -159,16 +153,19 @@ namespace Webinar
             lblNome.Text = objUsuario.Username;
             lblEmail.Text = objUsuario.Email;
             txtNome.Text = objUsuario.Username;
+            aPalestrante1.InnerText = objUsuario.Username;
 
             if (objPalestrante.PalestranteFoto == null)
             {
                 imgPalestrante.ImageUrl = "~/img/anonimo.jpg";
+                imgPalestrante1.Attributes["src"] = "~/img/anonimo.jpg";
             }
             else
             {
                 byte[] bytes = objPalestrante.PalestranteFoto;
                 string base64String = Convert.ToBase64String(bytes, 0, bytes.Length);
                 imgPalestrante.ImageUrl = "data:image/png;base64," + base64String;
+                imgPalestrante1.Attributes["src"] = "data:image/png;base64," + base64String;
                 LoginView LoginView = this.Master.FindControl("LoginView1") as LoginView;
                 (LoginView.FindControl("imgLogin") as Image).ImageUrl = "data:image/png;base64," + base64String;
             }
@@ -198,17 +195,18 @@ namespace Webinar
             }
             ddlEscolaridade.SelectedValue = objPalestrante.PalestranteFormacao;
             txtEspecialidade.Text = objPalestrante.PalestranteEspecialidade;
+            pPalestrante1.InnerText = objPalestrante.PalestranteEspecialidade;
             txtBio1.Text = objPalestrante.PalestranteBioP1;
             txtBio2.Text = objPalestrante.PalestranteBioP2;
             cbReceberEmail.Checked = objPalestrante.PalestranteReceberEmail;
             cbAutorizarPerfil.Checked = objPalestrante.PalestranteAutoriza;
-            if (objPalestrante.PalestranteTwiter == string.Empty) { txtTwiter.Text = "Não informado"; }
+            if (objPalestrante.PalestranteTwiter == string.Empty) { txtTwiter.Text = "Não informado"; twtPalestrante1.HRef = objPalestrante.PalestranteTwiter; }
             else { txtTwiter.Text = objPalestrante.PalestranteTwiter; }
-            if (objPalestrante.PalestranteFacebook == string.Empty) { txtFacebook.Text = "Não informado"; }
+            if (objPalestrante.PalestranteFacebook == string.Empty) { txtFacebook.Text = "Não informado"; facePalestrante1.HRef = objPalestrante.PalestranteFacebook; }
             else { txtFacebook.Text = objPalestrante.PalestranteFacebook; }
-            if (objPalestrante.PalestranteGoogle == string.Empty) { txtGoogle.Text = "Não informado"; }
+            if (objPalestrante.PalestranteGoogle == string.Empty) { txtGoogle.Text = "Não informado"; ggPalestrante1.HRef = objPalestrante.PalestranteGoogle; }
             else { txtGoogle.Text = objPalestrante.PalestranteGoogle; }
-            if (objPalestrante.PalestranteLinkedin == string.Empty) { txtLinkedin.Text = "Não informado"; }
+            if (objPalestrante.PalestranteLinkedin == string.Empty) { txtLinkedin.Text = "Não informado"; inPalestrante1.HRef = objPalestrante.PalestranteLinkedin; }
             else { txtLinkedin.Text = objPalestrante.PalestranteLinkedin; }
             
         }

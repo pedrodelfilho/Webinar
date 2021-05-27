@@ -291,6 +291,8 @@ namespace Webinar
 
         protected void btnSalvarPalestra_Click(object sender, EventArgs e)
         {
+            string cod = HttpContext.Current.User.Identity.Name;
+            string[] Administrador = { "Administrador", "Convidado, Administrador", "Administrador, Convidado", "Administrador, Palestrante", "Palestrante, Administrador" };
             int idPalestrante = Convert.ToInt32(Session["palestrante"]);
             int idCriador = Convert.ToInt32(Session["criador"]);
             string link = Convert.ToString(Session["link"]);
@@ -307,8 +309,15 @@ namespace Webinar
             byte[] FotoCapa = (byte[])Session["fotocapa"];
 
             PalestraDAL pDAL = new PalestraDAL();
+            UsuarioDAL uDAL = new UsuarioDAL();
+            Usuario usuario = uDAL.BuscarID(cod);
 
             Palestra objPalestra = new Palestra();
+            if (Administrador.Contains(usuario.Tipo))
+            {
+                objPalestra.PalestraAprovada = true;
+            }
+            else { objPalestra.PalestraAprovada = false; }
             objPalestra.PalestraCapa = FotoCapa;
             objPalestra.IDPalestrante = idPalestrante;
             objPalestra.PalestraCriador = idCriador;

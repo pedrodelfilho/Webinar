@@ -41,7 +41,9 @@ namespace Webinar
             PanelEventos.Visible = true;
             PanelPalestras.Visible = false;
             PanelPendencias.Visible = false;
-            PanelPaginaInicial.Visible = false;            
+            PanelPaginaInicial.Visible = false;
+            ViewState["sortOrder"] = "";
+            BindGridViewEventos("", "");
         }
         protected void btnPalestras_Click(object sender, EventArgs e) // Botão "Palestras" no Painel do Administrador
         {
@@ -83,12 +85,16 @@ namespace Webinar
         {
             Response.Redirect("NewPalestra.aspx");
         }
+        protected void btnAdicionarEvento_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("NewEvento.aspx");
+        }
 
 
         public void SolicitacaoPalestrante() // Busca todos os Palestrantes com Pendências 
         {
             UsuarioDAL uDAL = new UsuarioDAL();
-            gvPalestrante.DataSource = uDAL.PalestrantePendente();
+            gvPalestrante.DataSource = uDAL.ListarPalestrantePendente();
             gvPalestrante.DataBind();
             ViewState["sortOrder"] = "";
             BindGridViewPalestrantes("", "");
@@ -96,7 +102,7 @@ namespace Webinar
         public void SolicitacaoPalestra() // Busca todas as Palestras com Pendências
         {
             PalestraDAL pDAL = new PalestraDAL();
-            gvPalestra.DataSource = pDAL.PalestraPendente();
+            gvPalestra.DataSource = pDAL.ListarPalestrasPendetes();
             gvPalestra.DataBind();
             ViewState["sortOrder"] = "";
             BindGridViewPalestras("", "");
@@ -152,8 +158,8 @@ namespace Webinar
         }
         public void BindGridViewPalestras(string sortExp, string sortDir) // Coloca todas as Palestras com pendências em uma GridView
         {
-            UsuarioDAL uDAL = new UsuarioDAL();
-            DataTable dt = uDAL.ListarPalestraPendente();            
+            PalestraDAL pDAL = new PalestraDAL();
+            DataTable dt = pDAL.ListarPalestrasPendetes();
 
             if (dt.Rows.Count > 0)
             {
@@ -216,7 +222,7 @@ namespace Webinar
                 lblResPalestras.Font.Size = 14;
             }
         }
-        public void BindGridViewUsuarios(string sortExp, string sortDir)
+        public void BindGridViewUsuarios(string sortExp, string sortDir) // Coloca todos os Usuários em uma GridView
         {
             UsuarioDAL uDAL = new UsuarioDAL();
             DataTable dt = uDAL.ListarUsuarios();
@@ -241,7 +247,7 @@ namespace Webinar
                 lblRes1.ForeColor = System.Drawing.Color.White;
                 lblRes1.Font.Size = 14;
             }
-        } // Coloca todos os Usuários em uma GridView
+        } 
         public void BindGridViewPagInicial(string sortExp, string sortDir) // Preenche as propriedades da PreviewHome.aspx com as informações correntes da Página Inicial
         {
             HomeDAL hDAL = new HomeDAL();
@@ -270,6 +276,33 @@ namespace Webinar
             txtEmailADM.Text = objHome.EmailADM;
 
         }
+        public void BindGridViewEventos(string sortExp, string sortDir) // Coloca todos os Eventos em uma GridView
+        {
+            EventoDAL eDAL = new EventoDAL();
+            DataTable dt = eDAL.ListarEventos();
+            if (dt.Rows.Count > 0)
+            {
+                DataView dv = new DataView();
+                dv = dt.DefaultView;
+
+                if (sortExp != string.Empty)
+                {
+                    dv.Sort = string.Format("{0} {1}", sortExp, sortDir);
+                }
+
+                gvEvento.DataSource = dv;
+                gvEvento.DataBind();
+                lblEventoRes.Text = "Eventos localizados: " + dt.Rows.Count;
+                lblEventoRes.ForeColor = System.Drawing.Color.White;
+            }
+            else
+            {
+                lblEventoRes.Text = "Nenhum evento encontrado.";
+                lblEventoRes.ForeColor = System.Drawing.Color.White;
+                lblEventoRes.Font.Size = 14;
+            }
+        }
+    
 
 
         protected void gvPalestra_Sorting(object sender, GridViewSortEventArgs e) // Chamado para ordenar dados de determinada coluna da GridView de Palestras
@@ -292,7 +325,10 @@ namespace Webinar
         {
             BindGridViewPagInicial(e.SortExpression, sortOrder);
         }
-
+        protected void gvEvento_Sorting(object sender, GridViewSortEventArgs e)
+        {
+            BindGridViewEventos(e.SortExpression, sortOrder);
+        }
 
         protected void gvPalestras_RowCommand(object sender, GridViewCommandEventArgs e) // Botão "Visualizar" da GridView de Palestras, para visualizar individualmente e por completo determinada Palestra
         {
@@ -310,7 +346,6 @@ namespace Webinar
                 pDAL.ExcluirPalestra(id);
             }
         }
-
         public void gvPalestra_RowCommand(object sender, GridViewCommandEventArgs e) // Botão "Visualizar" da GridView de Palestras com Pendências, para visualizar individualmente e por completo determinada Palestra
         {
             if (e.CommandName != "SendPalestra") return;            
@@ -345,6 +380,11 @@ namespace Webinar
             int id = Convert.ToInt32(e.CommandArgument);
             ConexaoDAL cDAL = new ConexaoDAL();
             cDAL.RemoverConexao(id);
+        }
+        protected void gvEvento_RowCommand(object sender, GridViewCommandEventArgs e) // Botão "Visualizar" da GridView Eventos, para visualizar individualmente cada Evento
+        {
+            if (e.CommandName != "SendEventos") return;
+            int id = Convert.ToInt32(e.CommandArgument);
         }
 
 
@@ -410,6 +450,6 @@ namespace Webinar
             hDAL.AplicarHome(objHome);
             ClientScript.RegisterStartupScript(GetType(), "alert", "alert('Página inicial atualizada com sucesso.');", true);
             Response.Redirect("PainelAdministrador.aspx");
-        }
+        }        
     }
 }

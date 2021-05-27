@@ -41,32 +41,20 @@ namespace DAL
             cmd.Parameters.AddWithValue("@autoriza", objPalestra.PalestraAutoriza);
             cmd.ExecuteNonQuery();
             conn.Close();
-        }
-        public List<Palestra> PalestraPendente()
+        }     
+        public DataTable ListarPalestrasPendetes()
         {
-            List<Palestra> listaPalestras = new List<Palestra>();
             SqlConnection conn = new SqlConnection(connectionString);
             conn.Open();
 
-            string sql = "SELECT IDPalestra, IDPalestrante, convert(varchar(10), PalestraDtCriacao, 103) + ' ' + convert(varchar(8), PalestraDtCriacao, 14) AS PalestraDtCriacao, PalestraAutoriza FROM Palestras WHERE PalestraAprovada IS NULL OR PalestraAprovada = 'false'";
+            string sql = "SELECT Palestras.IDPalestra, Users.Username, convert(varchar(10), Palestras.PalestraDtCriacao, 103) AS PalestraDtCriacao, Palestras.PalestraAutoriza FROM Palestras LEFT JOIN Users ON Palestras.IDPalestrante = Users.UserId WHERE Palestras.PalestraAprovada = 'false'";
             SqlCommand cmd = new SqlCommand(sql, conn);
+            SqlDataAdapter adp = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            adp.Fill(dt);
 
-            SqlDataReader dr = cmd.ExecuteReader();
-            if (dr.HasRows)
-            {
-                Palestra objPalestra;
-                while (dr.Read())
-                {
-                    objPalestra = new Palestra();
-                    objPalestra.IDPalestra = Convert.ToInt32(dr["IDPalestra"]);
-                    objPalestra.IDPalestrante = Convert.ToInt32(dr["IDPalestrante"]);
-                    objPalestra.PalestraDtCriacao = Convert.ToDateTime(dr["PalestraDtCriacao"]);
-                    objPalestra.PalestraAutoriza = Convert.ToBoolean(dr["PalestraAutoriza"]);
-                    //if (objPalestra.PalestraAutoriza != true) { objPalestra.PalestraAutoriza = false; }
-                }
-            }
             conn.Close();
-            return listaPalestras;
+            return dt;
         }
         public Palestra ObterPalestra(int id)
         {
@@ -172,5 +160,36 @@ namespace DAL
             cmd.ExecuteNonQuery();
             conn.Close();
         }
+        public DataTable PreencherSelect()
+        {
+            SqlConnection conn = new SqlConnection(connectionString);
+            conn.Open();
+            string sql = "SELECT PalestraTitulo FROM Palestras";
+            SqlCommand cmd = new SqlCommand(sql, conn);
+            SqlDataAdapter adp = new SqlDataAdapter(cmd);
+
+            DataTable dt = new DataTable();
+            adp.Fill(dt);
+
+            conn.Close();
+            return dt;
+        }
+        public DataTable AdicionarPalestraEmEvento(string titulo)
+        {
+            SqlConnection conn = new SqlConnection(connectionString);
+            conn.Open();
+            string sql = "SELECT Users.Username, Palestrantes.PalestranteFoto FROM Palestras LEFT JOIN Users ON Users.UserId = Palestras.IDPalestrante LEFT JOIN Palestrantes ON Palestrantes.IDPalestrante = Palestras.IDPalestrante WHERE Palestras.PalestraTitulo = @titulo";
+            SqlCommand cmd = new SqlCommand(sql, conn);
+            cmd.Parameters.AddWithValue("@titulo", titulo);
+            SqlDataAdapter adp = new SqlDataAdapter(cmd);
+
+            DataTable dt = new DataTable();
+            adp.Fill(dt);
+
+            conn.Close();
+            return dt;
+        }
     }
 }
+
+            

@@ -1,10 +1,34 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="PainelAdministrador.aspx.cs" Inherits="Webinar.PainelAdministrador" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <style>
+    .botao {
+        background: #ef4136;
+        border: 0;
+        padding: 10px 40px;
+        color: #fff;
+        transition: all ease-in-out 0.3s;
+        border-radius: 50px;
+        cursor: pointer;
+    }
+    .botaosub {
+          color: #fff;
+          background: transparent;
+          padding: 10px 40px;
+          border-radius: 50px;
+          border: 2px solid #ef4136;
+          transition: all ease-in-out 0.3s;
+          font-weight: 500;
+          margin-left: 8px;
+          margin-top: 2px;
+          line-height: 1;
+          font-size: 14px;
+          cursor: pointer;
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-   <div style="background: rgba(6, 12, 34, 0.8); width:100%; height:100%; min-height:100%" id="intro-container"><br /><br /><br /><br />
-        <div class="mt-5 mb-5">
-            <div class="row">
+   <div style="background: rgba(25, 31, 32, 0.8); width:100%; height:100%; min-height:100%" id="intro-container"><br /><br /><br /><br /><br /><br />
+        <div class="row">
                 <div class="col-md-3">
                     <div class="align-items-left text-left p-3 py-5">
                         <h5 style="color:#ef4136"><span class="fa fa-user-secret"></span> Painel Administração</h5>
@@ -14,9 +38,9 @@
                             <li class="btn-link"><asp:LinkButton runat="server" ID="btnPalestras" OnClick="btnPalestras_Click">Palestras</asp:LinkButton></li>
                             <li class="btn-link"><asp:LinkButton runat="server" ID="btnPendencias" OnClick="btnPendencias_Click">Solicitações Pendentes</asp:LinkButton></li>
                             <li class="btn-link"><asp:LinkButton runat="server" ID="btnPaginaInicial" OnClick="btnPaginaInicial_Click">Página Inicial</asp:LinkButton></li>
-                        </ul><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-                        <asp:Button runat="server" ID="btnAdicionarEvento" CssClass="btn btn-danger" Visible="false" Text="Adicionar Evento" Width="200px"/>
-                        <asp:Button runat="server" ID="btnAdicionarPalestra" OnClick="btnAdicionarPalestra_Click" CssClass="btn btn-danger" Visible="false" Text="Adicionar Palestra" Width="200px" />
+                        </ul><br /><br /><br />
+                        <asp:Button runat="server" ID="btnAdicionarEvento" CssClass="botaosub" OnClick="btnAdicionarEvento_Click" Visible="false" Text="Adicionar Evento" Width="200px"/>
+                        <asp:Button runat="server" ID="btnAdicionarPalestra" OnClick="btnAdicionarPalestra_Click" CssClass="botaosub" Visible="false" Text="Adicionar Palestra" Width="200px" />
                     </div>               
                 </div>
                 <hr style="border-left:1px solid #ef4136; height: 220px; margin-left: -30px; margin-right: 30px" />
@@ -27,9 +51,11 @@
                                 <h5 style="color:#ef4136;"><span class="fa fa-list-alt"></span> Listagem de Usuários</h5><br />
                                 <asp:Label runat="server" ID="lblRes1" style="color: white" CssClass="labels" />
                             </div>
-                            <asp:GridView runat="server" ID="gvUsuarios" AllowSorting="True" OnRowCommand="gvUsuarios_RowCommand" HorizontalAlign="Center" OnSorting="gvUsuarios_Sorting" HeaderStyle-HorizontalAlign="Center"
-                                AutoGenerateColumns="False" BackColor="Transparent" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" ForeColor="White"
-                                GridLines="Vertical" PageSize="30">          
+                            <div class="text-center">
+                                <div style="display:inline-block; border-radius:8px; overflow:hidden;">
+                                <asp:GridView runat="server" ID="gvUsuarios" AllowSorting="True" OnRowCommand="gvUsuarios_RowCommand" HorizontalAlign="Center" OnSorting="gvUsuarios_Sorting" HeaderStyle-HorizontalAlign="Center"
+                                AutoGenerateColumns="False" BackColor="Transparent" BorderColor="#999999" BorderWidth="2px" CellPadding="3" ForeColor="White"
+                                GridLines="Vertical" PageSize="30" CssClass="Grid" >         
             
                                     <Columns>
                 
@@ -65,7 +91,7 @@
             
                                     </Columns>            
                                     <FooterStyle BackColor="#CCCCCC" />
-                                    <HeaderStyle BackColor="#060C22" Font-Bold="True" Font-Underline="true" ForeColor="White" />
+                                    <HeaderStyle BackColor="#231F20" Font-Bold="True" Font-Underline="true" ForeColor="White" />
                                     <PagerStyle BackColor="#999999" ForeColor="White" HorizontalAlign="Center" />
                                     <SelectedRowStyle BackColor="#000099" Font-Bold="True" ForeColor="White" />
                                     <SortedAscendingCellStyle BackColor="#F1F1F1" />
@@ -80,18 +106,76 @@
                                         LastPageText="<i class='icon-forward2' title='Última Página' /></i>" 
                                         PageButtonCount="3" />
                                 </asp:GridView>
+                            </div>
+                            </div>
                         </asp:Panel>
                         <asp:Panel ID="PanelEventos" Visible="false" runat="server">
-                        <div class="d-flex justify-content-between align-items-center mb-2">
-                            <h6 style="color:#ef4136;"><span class="fa fa-list-alt"></span> Listagem de Eventos</h6>
-                        </div>
+                         <div class="text-center">
+                                <h5 style="color:#ef4136;"><span class="fa fa-list-alt"></span> Listagem de Eventos</h5><br />
+                                <asp:Label runat="server" ID="lblEventoRes" style="color: white" CssClass="labels" />
+                            </div>
+                            <div class="text-center">
+                                <div style="display:inline-block; border-radius:8px; overflow:hidden;">
+                                <asp:GridView runat="server" ID="gvEvento" RowStyle-HorizontalAlign="Center" AllowSorting="True" OnRowCommand="gvEvento_RowCommand" HorizontalAlign="Center" OnSorting="gvEvento_Sorting" HeaderStyle-HorizontalAlign="Center"
+                                AutoGenerateColumns="False" BackColor="Transparent" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" ForeColor="White" 
+                                GridLines="Vertical" PageSize="30">          
+            
+                                    <Columns>
+                
+                                        <asp:TemplateField HeaderText="ID Evento" SortExpression="IDEvento" ItemStyle-HorizontalAlign="Center">                   
+                                            <ItemTemplate><asp:Label ID="lblIDEvento" Text='<%#Eval("IDEvento")%>' runat="server" /></ItemTemplate>
+                                        </asp:TemplateField>
+
+                                        <asp:TemplateField HeaderText="ADM Criador" SortExpression="Username" ItemStyle-HorizontalAlign="Center">
+                                            <ItemTemplate><asp:Label ID="lblEventoTitulo" Text='<%#Eval("Username")%>' runat="server" /></ItemTemplate>
+                                        </asp:TemplateField>
+                
+                                        <asp:TemplateField HeaderText="Evento" SortExpression="EventoTitulo" ItemStyle-HorizontalAlign="Center">
+                                            <ItemTemplate><asp:Label ID="lblEventoTitulo" Text='<%#Eval("EventoTitulo")%>' runat="server" /></ItemTemplate>
+                                        </asp:TemplateField>
+                
+                                        <asp:TemplateField HeaderText="Data de Início" SortExpression="EventoDtIni" ItemStyle-HorizontalAlign="Center">                    
+                                            <ItemTemplate><asp:Label ID="lblEventoDtIni" Text='<%#Eval("EventoDtIni")%>' runat="server"/></ItemTemplate>
+                                        </asp:TemplateField>  
+                
+                                        <asp:TemplateField HeaderText="Data de Término" SortExpression="PalestraDtCriacao" ItemStyle-HorizontalAlign="Center">
+                                            <ItemTemplate><asp:Label ID="lblPalestraDtCriacaoo" Text='<%#Eval("PalestraDtCriacao")%>' runat="server" /></ItemTemplate>
+                                        </asp:TemplateField>
+                
+                                        <asp:TemplateField ShowHeader="False">
+                                            <ItemTemplate>
+                                                <asp:Button ID="btnGridPalestrante" runat="server" CssClass="botao" CommandName="SendEventos" CausesValidation="false" Text="Visualizar" CommandArgument='<%# Eval("IDEvento") %>' />
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+            
+                                    </Columns>            
+                                    <FooterStyle BackColor="#CCCCCC" />
+                                    <HeaderStyle BackColor="#231F20" Font-Bold="True" Font-Underline="true" ForeColor="White" />
+                                    <PagerStyle BackColor="#999999" ForeColor="White" HorizontalAlign="Center" />
+                                    <SelectedRowStyle BackColor="#000099" Font-Bold="True" ForeColor="White" />
+                                    <SortedAscendingCellStyle BackColor="#F1F1F1" />
+                                    <SortedAscendingHeaderStyle BackColor="#808080" />
+                                    <SortedDescendingCellStyle BackColor="#CAC9C9" />
+                                    <SortedDescendingHeaderStyle BackColor="#383838" />
+                                    <PagerSettings  Position="Bottom" 
+                                        Mode="NextPreviousFirstLast"  
+                                        PreviousPageText="<i class='icon-previous' title='Página Anterior' /></i>" 
+                                        NextPageText="<i class='icon-next' title='Próxima Página' /></i>" 
+                                        FirstPageText="<i class='icon-backward' title='Primeira Página' /></i>" 
+                                        LastPageText="<i class='icon-forward2' title='Última Página' /></i>" 
+                                        PageButtonCount="3" />
+                                </asp:GridView>
+                            </div>
+                            </div>
                     </asp:Panel>
                         <asp:Panel ID="PanelPalestras" Visible="false" runat="server">
                             <div class="text-center">
                                 <h5 style="color:#ef4136;"><span class="fa fa-list-alt"></span> Listagem de Palestras</h5><br />
                                 <asp:Label runat="server" ID="lblResPalestras" style="color: white" CssClass="labels" />
                             </div>
-                            <asp:GridView runat="server" ID="gvPalestras" RowStyle-HorizontalAlign="Center" AllowSorting="True" OnRowCommand="gvPalestras_RowCommand" HorizontalAlign="Center" OnSorting="gvPalestras_Sorting" HeaderStyle-HorizontalAlign="Center"
+                            <div class="text-center">
+                                <div style="display:inline-block; border-radius:8px; overflow:hidden;">
+                                <asp:GridView runat="server" ID="gvPalestras" RowStyle-HorizontalAlign="Center" AllowSorting="True" OnRowCommand="gvPalestras_RowCommand" HorizontalAlign="Center" OnSorting="gvPalestras_Sorting" HeaderStyle-HorizontalAlign="Center"
                                 AutoGenerateColumns="False" BackColor="Transparent" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" ForeColor="White" 
                                 GridLines="Vertical" PageSize="30">          
             
@@ -101,23 +185,23 @@
                                             <ItemTemplate><asp:Label ID="lblIDPalestra" Text='<%#Eval("IDPalestra")%>' runat="server" /></ItemTemplate>
                                         </asp:TemplateField>
                 
-                                        <asp:TemplateField HeaderText="Palestrante" SortExpression="Palestrante">
+                                        <asp:TemplateField HeaderText="Palestrante" SortExpression="Palestrante" ItemStyle-HorizontalAlign="Center">
                                             <ItemTemplate><asp:Label ID="lblPalestrante" Text='<%#Eval("Palestrante")%>' runat="server" /></ItemTemplate>
                                         </asp:TemplateField>
                 
-                                        <asp:TemplateField HeaderText="Cadastrado por" SortExpression="Criador">                    
+                                        <asp:TemplateField HeaderText="Cadastrado por" SortExpression="Criador" ItemStyle-HorizontalAlign="Center">                    
                                             <ItemTemplate><asp:Label ID="lblCriador" Text='<%#Eval("Criador")%>' runat="server"/></ItemTemplate>
                                         </asp:TemplateField>  
                 
-                                        <asp:TemplateField HeaderText="Data de Cadastro" SortExpression="PalestraDtCriacao">
+                                        <asp:TemplateField HeaderText="Data de Cadastro" SortExpression="PalestraDtCriacao" ItemStyle-HorizontalAlign="Center">
                                             <ItemTemplate><asp:Label ID="lblPalestraDtCriacao" Text='<%#Eval("PalestraDtCriacao")%>' runat="server" /></ItemTemplate>
                                         </asp:TemplateField>
 
-                                        <asp:TemplateField HeaderText="Link" SortExpression="PalestraLink">                    
+                                        <asp:TemplateField HeaderText="Link" SortExpression="PalestraLink" ItemStyle-HorizontalAlign="Center">                    
                                             <ItemTemplate><asp:Label ID="lblLink" Text='<%#Eval("PalestraLink")%>' runat="server" /></ItemTemplate>
                                         </asp:TemplateField> 
 
-                                        <asp:TemplateField HeaderText="Aprovada" SortExpression="PalestraAprovada">
+                                        <asp:TemplateField HeaderText="Aprovada" SortExpression="PalestraAprovada" ItemStyle-HorizontalAlign="Center">
                                             <ItemTemplate><asp:Label ID="lblPalestrAprovada" Text='<%#Eval("PalestraAprovada")%>' runat="server" /></ItemTemplate>
                                         </asp:TemplateField>
                 
@@ -135,7 +219,7 @@
             
                                     </Columns>            
                                     <FooterStyle BackColor="#CCCCCC" />
-                                    <HeaderStyle BackColor="#060C22" Font-Bold="True" Font-Underline="true" ForeColor="White" />
+                                    <HeaderStyle BackColor="#231F20" Font-Bold="True" Font-Underline="true" ForeColor="White" />
                                     <PagerStyle BackColor="#999999" ForeColor="White" HorizontalAlign="Center" />
                                     <SelectedRowStyle BackColor="#000099" Font-Bold="True" ForeColor="White" />
                                     <SortedAscendingCellStyle BackColor="#F1F1F1" />
@@ -150,6 +234,8 @@
                                         LastPageText="<i class='icon-forward2' title='Última Página' /></i>" 
                                         PageButtonCount="3" />
                                 </asp:GridView>
+                            </div>
+                            </div>
                         </asp:Panel>
                         <asp:Panel ID="PanelPendencias" Visible="false" runat="server">
                             <div class="text-center">
@@ -160,8 +246,10 @@
                                 <div class="text-center">
                                     <h7 style="color:#ef4136;"><span class="fa fa-address-card-o"></span> Palestrantes / Apresentadores</h7><br />                               
                                     <asp:Label runat="server" ID="lblResPalestrante" style="color: white" CssClass="labels" />
-                                </div> 
-                                <asp:GridView runat="server" ID="gvPalestrante" OnSorting="gvPalestrante_Sorting" AllowSorting="True" HeaderStyle-HorizontalAlign="Center" HorizontalAlign="Center" 
+                                </div>
+                                <div class="text-center">
+                                    <div style="display:inline-block; border-radius:8px; overflow:hidden;">
+                                    <asp:GridView runat="server" ID="gvPalestrante" OnSorting="gvPalestrante_Sorting" AllowSorting="True" HeaderStyle-HorizontalAlign="Center" HorizontalAlign="Center" 
                                         AutoGenerateColumns="False" OnRowCommand="gvPalestrante_RowCommand" BackColor="Transparent" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" ForeColor="White"
                                         GridLines="Vertical" PageSize="30">          
             
@@ -171,19 +259,19 @@
                                                 <ItemTemplate><asp:Label ID="lblUserId" Text='<%#Eval("UserId")%>' runat="server" /></ItemTemplate>
                                             </asp:TemplateField>
                 
-                                            <asp:TemplateField HeaderText="Nome" SortExpression="Username">
+                                            <asp:TemplateField HeaderText="Palestrante" SortExpression="Username" ItemStyle-HorizontalAlign="Center">
                                                 <ItemTemplate><asp:Label ID="lblNome" Text='<%#Eval("Username")%>' runat="server" /></ItemTemplate>
                                             </asp:TemplateField>
                 
-                                            <asp:TemplateField HeaderText="E-mail" SortExpression="Email">                    
+                                            <asp:TemplateField HeaderText="E-mail" SortExpression="Email" ItemStyle-HorizontalAlign="Center">                    
                                                 <ItemTemplate><asp:Label ID="lblEmail" Text='<%#Eval("Email")%>' runat="server"/></ItemTemplate>
                                             </asp:TemplateField>  
                 
-                                            <asp:TemplateField HeaderText="Data de Cadastro" SortExpression="CreatedDate">                    
+                                            <asp:TemplateField HeaderText="Data de Cadastro" SortExpression="CreatedDate" ItemStyle-HorizontalAlign="Center">                    
                                                 <ItemTemplate><asp:Label ID="lblCreatedDate" Text='<%#Eval("CreatedDate")%>' runat="server" /></ItemTemplate>
                                             </asp:TemplateField>  
                 
-                                            <asp:TemplateField HeaderText="Último Acesso" SortExpression="LastLoginDate">
+                                            <asp:TemplateField HeaderText="Último Acesso" SortExpression="LastLoginDate" ItemStyle-HorizontalAlign="Center">
                                                 <ItemTemplate><asp:Label ID="lblLastLoginDate" Text='<%#Eval("LastLoginDate")%>' runat="server" /></ItemTemplate>
                                             </asp:TemplateField>
                 
@@ -195,7 +283,7 @@
             
                                         </Columns>            
                                         <FooterStyle BackColor="#CCCCCC" />
-                                        <HeaderStyle BackColor="#060C22" Font-Bold="True" Font-Underline="true" ForeColor="White" />
+                                        <HeaderStyle BackColor="#231F20" Font-Bold="True" Font-Underline="true" ForeColor="White" />
                                         <PagerStyle BackColor="#999999" ForeColor="White" HorizontalAlign="Center" />
                                         <SelectedRowStyle BackColor="#000099" Font-Bold="True" ForeColor="White" />
                                         <SortedAscendingCellStyle BackColor="#F1F1F1" />
@@ -209,14 +297,18 @@
                                             FirstPageText="<i class='icon-backward' title='Primeira Página' /></i>" 
                                             LastPageText="<i class='icon-forward2' title='Última Página' /></i>" 
                                             PageButtonCount="3" />
-                                    </asp:GridView><br /><br />
+                                    </asp:GridView>
+                                </div>
+                                </div><br /><br />
                             </asp:Panel>
                             <asp:Panel runat="server">
                                 <div class="text-center">
                                     <h7 style="color:#ef4136;"><span class="fa fa-video-camera"></span> Palestras / Seminários</h7><br />                              
                                     <asp:Label runat="server" ID="lblResPalestra" style="color: white" CssClass="labels" />
                                 </div>
-                                <asp:GridView runat="server" ID="gvPalestra" OnSorting="gvPalestra_Sorting" AllowSorting="True" HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center"
+                                <div class="text-center">
+                                    <div style="display:inline-block; border-radius:8px; overflow:hidden;">
+                                    <asp:GridView runat="server" ID="gvPalestra" OnSorting="gvPalestra_Sorting" AllowSorting="True" HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center"
                                     AutoGenerateColumns="False" OnRowCommand="gvPalestra_RowCommand" BackColor="Transparent" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" ForeColor="White"
                                     GridLines="Vertical" PageSize="30">
             
@@ -226,11 +318,11 @@
                                             <ItemTemplate><asp:Label ID="lblIDPalestra" Text='<%#Eval("IDPalestra")%>' runat="server" /></ItemTemplate>
                                         </asp:TemplateField>
                 
-                                        <asp:TemplateField HeaderText="ID Palestrante" SortExpression="IDPalestrante" ItemStyle-HorizontalAlign="Center">
-                                            <ItemTemplate><asp:Label ID="lblIDPalestrante" Text='<%#Eval("IDPalestrante")%>' runat="server" /></ItemTemplate>
+                                        <asp:TemplateField HeaderText="Palestrante" SortExpression="Username" ItemStyle-HorizontalAlign="Center">
+                                            <ItemTemplate><asp:Label ID="lblIDPalestrante" Text='<%#Eval("Username")%>' runat="server" /></ItemTemplate>
                                         </asp:TemplateField>
                 
-                                        <asp:TemplateField HeaderText="Data de Criação" SortExpression="PalestraDtCriacao">                    
+                                        <asp:TemplateField HeaderText="Data de Criação" SortExpression="PalestraDtCriacao" ItemStyle-HorizontalAlign="Center">                    
                                             <ItemTemplate><asp:Label ID="lblPalestraDtCriacao" Text='<%#Eval("PalestraDtCriacao")%>' runat="server"/></ItemTemplate>
                                         </asp:TemplateField>  
                 
@@ -246,7 +338,7 @@
             
                                     </Columns>            
                                     <FooterStyle BackColor="#CCCCCC" />
-                                    <HeaderStyle BackColor="#060C22" Font-Bold="True" Font-Underline="true" ForeColor="White" />
+                                    <HeaderStyle BackColor="#231F20" Font-Bold="True" Font-Underline="true" ForeColor="White" />
                                     <PagerStyle BackColor="#999999" ForeColor="White" HorizontalAlign="Center" />
                                     <SelectedRowStyle BackColor="#000099" Font-Bold="True" ForeColor="White" />
                                     <SortedAscendingCellStyle BackColor="#F1F1F1" />
@@ -260,7 +352,9 @@
                                         FirstPageText="<i class='icon-backward' title='Primeira Página' /></i>" 
                                         LastPageText="<i class='icon-forward2' title='Última Página' /></i>" 
                                         PageButtonCount="3" />
-                                </asp:GridView>        
+                                </asp:GridView>
+                                </div>
+                                </div>
                             </asp:Panel>
 
                         </asp:Panel>
@@ -310,7 +404,9 @@
                             <div class="col-md-12 mx-auto text-center">
                                 <label style="color: white" class="labels">Remover Conexão</label><br />
                                 <asp:Label runat="server" CssClass="labels" ID="lblResConEmpresarial"></asp:Label>
-                                <asp:GridView runat="server" ID="gvConEmpresarial" OnSorting="gvConEmpresarial_Sorting" AllowSorting="True" HeaderStyle-HorizontalAlign="Center" HorizontalAlign="Center" 
+                                <div class="text-center">
+                                    <div style="display:inline-block; border-radius:8px; overflow:hidden;">
+                                    <asp:GridView runat="server" ID="gvConEmpresarial" OnSorting="gvConEmpresarial_Sorting" AllowSorting="True" HeaderStyle-HorizontalAlign="Center" HorizontalAlign="Center" 
                                         AutoGenerateColumns="False" OnRowCommand="gvConEmpresarial_RowCommand" BackColor="Transparent" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" ForeColor="White"
                                         GridLines="Vertical" PageSize="30">          
             
@@ -336,7 +432,7 @@
             
                                         </Columns>            
                                         <FooterStyle BackColor="#CCCCCC" />
-                                        <HeaderStyle BackColor="#060C22" Font-Bold="True" Font-Underline="true" ForeColor="White" />
+                                        <HeaderStyle BackColor="#231F20" Font-Bold="True" Font-Underline="true" ForeColor="White" />
                                         <PagerStyle BackColor="#999999" ForeColor="White" HorizontalAlign="Center" />
                                         <SelectedRowStyle BackColor="#000099" Font-Bold="True" ForeColor="White" />
                                         <SortedAscendingCellStyle BackColor="#F1F1F1" />
@@ -350,7 +446,9 @@
                                             FirstPageText="<i class='icon-backward' title='Primeira Página' /></i>" 
                                             LastPageText="<i class='icon-forward2' title='Última Página' /></i>" 
                                             PageButtonCount="3" />
-                                    </asp:GridView><br />
+                                    </asp:GridView>
+                                </div>
+                                </div><br />
                             </div>
                             <div class="col-md-6 mx-auto text-center">
                                 <label style="color: #ef4136; font-size: 16px; display:block; text-align:left;" class="labels">Perguntas Frequentas</label>
@@ -400,10 +498,9 @@
                             </div>
                         </asp:Panel>
                     </div>
-                </div>
+                </div>       
             </div>
-        </div><br />
-    </div>
+        <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
     <script>
          $("#<%=fuLogoConexaoEmpresarial.ClientID%>").on('change', function () {
              if (this.files[0].type.indexOf("image") > -1) {
@@ -419,4 +516,6 @@
             }
         });
     </script>
+    </div>
+
 </asp:Content>
