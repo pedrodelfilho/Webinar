@@ -111,6 +111,7 @@ namespace DAL
             if (dr.HasRows && dr.Read())
             {
                 usuario = new Usuario();
+                usuario.Password = dr["Password"].ToString();
                 usuario.UserId = Convert.ToInt32(dr["UserId"]);
                 usuario.Tipo = dr["Tipo"].ToString();
                 usuario.Username = dr["Username"].ToString();
@@ -390,37 +391,11 @@ namespace DAL
             cmd.Parameters.AddWithValue("@goo", objPalestrante.PalestranteGoogle);
             cmd.Parameters.AddWithValue("@in", objPalestrante.PalestranteLinkedin);
             cmd.Parameters.AddWithValue("@id", objPalestrante.IDPalestrante);
-
+            
             cmd.ExecuteNonQuery();
             conn.Close();
 
         }
-        public List<Usuario> PalestrantePendente()
-        {
-            List<Usuario> listaUsuarios = new List<Usuario>();
-            SqlConnection conn = new SqlConnection(connectionString);
-            conn.Open();
-
-            string sql = "SELECT u.UserId, u.Username, u.Email, convert(varchar(10), u.CreatedDate, 103) + ' ' + convert(varchar(8), u.CreatedDate, 14) AS CreatedDate, convert(varchar(10), u.LastLoginDate, 103) + ' ' + convert(varchar(8), u.LastLoginDate, 14) AS LastLoginDate FROM Users AS u, Palestrantes AS p WHERE p.PerfilAprovado = 'false' OR p.PerfilAprovado IS NULL";
-            SqlCommand cmd = new SqlCommand(sql, conn);
-
-            SqlDataReader dr = cmd.ExecuteReader();
-            if (dr.HasRows)
-            {
-                Usuario objUsuario;
-                while (dr.Read())
-                {
-                    objUsuario = new Usuario();
-                    objUsuario.UserId = Convert.ToInt32(dr["UserId"]);
-                    objUsuario.Username = dr["Username"].ToString();
-                    objUsuario.Email = dr["Email"].ToString();
-                    objUsuario.CreatedDate = Convert.ToDateTime(dr["CreatedDate"]);
-                    try { objUsuario.LastLoginDate = Convert.ToDateTime(dr["LastLoginDate"]); } catch { objUsuario.LastLoginDate = DateTime.MinValue; }
-                }
-            }
-            conn.Close();
-            return listaUsuarios;
-        } 
         public DataTable ListarUsuarios()
         {
             SqlConnection conn = new SqlConnection(connectionString);
@@ -446,20 +421,7 @@ namespace DAL
 
             conn.Close();
             return dt;
-        }
-        public DataTable ListarPalestraPendente()
-        {
-            SqlConnection conn = new SqlConnection(connectionString);
-            conn.Open();
-            string sql = "SELECT * FROM Palestras WHERE PalestraAprovada IS NULL OR PalestraAprovada = 'false'";
-            SqlCommand cmd = new SqlCommand(sql, conn);
-            SqlDataAdapter adp = new SqlDataAdapter(cmd);
-            DataTable dt = new DataTable();
-            adp.Fill(dt);
-
-            conn.Close();
-            return dt;
-        }
+        }       
         public void ExcluirUsuario(int id)
         {
             SqlConnection conn = new SqlConnection(connectionString);
@@ -571,5 +533,32 @@ namespace DAL
             cmd.Parameters.AddWithValue("@id", objUsuario.UserId);
             cmd.ExecuteNonQuery();
         }
+        public void AtualizarSenhaUsuario(int id, string pw)
+        {
+            SqlConnection conn = new SqlConnection(connectionString);
+            conn.Open();
+
+            string sql = "UPDATE Users SET Password = @pw WHERE UserId = @id";
+
+            SqlCommand cmd = new SqlCommand(sql, conn);
+            cmd.Parameters.AddWithValue("@id", id);
+            cmd.Parameters.AddWithValue("@pw", pw);
+            cmd.ExecuteNonQuery();
+        }    
+        public DataTable PalestranteRandom()
+        {
+            SqlConnection conn = new SqlConnection(connectionString);
+            conn.Open();
+
+            string sql = "SELECT Top 6 * FROM Palestrantes WHERE PerfilAprovado = 'true' AND PalestranteFoto IS NOT NULL ORDER BY NEWID()";
+
+            SqlCommand cmd = new SqlCommand(sql, conn);
+            SqlDataAdapter adp = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            adp.Fill(dt);
+
+            conn.Close();
+            return dt;
+        }   
     }
 }

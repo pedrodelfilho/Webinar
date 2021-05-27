@@ -114,8 +114,95 @@ namespace Webinar
             lblPergunta3.Controls.Add(iii);
             lblPergunta4.Controls.Add(iiii);
             lblPergunta5.Controls.Add(iiiii);
+            CarregarHomePalestrantes();
         }
+        protected void CarregarHomePalestrantes()
+        {
+            UsuarioDAL uDAL = new UsuarioDAL();
+            DataTable dt = uDAL.PalestranteRandom();
 
+            byte[] bytes1 = (byte[])dt.Rows[0]["PalestranteFoto"];
+            string base64String1 = Convert.ToBase64String(bytes1, 0, bytes1.Length);
+            imgPalestrante1.Attributes["src"] = "data:image/png;base64," + base64String1;
+            int id1 = Convert.ToInt32(dt.Rows[0]["IDPalestrante"]);
+            Usuario p1 = uDAL.BuscarEmail(id1);
+            aPalestrante1.InnerText = p1.Username;
+            aPalestrante1.HRef = "PreviewPalestrante.aspx?a=" + id1;
+            pPalestrante1.InnerText = dt.Rows[0]["PalestranteEspecialidade"].ToString();
+            twtPalestrante1.Attributes["href"] = dt.Rows[0]["PalestranteTwiter"].ToString();
+            facePalestrante1.Attributes["href"] = dt.Rows[0]["PalestranteFacebook"].ToString();
+            ggPalestrante1.HRef = dt.Rows[0]["PalestranteGoogle"].ToString();
+            inPalestrante1.HRef = dt.Rows[0]["PalestranteLinkedin"].ToString();
+
+            byte[] bytes2 = (byte[])dt.Rows[1]["PalestranteFoto"];
+            string base64String2 = Convert.ToBase64String(bytes2, 0, bytes2.Length);
+            imgPalestrante2.Attributes["src"] = "data:image/png;base64," + base64String2;
+            int id2 = Convert.ToInt32(dt.Rows[1]["IDPalestrante"]);
+            Usuario p2 = uDAL.BuscarEmail(id2);
+            aPalestrante2.InnerText = p2.Username;
+            aPalestrante2.HRef = "PreviewPalestrante.aspx?a=" + id2;
+            pPalestrante2.InnerText = dt.Rows[1]["PalestranteEspecialidade"].ToString();
+            twtPalestrante2.Attributes["href"] = dt.Rows[1]["PalestranteTwiter"].ToString();
+            facePalestrante2.Attributes["href"] = dt.Rows[1]["PalestranteFacebook"].ToString();
+            ggPalestrante2.HRef = dt.Rows[1]["PalestranteGoogle"].ToString();
+            inPalestrante2.HRef = dt.Rows[1]["PalestranteLinkedin"].ToString();
+
+
+            byte[] bytes3 = (byte[])dt.Rows[2]["PalestranteFoto"];
+            string base64String3 = Convert.ToBase64String(bytes3, 0, bytes3.Length);
+            imgPalestrante3.Attributes["src"] = "data:image/png;base64," + base64String3;
+            int id3 = Convert.ToInt32(dt.Rows[2]["IDPalestrante"]);
+            Usuario p3 = uDAL.BuscarEmail(id3);
+            aPalestrante3.InnerText = p3.Username;
+            aPalestrante3.HRef = "PreviewPalestrante.aspx?a=" + id3;
+            pPalestrante3.InnerText = dt.Rows[2]["PalestranteEspecialidade"].ToString();
+            twtPalestrante3.Attributes["href"] = dt.Rows[2]["PalestranteTwiter"].ToString();
+            facePalestrante3.Attributes["href"] = dt.Rows[2]["PalestranteFacebook"].ToString();
+            ggPalestrante3.HRef = dt.Rows[2]["PalestranteGoogle"].ToString();
+            inPalestrante3.HRef = dt.Rows[2]["PalestranteLinkedin"].ToString();
+
+
+            byte[] bytes4 = (byte[])dt.Rows[3]["PalestranteFoto"];
+            string base64String4 = Convert.ToBase64String(bytes4, 0, bytes4.Length);
+            imgPalestrante4.Attributes["src"] = "data:image/png;base64," + base64String4;
+            int id4 = Convert.ToInt32(dt.Rows[3]["IDPalestrante"]);
+            Usuario p4 = uDAL.BuscarEmail(id4);
+            aPalestrante4.InnerText = p4.Username;
+            aPalestrante4.HRef = "PreviewPalestrante.aspx?a=" + id4;
+            pPalestrante4.InnerText = dt.Rows[3]["PalestranteEspecialidade"].ToString();
+            twtPalestrante4.Attributes["href"] = dt.Rows[3]["PalestranteTwiter"].ToString();
+            facePalestrante4.Attributes["href"] = dt.Rows[3]["PalestranteFacebook"].ToString();
+            ggPalestrante4.HRef = dt.Rows[3]["PalestranteGoogle"].ToString();
+            inPalestrante4.HRef = dt.Rows[3]["PalestranteLinkedin"].ToString();
+
+
+            byte[] bytes5 = (byte[])dt.Rows[4]["PalestranteFoto"];
+            string base64String5 = Convert.ToBase64String(bytes5, 0, bytes5.Length);
+            imgPalestrante5.Attributes["src"] = "data:image/png;base64," + base64String5;
+            int id5 = Convert.ToInt32(dt.Rows[4]["IDPalestrante"]);
+            Usuario p5 = uDAL.BuscarEmail(id5);
+            aPalestrante5.InnerText = p5.Username;
+            aPalestrante5.HRef = "PreviewPalestrante.aspx?a=" + id5;
+            pPalestrante5.InnerText = dt.Rows[4]["PalestranteEspecialidade"].ToString();
+            twtPalestrante5.Attributes["href"] = dt.Rows[4]["PalestranteTwiter"].ToString();
+            facePalestrante5.Attributes["href"] = dt.Rows[4]["PalestranteFacebook"].ToString();
+            ggPalestrante5.HRef = dt.Rows[4]["PalestranteGoogle"].ToString();
+            inPalestrante5.HRef = dt.Rows[4]["PalestranteLinkedin"].ToString();
+
+            byte[] bytes6 = (byte[])dt.Rows[5]["PalestranteFoto"];
+            string base64String6 = Convert.ToBase64String(bytes6, 0, bytes6.Length);
+            imgPalestrante6.Attributes["src"] = "data:image/png;base64," + base64String6;
+            int id6 = Convert.ToInt32(dt.Rows[5]["IDPalestrante"]);
+            Usuario p6 = uDAL.BuscarEmail(id6);
+            aPalestrante6.InnerText = p6.Username;
+            aPalestrante6.HRef = "PreviewPalestrante.aspx?a=" + id6;
+            pPalestrante6.InnerText = dt.Rows[5]["PalestranteEspecialidade"].ToString();
+            twtPalestrante6.Attributes["href"] = dt.Rows[5]["PalestranteTwiter"].ToString();
+            facePalestrante6.Attributes["href"] = dt.Rows[5]["PalestranteFacebook"].ToString();
+            ggPalestrante6.HRef = dt.Rows[5]["PalestranteGoogle"].ToString();
+            inPalestrante6.HRef = dt.Rows[5]["PalestranteLinkedin"].ToString();
+            Session["HomePage"] = "SIM";
+        }
         protected void btnCadastrarUsuario_Click(object sender, EventArgs e)
         {
             int userId = 0;

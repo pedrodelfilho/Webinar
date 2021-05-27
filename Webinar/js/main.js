@@ -37,7 +37,7 @@ jQuery(document).ready(function( $ ) {
   // Initialize Venobox
   $('.venobox').venobox({
     bgcolor: '',
-    overlayColor: 'rgba(6, 12, 34, 0.85)',
+      overlayColor: 'rgba(25, 31, 32, 0.85)',
     closeBackground: '',
     closeColor: '#fff'
   });

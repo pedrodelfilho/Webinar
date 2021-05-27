@@ -60,9 +60,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Certificados.cs" />
     <Compile Include="Cidade.cs" />
     <Compile Include="Conexao.cs" />
     <Compile Include="Criptografia.cs" />
+    <Compile Include="Evento.cs" />
     <Compile Include="Home.cs" />
     <Compile Include="Notificar.cs" />
     <Compile Include="Palestra.cs" />

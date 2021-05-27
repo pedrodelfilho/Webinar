@@ -35,24 +35,24 @@ namespace Webinar
             Convidado objConvidado = new Convidado();
             objConvidado.UserId = usuario.UserId;
 
-            if(fuUsuario.HasFile)
+            if (formFile.PostedFile.ContentLength > 0)
             {
-                string empFilename = Path.GetFileName(fuUsuario.PostedFile.FileName);
-                string FilecontentType = fuUsuario.PostedFile.ContentType;
-                Stream s = fuUsuario.PostedFile.InputStream;
+                string empFilename = Path.GetFileName(formFile.PostedFile.FileName);
+                string FilecontentType = formFile.PostedFile.ContentType;
+                Stream s = formFile.PostedFile.InputStream;
                 BinaryReader br = new BinaryReader(s);
                 byte[] Databytes = br.ReadBytes((Int32)s.Length);
                 objConvidado.FotoConvidado = Databytes;
             }
             else { objConvidado.FotoConvidado = null; }
 
-            
+
             switch (ddlSexo.SelectedValue)
             {
                 case "Masculino":
                     objConvidado.SexoConvidado = 'M';
                     break;
-                case "Feminio":
+                case "Feminino":
                     objConvidado.SexoConvidado = 'F';
                     break;
                 case "Outros":
@@ -73,18 +73,16 @@ namespace Webinar
                 NotificarDAL nDAL = new NotificarDAL();
                 Notificar email = nDAL.VerificarEmail(cod);
 
-                if(email.NotificarEmail == null)
+                if (email.NotificarEmail == null)
                 {
                     nDAL.CadastrarEmailNotificar(cod);
                 }
             }
             CarregarUsuario();
-
         }  
         
         protected void CarregarUsuario()
         {
-
             string cod = HttpContext.Current.User.Identity.Name;
             UsuarioDAL uDAL = new UsuarioDAL();
             Usuario usuario = uDAL.BuscarID(cod);
@@ -104,8 +102,10 @@ namespace Webinar
                 byte[] bytes = objConvidado.FotoConvidado;
                 string base64String = Convert.ToBase64String(bytes, 0, bytes.Length);
                 imgUsuario.ImageUrl = "data:image/png;base64," + base64String;
+                LoginView LoginView = this.Master.FindControl("LoginView1") as LoginView;
+                (LoginView.FindControl("imgLogin") as Image).ImageUrl = "data:image/png;base64," + base64String;
             }
-            
+
             try { lblCidade.Text = objConvidado.ConvidadoCidadeUF; } catch { lblCidade.Text = null; }
             try { txtDtNasc.Text = objConvidado.ConvidadoDtNasc; } catch { txtDtNasc.Text = "01/01/2000"; }
             ddlCidade.SelectedValue = objConvidado.ConvidadoCidadeUF;

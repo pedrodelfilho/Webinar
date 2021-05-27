@@ -66,15 +66,37 @@ namespace Webinar
             }
             else if (Moderador.Contains(usuario.Tipo)) 
             {
+                (this.LoginView1.FindControl("EditarPerfil") as HtmlAnchor).Attributes["href"] = "PainelUsuario.aspx";
                 (this.LoginView1.FindControl("PainelAdm") as HtmlGenericControl).Visible = false;
                 (this.LoginView1.FindControl("PainelMod") as HtmlGenericControl).Visible = true;
-                (this.LoginView1.FindControl("imgLogin") as Image).ImageUrl = "~/img/anonimo.jpg"; 
+
+                if (objConvidado.FotoConvidado == null)
+                {
+                    (this.LoginView1.FindControl("imgLogin") as Image).ImageUrl = "~/img/anonimo.jpg";
+                }
+                else
+                {
+                    byte[] bytes = objConvidado.FotoConvidado;
+                    string base64String = Convert.ToBase64String(bytes, 0, bytes.Length);
+                    (this.LoginView1.FindControl("imgLogin") as Image).ImageUrl = "data:image/png;base64," + base64String;
+                }
             }
             else if (Administrador.Contains(usuario.Tipo)) 
             {
+                (this.LoginView1.FindControl("EditarPerfil") as HtmlAnchor).Attributes["href"] = "PainelUsuario.aspx";
                 (this.LoginView1.FindControl("PainelAdm") as HtmlGenericControl).Visible = true;
                 (this.LoginView1.FindControl("PainelMod") as HtmlGenericControl).Visible = false;
-                (this.LoginView1.FindControl("imgLogin") as Image).ImageUrl = "~/img/anonimo.jpg"; 
+
+                if (objConvidado.FotoConvidado == null)
+                {
+                    (this.LoginView1.FindControl("imgLogin") as Image).ImageUrl = "~/img/anonimo.jpg";
+                }
+                else
+                {
+                    byte[] bytes = objConvidado.FotoConvidado;
+                    string base64String = Convert.ToBase64String(bytes, 0, bytes.Length);
+                    (this.LoginView1.FindControl("imgLogin") as Image).ImageUrl = "data:image/png;base64," + base64String;
+                }
             }
             else 
             {
