@@ -17,7 +17,6 @@ namespace Models
         public string  PalestraCategoria { get; set; }
         public string PalestraTitulo { get; set; }
         public string PalestraSubTitulo { get; set; }
-        public string PalestaSubTitulo { get; set; }
         public string PalestraSinopseP1 { get; set; }
         public string PalestraSinopseP2 { get; set; }
         public string PalestraSinopseP3 { get; set; }
@@ -27,6 +26,7 @@ namespace Models
         public DateTime PalestraData { get; set; }
         public bool PalestraAutoriza { get; set; }
         public bool PalestraAprovada { get; set; }
-
+        public int IDEvento { get; set; }
+        public bool Acervo { get; set; }
     }
 }

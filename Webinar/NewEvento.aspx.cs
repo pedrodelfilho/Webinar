@@ -14,47 +14,17 @@ namespace Webinar
 {
     public partial class NewEvento : System.Web.UI.Page
     {
+        
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+            List<string> keys = Request.Form.AllKeys.Where(key => key.Contains("txtDynamic")).ToList();
+            int i = 1;
+            foreach (string key in keys)
+            {
+                this.CreateTextBox("txtDynamic" + i);
+                i++;
+            }
         }
-
-        //protected void btnRemover_Click(object sender, EventArgs e)
-        //{
-        //    List<ListItem> removedItems = new List<ListItem>();
-        //    foreach (ListItem item in lstLeft.Items)
-        //    {
-        //        if (item.Selected)
-        //        {
-        //            item.Selected = false;
-        //            lstRight.Items.Add(item);
-        //            removedItems.Add(item);
-        //        }
-        //    }
-        //    foreach (ListItem item in removedItems)
-        //    {
-        //        lstLeft.Items.Remove(item);
-        //    }
-        //}
-
-        //protected void btnAdicionar_Click(object sender, EventArgs e)
-        //{
-        //    List<ListItem> removedItems = new List<ListItem>();
-        //    foreach (ListItem item in lstRight.Items)
-        //    {
-        //        if (item.Selected)
-        //        {
-        //            item.Selected = false;
-        //            lstLeft.Items.Add(item);
-        //            removedItems.Add(item);
-        //        }
-        //    }
-        //    foreach (ListItem item in removedItems)
-        //    {
-        //        lstRight.Items.Remove(item);
-        //    }
-        //}
-
         protected void btnNextPanel1_Click(object sender, EventArgs e)
         {
             if (txtTituloEvento.Text == string.Empty)
@@ -99,179 +69,84 @@ namespace Webinar
                 return;
             }
             else { txtDataTerEvento.BorderColor = System.Drawing.Color.Empty; }
-            Painel2();
-        }   
-            
-            
-        protected void Painel2()
-        {
-          
-            Panel1.Visible = false;
-            Panel2.Visible = true;
 
+            DateTime a = Convert.ToDateTime(txtDataIniEvento.Text);
+            DateTime b = Convert.ToDateTime(txtDataTerEvento.Text);
+            Session["DtInicio"] = a;
+            Session["DtTermino"] = b;
+            Session["TituloEvento"] = txtTituloEvento.Text;
+            Session["SubTituloEvento"] = txtSubTituloEvento.Text;
+            Session["Sinopse1Evento"] = txtSinopseP1Evento.Text;
+            Session["Sinopse2Evento"] = txtSinopseP2Evento.Text;
+ 
+            string c = (b - a).TotalDays.ToString();
+
+            int TotalDias = Convert.ToInt32(c) + 2;
+            Session["dias"] = TotalDias;
+
+            for (int x = 1; x != TotalDias; x++)
+            {
+                this.CreateTextBox("txtDynamic" + x);
+            }
+
+            btnProximo.Visible = true;
+            btnNextPanel1.Visible = false;
+        }
+
+        public void CreateTextBox(string x) 
+        {
+            string s = x.Substring(x.Length - 1, 1);
+
+            Panel pn = new Panel();
+            pn.CssClass = "row mt-1";
+            addaq.Controls.Add(pn);
+
+            Panel pnl = new Panel();
+            pnl.Attributes.Add("class", "col-md-4");
+            addaq.Controls.Add(pnl);
+
+            HtmlGenericControl lb = new HtmlGenericControl("label");
+            lb.Attributes.Add("class", "labels");
+            lb.Attributes.Add("style", "color: white");
+            lb.InnerText = "Quantidade de palestras no Dia " + s;
+            addaq.Controls.Add(lb);
+
+            TextBox txt = new TextBox();
+            txt.Attributes.Add("class", "form-control");
+            txt.ID = x;
+            txt.Attributes.Add("type", "number");
+            txt.Width = 100;
+            addaq.Controls.Add(txt);
+
+            Literal lt = new Literal();
+            lt.Text = "<br />";
+            addaq.Controls.Add(lt);
+        }
+
+        protected void btnProximo_Click(object sender, EventArgs e)
+        {
             DateTime a = Convert.ToDateTime(txtDataIniEvento.Text);
             DateTime b = Convert.ToDateTime(txtDataTerEvento.Text);
             string c = (b - a).TotalDays.ToString();
 
             int TotalDias = Convert.ToInt32(c) + 2;
 
-            for (int x = 2; x != TotalDias; x++)
+            List<int> termsList = new List<int>();
+            foreach (TextBox textBox in addaq.Controls.OfType<TextBox>())
             {
-                var lidia = new HtmlGenericControl("li");
-                lidia.Attributes["class"] = "nav-item";
-                lidia.Attributes["id"] = "dia" + x.ToString();
+                if (textBox.Text == string.Empty)
+                {
+                    textBox.BorderColor = System.Drawing.Color.Red;
+                    return;
+                }
+                else { textBox.BorderColor = System.Drawing.Color.Empty; }
 
-                var adia = new HtmlGenericControl("a");
-                adia.Attributes["class"] = "nav-link";
-                adia.Attributes["style"] = "width:240px; margin-bottom:4px;";
-                adia.Attributes["href"] = "#day-" + x.ToString();
-                adia.Attributes["role"] = "tab";
-                adia.Attributes["data-toggle"] = "tab";
-                adia.InnerText = "Dia " + x.ToString();
+                termsList.Add(Convert.ToInt32(textBox.Text));
+            }            
 
-                lidia.Controls.Add(adia);
-                ulDias.Controls.Add(lidia);
+            Session["itens"] = termsList;
 
-                var div1 = new HtmlGenericControl("div");
-                div1.Attributes["role"] = "toppanel";
-                div1.Attributes["class"] = "col-lg-9 tab-pane fade";
-                div1.Attributes["id"] = "day-" + x.ToString();
-
-                var div2 = new HtmlGenericControl("div");
-                div2.Attributes["class"] = "row schedule-item";
-
-                var div3 = new HtmlGenericControl("div");
-                div3.Attributes["class"] = "col-md-2";
-
-                var input1 = new HtmlGenericControl("input");
-                input1.Attributes["runat"] = "server";
-                input1.Attributes["id"] = "timeD" + x.ToString() + "P" + x.ToString();
-                input1.Attributes["style"] = "background-color: transparent; border-color: transparent; color: white;";
-
-                var div4 = new HtmlGenericControl("div");
-                div4.Attributes["class"] = "col-md-10";
-
-                var div5 = new HtmlGenericControl("div");
-                div5.Attributes["class"] = "speaker";
-
-                Image img = new Image();
-                img.ID = "imgD" + x.ToString() + "P" + x.ToString();
-                img.CssClass = "rounded-circle";
-
-                var h4 = new HtmlGenericControl("h4");
-                h4.Attributes["runat"] = "server";
-                h4.ID = "h4D" + x.ToString() + "P" + x.ToString();
-
-                DropDownList ddl = new DropDownList();
-                ddl.Attributes["runat"] = "server";
-                ddl.ID = "ddlD" + x.ToString() + "P" + x.ToString();
-                ddl.DataSourceID = "DsPalestra" + x.ToString();
-                ddl.AutoPostBack = true;
-                ddl.DataTextField = "PalestraTitulo";
-                ddl.DataValueField = "PalestraTitulo";
-                ddl.AppendDataBoundItems = true;
-
-                SqlDataSource sql = new SqlDataSource();
-                sql.ID = "DsPalestra" + x.ToString();
-                sql.ConnectionString = "<%$ ConnectionStrings:AggregateBD %>";
-                sql.SelectCommand = "SELECT PalestraTitulo FROM Palestras ORDER BY PalestraTitulo ASC";
-
-                div5.Controls.Add(img);
-                div4.Controls.Add(div5);
-                div4.Controls.Add(h4);
-                div4.Controls.Add(ddl);
-                div4.Controls.Add(sql);
-                div3.Controls.Add(input1);
-
-                div2.Controls.Add(div3);
-                div2.Controls.Add(div4);
-
-                div1.Controls.Add(div2);
-
-                //TextWriter texto = new StreamWriter("D:\\Users\\Pedro\\Desktop\\texto.txt");
-                //texto.WriteLine(div1);
-                //texto.Close();
-                
-            }
-        }
-
-        protected void ddlD1P1_SelectedIndexChanged(object sender, EventArgs e)
-        {            
-            string ddl = ddlD1P1.SelectedValue;
-            PalestraDAL pDAL = new PalestraDAL();
-            DataTable dt = pDAL.AdicionarPalestraEmEvento(ddl);
-
-            byte[] bytes1 = (byte[])dt.Rows[0]["PalestranteFoto"];
-            string base64String1 = Convert.ToBase64String(bytes1, 0, bytes1.Length);
-            imgD1P1.ImageUrl = "data:image/png;base64," + base64String1;
-            h4D1P1.InnerText = dt.Rows[0]["Username"].ToString();
-            Painel2();
-        }
-
-        protected void addPalestra_Click(object sender, EventArgs e)
-        {
-            Painel2();
-            Painel3();
-        }
-        protected void Painel3()
-        {
-            int x = 20;
-            var div1 = new HtmlGenericControl("div");
-            div1.Attributes["role"] = "toppanel";
-            div1.Attributes["class"] = "col-lg-9 tab-pane fade";
-            div1.Attributes["id"] = "day-" + x.ToString();
-
-            var div2 = new HtmlGenericControl("div");
-            div2.Attributes["class"] = "row schedule-item";
-
-            var div3 = new HtmlGenericControl("div");
-            div3.Attributes["class"] = "col-md-2";
-
-            var input1 = new HtmlGenericControl("input");
-            input1.Attributes["runat"] = "server";
-            input1.Attributes["id"] = "timeD" + x.ToString() + "P" + x.ToString();
-            input1.Attributes["style"] = "background-color: transparent; border-color: transparent; color: white;";
-
-            var div4 = new HtmlGenericControl("div");
-            div4.Attributes["class"] = "col-md-10";
-
-            var div5 = new HtmlGenericControl("div");
-            div5.Attributes["class"] = "speaker";
-
-            Image img = new Image();
-            img.ID = "imgD" + x.ToString() + "P" + x.ToString();
-            img.CssClass = "rounded-circle";
-
-            var h4 = new HtmlGenericControl("h4");
-            h4.Attributes["runat"] = "server";
-            h4.ID = "h4D" + x.ToString() + "P" + x.ToString();
-
-            DropDownList ddl = new DropDownList();
-            ddl.Attributes["runat"] = "server";
-            ddl.ID = "ddlD" + x.ToString() + "P" + x.ToString();
-            ddl.DataSourceID = "DsPalestra" + x.ToString();
-            ddl.AutoPostBack = true;
-            ddl.DataTextField = "PalestraTitulo";
-            ddl.DataValueField = "PalestraTitulo";
-            ddl.AppendDataBoundItems = true;
-
-            SqlDataSource sql = new SqlDataSource();
-            sql.ID = "DsPalestra" + x.ToString();
-            sql.ConnectionString = "<%$ ConnectionStrings:AggregateBD %>";
-            sql.SelectCommand = "SELECT PalestraTitulo FROM Palestras ORDER BY PalestraTitulo ASC";
-
-            div5.Controls.Add(img);
-            div4.Controls.Add(div5);
-            div4.Controls.Add(h4);
-            div4.Controls.Add(ddl);
-            div4.Controls.Add(sql);
-            div3.Controls.Add(input1);
-
-            div2.Controls.Add(div3);
-            div2.Controls.Add(div4);
-
-            div1.Controls.Add(div2);
-            //divDias.Controls.Add(div1);
+            Response.Redirect("NewEventoPage2.aspx");
         }
     }
 }

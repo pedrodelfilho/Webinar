@@ -36,7 +36,7 @@
     </asp:ContentPlaceHolder>
 </head>
 
-<body>
+<body runat="server" id="idBody">
     <form runat="server">
 
   <!--==========================
@@ -50,11 +50,11 @@
          <nav id="nav-menu-container">                     
             <ul class="nav-menu">
                 <li class="menu-active"><a href="Default.aspx">Página Inicial</a></li>
-                <li><a href="#about">Sobre</a></li>
-                <li><a href="#venue">Eventos</a></li>
-                <li><a href="#speakers">Palestrantes</a></li>                
-                <li><a href="#gallery">Acervo</a></li>
-                <li><a href="#contact">Contato</a></li>
+                <li><a href="Default.aspx?#about">Sobre</a></li>
+                <li><a href="Default.aspx?#venue">Eventos</a></li>
+                <li><a href="Default.aspx?#speakers">Palestrantes</a></li>                
+                <li><a href="Default.aspx?#gallery">Acervo</a></li>
+                <li><a href="Default.aspx?#contact">Contato</a></li>
                 <asp:LoginView runat="server" ID="LoginView1" ViewStateMode="Disabled">
                     <AnonymousTemplate>
                         <li class="an-login"><asp:LinkButton runat="server" ForeColor="white" Font-Bold="true" ID="btnEntrar" data-toggle="modal" data-target="#login">Login</asp:LinkButton>

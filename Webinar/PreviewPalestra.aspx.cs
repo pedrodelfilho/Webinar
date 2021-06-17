@@ -97,8 +97,8 @@ namespace Webinar
             btnAutorizarPalestra.Visible = false;
             btnNegarPalestra.Visible = false;
             btnSalvarPalestra.Visible = false;
-            btnEditarPalestra.Visible = true;
-            btnEditarPalestra.Text = "Voltar";
+            btnEditarPalestra.Visible = false;
+            btnEditarADM.Visible = true;
 
             int id = Convert.ToInt32(Session["IDPalestra"]);
             PalestraDAL pDAL = new PalestraDAL();
@@ -354,5 +354,13 @@ namespace Webinar
             else { Response.Redirect("Default.aspx"); }
         }
 
+        protected void btnEditarADM_Click(object sender, EventArgs e)
+        {
+            int id = Convert.ToInt32(Session["IDPalestra"]);
+            Session["ID"] = id;
+            Session["EditarADM"] = "Sim";
+            Response.Redirect("NewPalestra.aspx");
+
+        }
     }
 }

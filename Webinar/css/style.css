@@ -982,8 +982,8 @@ body.mobile-nav-active {
 
 #venue .venue-gallery {
     overflow: hidden;
-    border-right: 3px solid #fff;
-    border-bottom: 3px solid #fff;
+    border-right: 20px solid #fff;
+    border-bottom: 20px solid #fff;
 }
 
 #venue .venue-gallery img {

@@ -5,8 +5,14 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Diagnostics;
 using DAL;
 using Models;
+using System.IO;
+using PdfSharp;
+using PdfSharp.Drawing;
+using PdfSharp.Pdf;
+using PdfSharp.Pdf.IO;
 
 namespace Webinar
 {
@@ -35,6 +41,8 @@ namespace Webinar
             PanelAlterarSenha.Visible = false;
             PanelMeuHistorico.Visible = true;
             PanelMeusCertificados.Visible = false;
+            ViewState["sortOrder"] = "";
+            BindGridViewHistorico("", "");
         }
         protected void btnEditarPerfil_Click(object sender, EventArgs e)
         {
@@ -107,7 +115,6 @@ namespace Webinar
                 lblSenhaAtual.Text = "Senha incorreta";
             }
         }
-
         public string sortOrder 
         {
             get
@@ -128,7 +135,6 @@ namespace Webinar
                 ViewState["sortOrder"] = value;
             }
         }
-
         public void BindGridViewCertificados(string sortExp, string sortDir)
         {
             UsuarioDAL uDAL = new UsuarioDAL();
@@ -160,18 +166,124 @@ namespace Webinar
                 lblCertificados.Font.Size = 14;
             }
         }
-
+        public void BindGridViewHistorico(string sortExp, string sortDir)
+        {
+            UsuarioDAL uDAL = new UsuarioDAL();
+            string s = HttpContext.Current.User.Identity.Name;
+            Usuario usuario = uDAL.BuscarID(s);
+            int id = usuario.UserId;
+            CertificadoDAL cDAL = new CertificadoDAL();
+            gvHistorico.DataSource = cDAL.HistoricoCertificados(id);
+            gvHistorico.DataBind();
+           
+        }
         protected void gvCertificados_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            if(e.CommandName == "SendCertificados")
+            if(e.CommandName == "SendCertificado")
             {
                 int id = Convert.ToInt32(e.CommandArgument);
+                CertificadoDownload(id);
             }
         }
-
         protected void gvCertificados_Sorting(object sender, GridViewSortEventArgs e)
         {
             BindGridViewCertificados(e.SortExpression, sortOrder);
+        }        
+        public void CertificadoDownload(int id)
+        {
+            CertificadoDAL cDAL = new CertificadoDAL();
+            DataTable dt = cDAL.GetBackgroundCertificado();
+            Certificados ObterCert = cDAL.ObterCertificado(id);  
+
+            UsuarioDAL uDAL = new UsuarioDAL();
+            string s = HttpContext.Current.User.Identity.Name;
+            Usuario usuario = uDAL.BuscarID(s);
+
+            int idPalestra = ObterCert.IDPalestra;
+            PalestraDAL pDAL = new PalestraDAL();
+            Palestra objPalestra = pDAL.ObterPalestra(idPalestra);
+
+            TimeSpan time = ObterCert.Alvo;
+            string time1 = time.ToString();
+            string[] t = time1.Split(':');
+            string tempo = null;
+            int t1 = Convert.ToInt32(t[0]);
+            int t2 = Convert.ToInt32(t[1]);
+            int t3 = Convert.ToInt32(t[2]);
+            if (t1 != 0)
+            {
+                tempo = t1.ToString() + " horas ";
+            }
+            if (t2 != 0)
+            {
+                tempo += t2.ToString() + " minutos ";
+            }
+            DateTime fim = ObterCert.DtFinal;
+            string mes = null;
+            switch (fim.Month)
+            {
+                case 01:
+                    mes = "janeiro";
+                    break;
+                case 02:
+                    mes = "feveiro";
+                    break;
+                case 03:
+                    mes = "março";
+                    break;
+                case 04:
+                    mes = "abril";
+                    break;
+                case 05:
+                    mes = "maio";
+                    break;
+                case 06:
+                    mes = "junho";
+                    break;
+                case 07:
+                    mes = "julho";
+                    break;
+                case 08:
+                    mes = "agosto";
+                    break;
+                case 09:
+                    mes = "setembro";
+                    break;
+                case 10:
+                    mes = "outubro";
+                    break;
+                case 11:
+                    mes = "novembro";
+                    break;
+                case 12:
+                    mes = "dezembro";
+                    break;
+            }
+            string name = usuario.Username;
+            string curso = objPalestra.PalestraTitulo;
+
+            PdfDocument document = new PdfDocument();
+            document.Info.Title = "Certificado";
+
+            byte[] bytes = (byte[])dt.Rows[0]["BackgroundCert"];
+            using (MemoryStream ms = new MemoryStream(bytes))
+            {
+                XImage imagen = XImage.FromStream(ms);
+
+                PdfPage page = document.AddPage();
+                page.Width = 1200;
+                page.Height = 900;
+                XFont font = new XFont("Tahoma", 32, XFontStyle.BoldItalic);
+                XGraphics gfx = XGraphics.FromPdfPage(page);
+                gfx.DrawImage(imagen, 0, 0, 1200, 900);
+                gfx.DrawString("Certificamos que " + name, font, XBrushes.Black, new XRect(0, 300, page.Width, page.Height), XStringFormats.TopCenter);
+                gfx.DrawString("concluiu com êxito " + tempo + "total da Palestra", font, XBrushes.Black, new XRect(0, 330, page.Width, page.Height), XStringFormats.TopCenter);
+                gfx.DrawString(curso, font, XBrushes.Black, new XRect(0, 360, page.Width, page.Height), XStringFormats.TopCenter);
+                gfx.DrawString("em " + fim.Day + " de " + mes + " de " + fim.Year, font, XBrushes.Black, new XRect(0, 390, page.Width, page.Height), XStringFormats.TopCenter);
+                const string filename = "Certificado.pdf";
+                document.Save(filename);
+                Process.Start(filename);
+            }            
         }
     }
 }

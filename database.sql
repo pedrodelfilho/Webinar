@@ -6,6 +6,51 @@ select * from Eventos
 select * from Moderadores
 select * from Convidados
 select * from Certificados
+select * from SendLinkEvento
+Select * from Maintenance
+SELECT * FROM Certificados WHERE UserId = 7 AND IDPalestra = 2
+alter table Certificados add Alvo time
+
+delete Eventos
+
+SELECT * FROM Maintenance
+
+insert into Maintenance (EmailContact) Values('sender.email.validation@gmail.com')
+
+select Eventos.EventoTitulo, Palestras.PalestraTitulo, Certificados.DtInicio, Certificados.DtFinal, Progresso, Alvo from Certificados
+LEFT JOIN Eventos ON Eventos.IDEvento = Certificados.IDEvento
+LEFT JOIN Palestras ON Palestras.IDPalestra = Certificados.IDPalestra WHERE Certificados.UserId = 7
+
+update Certificados set Progresso = '01:45:00' Where IDCertificado = 12
+update Certificados Set DtFinal = '2021-06-16 10:29:08.493' WHERE IDCertificado = 5
+delete Certificados Where IDCertificado > 6
+SELECT * FROM Palestras WHERE Acervo = 'true'
+update Palestras Set Acervo = 'true'
+alter table Eventos add Acervo bit
+
+SELECT * FROM SendLinkEvento WHERE IDRequerente = @idReq AND IDEvento = @idEvent AND IDPalestra = @idPales
+
+
+
+SELECT CONVERT(VARCHAR(10), PalestraData, 103), COUNT(*) AS Quantidade FROM Palestras WHERE IDEvento = 28 GROUP BY CONVERT(VARCHAR(10), PalestraData, 103)
+
+SELECT Users.Username, Palestrantes.PalestranteFoto, Palestras.PalestraTitulo, Palestras.PalestraData  FROM Palestras
+LEFT JOIN Users ON users.UserId = Palestras.IDPalestrante
+LEFT JOIN Palestrantes ON Palestrantes.IDPalestrante = Palestras.IDPalestrante WHERE IDEvento = 2 ORDER BY PalestraData ASC
+
+set dateformat dmy
+
+update Palestras Set IDEvento = null
+update Palestras Set PalestraData = '11/06/2021 20:00'
+delete Eventos where IDEvento = 7
+
+SELECT Eventos.IDEvento, Users.Username, Eventos.EventoTitulo, Eventos.EventoSubTitulo, convert(varchar(10), Eventos.EventoDtIni, 103) AS EventoDtIni, convert(varchar(10), Eventos.EventoDtTer, 103) AS EventoDtTer, Eventos.ModResponsavel FROM Eventos LEFT JOIN Users ON Eventos.IDAdm = Users.UserId
+Alter Table Eventos add ModResponsavel varchar(200) not null
+
+UPDATE Certificados SET DtInicio = '11/06/2021 08:00' Where IDCertificado = 1
+
+SELECT Users.Username FROM Moderadores
+LEFT JOIN Users ON IDModerador = Users.UserId ORDER BY Users.Username ASC
 
 insert into Certificados(userId, IDPalestra, DtInicio, DtFinal, Finalizado) Values(1, 2, '2021-05-17 16:52:55.753', '2021-05-26 16:52:55.753', 'true')
 
@@ -5736,6 +5781,10 @@ INSERT INTO Cidades (IDCidade, NomeCidade) VALUES
 (5564, 'Xambioá - TO');
 GO
 
+CREATE TABLE Maintenance(
+	EmailContact varchar(200),
+	BackgroundCert varbinary(max))
+
 CREATE TABLE Home(
 	IDHome int PRIMARY KEY IDENTITY not null,
 	UserId int FOREIGN KEY REFERENCES Users(UserId),
@@ -5763,6 +5812,11 @@ CREATE TABLE Home(
 	EmailADM varchar(200) not null	
 )
 GO
+
+CREATE TABLE SendLinkEvento(
+	IDRequerente int FOREIGN KEY REFERENCES Users(UserId),
+	IDEvento int FOREIGN KEY REFERENCES Eventos(IDEvento),
+	IDPalestra int FOREIGN KEY REFERENCES Palestras(IDPalestra))
 
 INSERT INTO Home(Titulo, TituloDestaque, SubTitulo,LinkIntro,QuemSomos,Quando,Onde,Pergunta1,Resposta1,Pergunta2,Resposta2,Pergunta3,Resposta3,Pergunta4,Resposta4,Pergunta5,Resposta5,Endereco,Telefone,Email,EmailADM) VALUES('Pensar positivo é agregar valor em seu potencial', 'agregar', 'Aggregate Webinar. A hora é agora.', 
 'https://www.youtube.com/watch?v=jDDaplaOz7Q', 'A melhor e mais envolvente plataforma de palestras para fins educacionais', 'Palestras realizadas em tempo real, acesso a conteúdos gravados',

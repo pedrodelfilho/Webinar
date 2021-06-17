@@ -17,5 +17,13 @@ namespace Models
         public DateTime EventoDtIni { get; set; }
         public DateTime EventoDtTer { get; set; }
         public virtual byte[] EventoCapa { get; set; }
+        public string ModResponsavel { get; set; }
+    }
+
+    public class SendLinkEvento
+    {
+        public int IDRequerente { get; set; }
+        public int IDEvento { get; set; }
+        public int IDPalestra { get; set; }
     }
 }

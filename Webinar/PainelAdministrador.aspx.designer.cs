@@ -456,6 +456,24 @@ namespace Webinar
         protected global::System.Web.UI.WebControls.TextBox txtEmailADM;
 
         /// <summary>
+        /// Controle imgBack.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image imgBack;
+
+        /// <summary>
+        /// Controle imgBackGroundCertificado.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputFile imgBackGroundCertificado;
+
+        /// <summary>
         /// Controle btnVisualizarPagInicial.
         /// </summary>
         /// <remarks>
@@ -463,6 +481,15 @@ namespace Webinar
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton btnVisualizarPagInicial;
+
+        /// <summary>
+        /// Controle btnCertificado.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnCertificado;
 
         /// <summary>
         /// Controle btnAplicarPagInicial.

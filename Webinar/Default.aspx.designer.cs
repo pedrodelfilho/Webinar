@@ -150,6 +150,15 @@ namespace Webinar
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblOnde;
 
         /// <summary>
+        /// Controle divEventos1.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divEventos1;
+
+        /// <summary>
         /// Controle imgPalestrante1.
         /// </summary>
         /// <remarks>
@@ -526,6 +535,24 @@ namespace Webinar
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlAnchor inPalestrante6;
+
+        /// <summary>
+        /// Controle GaleriaAcervo.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor GaleriaAcervo;
+
+        /// <summary>
+        /// Controle CarouselAcervo.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl CarouselAcervo;
 
         /// <summary>
         /// Controle lblPergunta1.

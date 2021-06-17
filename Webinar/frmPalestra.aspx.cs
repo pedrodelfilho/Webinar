@@ -9,7 +9,7 @@ namespace Webinar
 {
     public partial class frmPalestra : System.Web.UI.Page
     {
-        internal int IDPalestrante;
+        int IDPalestrante;
 
         protected void Page_Load(object sender, EventArgs e)
         {

@@ -10,6 +10,7 @@ using System.Net.Mail;
 using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Security;
+using System.Web.Services.Description;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
@@ -45,12 +46,107 @@ namespace Webinar
             try { return Regex.IsMatch(email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$", RegexOptions.IgnoreCase, TimeSpan.FromMilliseconds(250)); }
             catch (RegexMatchTimeoutException) { return false; }
         }
-
         protected void Page_Load(object sender, EventArgs e)
         {
             CarregarHome();
+            CarregarEventos();
+            CarregarHomeAcervo();
         }
+        protected static string ReturnEncodedBase64UTF8(object rawImg)
+        {
+            string img = "data:image/jpg;base64,{0}"; 
+            byte[] toEncodeAsBytes = (byte[])rawImg;
+            string returnValue = System.Convert.ToBase64String(toEncodeAsBytes);
+            return String.Format(img, returnValue);
+        }
+        private void CarregarEventos()
+        {
+            EventoDAL eDAL = new EventoDAL();
+            DataTable dt = eDAL.EventosHome();
 
+            if (dt != null)
+            {
+                if (dt.Rows.Count > 3)
+                {
+                    for (int x = 0; x < 3; x++)
+                    {
+                        string titulo = dt.Rows[x]["EventoTitulo"].ToString();
+                        byte[] bytes = (byte[])dt.Rows[x]["EventoCapa"];
+                        DateTime dti = Convert.ToDateTime(dt.Rows[x]["EventoDtIni"]).Date;
+                        DateTime dtf = Convert.ToDateTime(dt.Rows[x]["EventoDtTer"]).Date;
+                        string data = dti.Date.ToString("dd/MM/yyyy") + " até " + dtf.Date.ToString("dd/MM/yyyy");
+                        string image = Convert.ToBase64String(bytes, 0, bytes.Length);
+                        Evento(image, data, titulo);
+                    }
+                } 
+                else
+                {
+                    foreach (DataRow dr in dt.Rows)
+                    {
+                        string titulo = dr["EventoTitulo"].ToString();
+                        byte[] bytes = (byte[])dr["EventoCapa"];
+                        DateTime dti = Convert.ToDateTime(dr["EventoDtIni"]).Date;
+                        DateTime dtf = Convert.ToDateTime(dr["EventoDtTer"]).Date;
+                        string data = dti.Date.ToString("dd/MM/yyyy") + " até " + dtf.Date.ToString("dd/MM/yyyy");
+                        string image = Convert.ToBase64String(bytes, 0, bytes.Length);
+                        Evento(image, data, titulo);
+                    }                    
+                }
+            }
+            else
+            {
+                HtmlGenericControl h = new HtmlGenericControl("h4");
+                h.InnerText = "Nenhum Evento em andamento";
+                divEventos1.Controls.Add(h);
+            }
+
+        }
+        public void PalestraAcervo (int id, string i)
+        {
+            HtmlGenericControl a = new HtmlGenericControl("a");
+            a.Attributes.Add("data-gall", "gallery-carousel");
+            a.Attributes.Add("href", "PreviewPalestraON.aspx?a=" + id);
+            CarouselAcervo.Controls.Add(a);
+
+            HtmlGenericControl img = new HtmlGenericControl("img");
+            img.Attributes.Add("src", "data:image/png;base64," + i);
+            img.Attributes.Add("alt", "");
+            a.Controls.Add(img);
+        }
+        public void Evento(string image, string data, string titulo)
+        {
+            Panel div1 = new Panel();
+            div1.Attributes.Add("class", "col col-lg-3");
+            divEventos1.Controls.Add(div1);
+
+            Panel div2 = new Panel();
+            div2.Attributes.Add("class", "venue-gallery");
+            div1.Controls.Add(div2);
+
+            HtmlGenericControl a = new HtmlGenericControl("a");
+            a.Attributes.Add("data-gall", "venue-gallery");
+            a.Attributes.Add("href", "PreviewEventoON.aspx?a=" + titulo);
+            div2.Controls.Add(a);
+
+            HtmlGenericControl h = new HtmlGenericControl("h2");
+            h.InnerText = titulo;
+            h.Attributes.Add("style", "font-size: 16px;");
+            a.Controls.Add(h);
+
+            HtmlGenericControl dt = new HtmlGenericControl("p");
+            dt.Attributes.Add("style", "color: Red;");
+            dt.InnerText = data;
+            a.Controls.Add(dt);
+
+            HtmlGenericControl img = new HtmlGenericControl("img");
+            img.Attributes.Add("src", "data:image/png;base64," + image);
+            img.Attributes.Add("class", "img-fluid");
+            a.Controls.Add(img);
+
+            Literal lt = new Literal();
+            lt.Text = "<br /><br />";
+            div1.Controls.Add(lt);
+        }
         protected void CarregarHome()
         {
             HomeDAL hDAL = new HomeDAL();
@@ -147,7 +243,6 @@ namespace Webinar
             ggPalestrante2.HRef = dt.Rows[1]["PalestranteGoogle"].ToString();
             inPalestrante2.HRef = dt.Rows[1]["PalestranteLinkedin"].ToString();
 
-
             byte[] bytes3 = (byte[])dt.Rows[2]["PalestranteFoto"];
             string base64String3 = Convert.ToBase64String(bytes3, 0, bytes3.Length);
             imgPalestrante3.Attributes["src"] = "data:image/png;base64," + base64String3;
@@ -161,7 +256,6 @@ namespace Webinar
             ggPalestrante3.HRef = dt.Rows[2]["PalestranteGoogle"].ToString();
             inPalestrante3.HRef = dt.Rows[2]["PalestranteLinkedin"].ToString();
 
-
             byte[] bytes4 = (byte[])dt.Rows[3]["PalestranteFoto"];
             string base64String4 = Convert.ToBase64String(bytes4, 0, bytes4.Length);
             imgPalestrante4.Attributes["src"] = "data:image/png;base64," + base64String4;
@@ -174,7 +268,6 @@ namespace Webinar
             facePalestrante4.Attributes["href"] = dt.Rows[3]["PalestranteFacebook"].ToString();
             ggPalestrante4.HRef = dt.Rows[3]["PalestranteGoogle"].ToString();
             inPalestrante4.HRef = dt.Rows[3]["PalestranteLinkedin"].ToString();
-
 
             byte[] bytes5 = (byte[])dt.Rows[4]["PalestranteFoto"];
             string base64String5 = Convert.ToBase64String(bytes5, 0, bytes5.Length);
@@ -202,6 +295,41 @@ namespace Webinar
             ggPalestrante6.HRef = dt.Rows[5]["PalestranteGoogle"].ToString();
             inPalestrante6.HRef = dt.Rows[5]["PalestranteLinkedin"].ToString();
             Session["HomePage"] = "SIM";
+        }
+        protected void CarregarHomeAcervo()
+        {
+            PalestraDAL pDAL = new PalestraDAL();
+            DataTable dt = pDAL.ListarPalestrasHome();
+
+            if (dt != null)
+            {
+                if (dt.Rows.Count > 10)
+                {
+                    for (int x = 0; x < 10; x++)
+                    {
+                        byte[] bytes = (byte[])dt.Rows[x]["PalestraCapa"];
+                        string image = Convert.ToBase64String(bytes, 0, bytes.Length);
+                        int id = Convert.ToInt32(dt.Rows[x]["IDPalestra"]);
+                        PalestraAcervo(id, image);
+                    }
+                }
+                else
+                {
+                    foreach (DataRow dr in dt.Rows)
+                    {
+                        byte[] bytes = (byte[])dr["PalestraCapa"];
+                        string image = Convert.ToBase64String(bytes, 0, bytes.Length);
+                        int id = Convert.ToInt32(dr["IDPalestra"]);
+                        PalestraAcervo(id, image);
+                    }
+                }
+            }                
+            else
+            {
+                HtmlGenericControl h = new HtmlGenericControl("h4");
+                h.InnerText = "Nenhum item encontrado";
+                CarouselAcervo.Controls.Add(h);
+            }
         }
         protected void btnCadastrarUsuario_Click(object sender, EventArgs e)
         {
@@ -243,7 +371,6 @@ namespace Webinar
                 ClientScript.RegisterStartupScript(GetType(), "alert", "alert('" + message + "');", true);
             }
         }
-
         protected void CadastrarConvidado(int id)
         {
             Convidado objConvidado = new Convidado();
@@ -252,7 +379,6 @@ namespace Webinar
             UsuarioDAL uDAL = new UsuarioDAL();
             uDAL.InserirConvidado(objConvidado);
         }
-
         private void SendActivationEmail(int userId)
         {
             string constr = ConfigurationManager.ConnectionStrings["AggregateBD"].ConnectionString;
@@ -295,7 +421,6 @@ namespace Webinar
                 catch { ClientScript.RegisterStartupScript(GetType(), "alert", "alert('Ocorreu um erro ao enviar o e-mail para validação da conta. Tente realizar o Login com o e-mail e senha que realizou o cadastro.');", true); }
             }
         }
-
         private void ReSendActivationEmail(int userId, string mail)
         {
             string constr = ConfigurationManager.ConnectionStrings["AggregateBD"].ConnectionString;
@@ -324,14 +449,12 @@ namespace Webinar
                 smtp.Send(mm);
             }
         }
-
         private void BuscarID(string mail)
         {
             UsuarioDAL uDAL = new UsuarioDAL();
             Usuario usuario = uDAL.BuscarID(mail);
             ReSendActivationEmail(usuario.UserId, mail);            
         }
-
         protected void btnEntrarLogin_Click(object sender, EventArgs e)
         {
             int userId = 0;
@@ -375,7 +498,6 @@ namespace Webinar
                 ClientScript.RegisterStartupScript(GetType(), "alert", "alert('" + message + "');", true);
             }
         }
-
         protected void btnRecuperarSenha_Click(object sender, EventArgs e)
         {
             string username = string.Empty;
@@ -425,7 +547,6 @@ namespace Webinar
             }
             ClientScript.RegisterStartupScript(GetType(), "alert", "alert('" + message + "');", true);
         }
-
         protected void btnEnviarMensagemContato_Click(object sender, EventArgs e)
         {            
             int x = 0;
@@ -510,7 +631,6 @@ namespace Webinar
             
 
         }
-
         protected void btnEnviarNotificacao_Click(object sender, EventArgs e)
         {
             if (IsValidEmail(txtEnviarEmail.Text) == false)
@@ -525,5 +645,5 @@ namespace Webinar
                 ClientScript.RegisterStartupScript(GetType(), "alert", "alert('E-mail cadastrado, obrigado.');", true);
             }
         }
-    }
+    }    
 }

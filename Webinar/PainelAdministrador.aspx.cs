@@ -2,12 +2,19 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using DAL;
 using Models;
+using PdfSharp;
+using PdfSharp.Drawing;
+using PdfSharp.Pdf;
+using PdfSharp.Pdf.IO;
+
 
 namespace Webinar
 {
@@ -275,6 +282,14 @@ namespace Webinar
             txtEmail.Text = objHome.Email;
             txtEmailADM.Text = objHome.EmailADM;
 
+            CertificadoDAL cDAL = new CertificadoDAL();
+            DataTable dt = cDAL.GetBackgroundCertificado();
+
+            byte[] bytes = (byte[])dt.Rows[0]["BackgroundCert"];
+            string base64String = Convert.ToBase64String(bytes, 0, bytes.Length);
+            imgBack.ImageUrl = "data:image/png;base64," + base64String;
+
+
         }
         public void BindGridViewEventos(string sortExp, string sortDir) // Coloca todos os Eventos em uma GridView
         {
@@ -301,8 +316,7 @@ namespace Webinar
                 lblEventoRes.ForeColor = System.Drawing.Color.White;
                 lblEventoRes.Font.Size = 14;
             }
-        }
-    
+        }    
 
 
         protected void gvPalestra_Sorting(object sender, GridViewSortEventArgs e) // Chamado para ordenar dados de determinada coluna da GridView de Palestras
@@ -448,8 +462,73 @@ namespace Webinar
             objHome.EmailADM = txtEmailADM.Text;
 
             hDAL.AplicarHome(objHome);
+
+            if (imgBackGroundCertificado.PostedFile.ContentLength > 0)
+            {
+                CertificadoDAL cDAL = new CertificadoDAL();
+                Maintenance certificado = new Maintenance();
+                string empFilename = Path.GetFileName(imgBackGroundCertificado.PostedFile.FileName);
+                string FilecontentType = imgBackGroundCertificado.PostedFile.ContentType;
+                Stream s = imgBackGroundCertificado.PostedFile.InputStream;
+                BinaryReader br = new BinaryReader(s);
+                byte[] Databytes = br.ReadBytes((Int32)s.Length);
+                certificado.BackgroundCert = Databytes;
+                cDAL.AlterarBackgroundCertificado(certificado);
+            }
+
             ClientScript.RegisterStartupScript(GetType(), "alert", "alert('Página inicial atualizada com sucesso.');", true);
             Response.Redirect("PainelAdministrador.aspx");
-        }        
+        }
+        protected void btnCertificado_Click(object sender, EventArgs e)
+        {
+            byte[] bytes = null;
+            if (imgBackGroundCertificado.PostedFile.ContentLength > 0)
+            {
+                string empFilename = Path.GetFileName(imgBackGroundCertificado.PostedFile.FileName);
+                string FilecontentType = imgBackGroundCertificado.PostedFile.ContentType;
+                Stream ss = imgBackGroundCertificado.PostedFile.InputStream;
+                BinaryReader br = new BinaryReader(ss);
+                byte[] Databytes = br.ReadBytes((Int32)ss.Length);
+                bytes = Databytes;
+            }
+            else
+            {
+                CertificadoDAL cDAL = new CertificadoDAL();
+                DataTable dt = cDAL.GetBackgroundCertificado();
+
+                bytes = (byte[])dt.Rows[0]["BackgroundCert"];
+            }
+                        
+            string base64String = Convert.ToBase64String(bytes, 0, bytes.Length);
+            string imageLoc = "data:image/png;base64," + base64String;
+
+            UsuarioDAL uDAL = new UsuarioDAL();
+            string s = HttpContext.Current.User.Identity.Name;
+            Usuario usuario = uDAL.BuscarID(s);
+
+            string name = usuario.Username;
+
+            PdfDocument document = new PdfDocument();
+            document.Info.Title = "Certificado";
+
+            using (MemoryStream ms = new MemoryStream(bytes))
+            {
+                XImage imagen = XImage.FromStream(ms);
+
+                PdfPage page = document.AddPage();
+                page.Width = 1200;
+                page.Height = 900;
+                XFont font = new XFont("Tahoma", 32, XFontStyle.BoldItalic);
+                XGraphics gfx = XGraphics.FromPdfPage(page);
+                gfx.DrawImage(imagen, 0, 0, 1200, 900);
+                gfx.DrawString("Certificamos que " + name, font, XBrushes.Black, new XRect(0, 300, page.Width, page.Height), XStringFormats.TopCenter);
+                gfx.DrawString("concluiu com êxito 20 total horas da Palestra", font, XBrushes.Black, new XRect(0, 330, page.Width, page.Height), XStringFormats.TopCenter);
+                gfx.DrawString("Pensar positivo é agregar valor em seu potencial", font, XBrushes.Black, new XRect(0, 360, page.Width, page.Height), XStringFormats.TopCenter);
+                gfx.DrawString("em 31 de fevereiro de 2021", font, XBrushes.Black, new XRect(0, 390, page.Width, page.Height), XStringFormats.TopCenter);
+                const string filename = "Certificado.pdf";
+                document.Save(filename);
+                Process.Start(filename);
+            }
+        } 
     }
 }

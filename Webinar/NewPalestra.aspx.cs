@@ -16,6 +16,15 @@ namespace Webinar
         {
             if (!IsPostBack)
             {
+                try
+                {
+                    if (Session["EditarADM"].ToString() == "Sim")
+                    {
+                        CarregarPalestraADM();
+                        return;
+                    }
+                }
+                catch { }
                 UsuarioDAL uDAL = new UsuarioDAL();
                 string s = HttpContext.Current.User.Identity.Name;
                 Usuario usuario = uDAL.BuscarID(s);
@@ -25,7 +34,36 @@ namespace Webinar
                 if (Palestrante.Contains(usuario.Tipo)) { ddlPalestrantes.SelectedValue = usuario.Username; ddlPalestrantes.Enabled = false; }
             }
         }
+        protected void CarregarPalestraADM()
+        {
+            int id = Convert.ToInt32(Session["ID"]);            
+            PalestraDAL pDAL = new PalestraDAL();
+            Palestra p = pDAL.ObterPalestra(id);
+            int idPalestrante = p.IDPalestrante;
+            UsuarioDAL uDAL = new UsuarioDAL();
+            Usuario us = uDAL.BuscarEmail(idPalestrante);
 
+            txtTituloPalestra.Text = p.PalestraTitulo;
+            txtSubTituloPalestra.Text = p.PalestraSubTitulo;
+            txtLinkPalestra.Text = p.PalestraLink;
+            ddlCategoria.SelectedValue = p.PalestraCategoria;
+            txtSinopseP1Palestra.Text = p.PalestraSinopseP1;
+            txtSinopseP2Palestra.Text = p.PalestraSinopseP2;
+            txtSinopseP3Palestra.Text = p.PalestraSinopseP3;
+            txtSinopseP4Palestra.Text = p.PalestraSinopseP4;
+            ddlPalestrantes.SelectedValue = us.Username;
+            txtTempoPalestra.Text = p.PalestraDuracao;
+            txtDataPalestra.Text = p.PalestraData.ToString("dd/MM/yyyy");
+            cbAutorizarPalestra.Checked = p.PalestraAutoriza;
+            byte[] bytes = p.PalestraCapa;
+            string base64String = Convert.ToBase64String(bytes, 0, bytes.Length);
+            imgPalestra.ImageUrl = "data:image/png;base64," + base64String;
+
+            btnAtualizarPalestra.Visible = true;
+            btnSalvarPalestra.Visible = false;
+            btnVisualizar.Enabled = false;
+            RequiredFieldValidator7.Enabled = false;
+        }
         protected void btnSalvarPalestra_Click(object sender, EventArgs e)
         {
             string[] Administrador = { "Administrador", "Convidado, Administrador", "Administrador, Convidado", "Administrador, Palestrante", "Palestrante, Administrador" };
@@ -186,6 +224,63 @@ namespace Webinar
             else if (Moderador.Contains(usuario.Tipo)) { Response.Redirect("PainelPalestrante.aspx"); }
             else if (Administrador.Contains(usuario.Tipo)) { Response.Redirect("PainelAdministrador.aspx"); }
             else { Response.Redirect("Default.aspx"); }
+        }
+
+        protected void btnAtualizarPalestra_Click(object sender, EventArgs e)
+        {
+            
+            int id = Convert.ToInt32(Session["ID"]);
+            string cod = HttpContext.Current.User.Identity.Name;
+            UsuarioDAL uDAL = new UsuarioDAL();
+            PalestraDAL pDAL = new PalestraDAL();
+
+            Usuario usuario = uDAL.BuscarID(cod);
+
+            int criador = usuario.UserId;
+            Usuario usuario1 = uDAL.BuscarName(ddlPalestrantes.SelectedValue);
+            Usuario usuario2 = uDAL.BuscarID(usuario1.Email);
+            int pales = usuario2.UserId;
+
+            Palestra objPalestra = new Palestra();
+            objPalestra.PalestraAprovada = true;
+
+            if (fuImageCapa.HasFile)
+            {
+                string empFilename = Path.GetFileName(fuImageCapa.PostedFile.FileName);
+                string FilecontentType = fuImageCapa.PostedFile.ContentType;
+                Stream s = fuImageCapa.PostedFile.InputStream;
+                BinaryReader br = new BinaryReader(s);
+                byte[] FotoCapa = br.ReadBytes((Int32)s.Length);
+                objPalestra.PalestraCapa = FotoCapa;
+            }
+            else
+            {
+                Palestra pa = pDAL.ObterPalestra(id);
+                
+                byte[] FotoCapa = pa.PalestraCapa;
+                string base64String = Convert.ToBase64String(FotoCapa, 0, FotoCapa.Length);
+                objPalestra.PalestraCapa = FotoCapa;
+                
+            }
+
+            objPalestra.IDPalestra = id;
+            objPalestra.IDPalestrante = pales;
+            objPalestra.PalestraCriador = criador;
+            objPalestra.PalestraLink = txtLinkPalestra.Text;
+            objPalestra.PalestraDtCriacao = DateTime.Now;
+            objPalestra.PalestraCategoria = ddlCategoria.SelectedValue;
+            objPalestra.PalestraTitulo = txtTituloPalestra.Text;
+            objPalestra.PalestraSubTitulo = txtSubTituloPalestra.Text;
+            objPalestra.PalestraSinopseP1 = txtSinopseP1Palestra.Text;
+            objPalestra.PalestraSinopseP2 = txtSinopseP2Palestra.Text;
+            objPalestra.PalestraSinopseP3 = txtSinopseP3Palestra.Text;
+            objPalestra.PalestraSinopseP4 = txtSinopseP4Palestra.Text;
+            objPalestra.PalestraDuracao = txtTempoPalestra.Text;
+            objPalestra.PalestraData = Convert.ToDateTime(txtDataPalestra.Text);
+            objPalestra.PalestraAutoriza = cbAutorizarPalestra.Checked;
+
+            pDAL.AtualizarPalestra(objPalestra);
+            Response.Redirect("Default.aspx");
         }
     }
 }
