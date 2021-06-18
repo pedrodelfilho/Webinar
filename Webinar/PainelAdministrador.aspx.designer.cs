@@ -69,13 +69,22 @@ namespace Webinar
         protected global::System.Web.UI.WebControls.Button btnAdicionarEvento;
 
         /// <summary>
-        /// Controle btnAdicionarPalestra.
+        /// Controle btnAdicionarPalestraADM.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAdicionarPalestra;
+        protected global::System.Web.UI.WebControls.Button btnAdicionarPalestraADM;
+
+        /// <summary>
+        /// Controle hfWasConfirmed.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfWasConfirmed;
 
         /// <summary>
         /// Controle PanelUsuarios.
@@ -112,6 +121,15 @@ namespace Webinar
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel PanelEventos;
+
+        /// <summary>
+        /// Controle lblEventoRes1.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblEventoRes1;
 
         /// <summary>
         /// Controle lblEventoRes.

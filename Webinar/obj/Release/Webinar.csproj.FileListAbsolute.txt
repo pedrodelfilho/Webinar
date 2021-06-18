@@ -185,3 +185,9 @@ C:\Users\Pedro\source\repos\2021-1-webinar-5\Webinar\obj\Release\Webinar.csproj.
 C:\Users\Pedro\source\repos\2021-1-webinar-5\Webinar\obj\Release\Webinar.csproj.CopyComplete
 C:\Users\Pedro\source\repos\2021-1-webinar-5\Webinar\obj\Release\Webinar.dll
 C:\Users\Pedro\source\repos\2021-1-webinar-5\Webinar\obj\Release\Webinar.pdb
+C:\Users\Pedro\source\repos\2021-1-webinar-5\Webinar\bin\PdfSharp.Charting.dll
+C:\Users\Pedro\source\repos\2021-1-webinar-5\Webinar\bin\PdfSharp.dll
+C:\Users\Pedro\source\repos\2021-1-webinar-5\Webinar\bin\PdfSharp.xml
+C:\Users\Pedro\source\repos\2021-1-webinar-5\Webinar\bin\PdfSharp.Charting.xml
+C:\Users\Pedro\source\repos\2021-1-webinar-5\Webinar\bin\de\PdfSharp.resources.dll
+C:\Users\Pedro\source\repos\2021-1-webinar-5\Webinar\bin\de\PdfSharp.Charting.resources.dll

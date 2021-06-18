@@ -123,7 +123,11 @@
                         </div>
                         <label style="color: white; font-size:medium;" class="labels">Foto de capa:</label>
                             <asp:FileUpload ID="fuImageCapa" runat="server" style="color: white; font-size:small"/>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server" ControlToValidate="fuImageCapa" Display="Dynamic" ErrorMessage="Foto é obrigatório." ForeColor="Red"></asp:RequiredFieldValidator>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server" ControlToValidate="fuImageCapa" Display="Dynamic" ErrorMessage="Foto é obrigatório." ForeColor="Red"></asp:RequiredFieldValidator><br />
+                            <asp:Label runat="server" ID="lblParticipaEvento" style="color: white; font-size: medium" Visible="false" class="labels"></asp:Label><br />
+                            <asp:Button runat="server" ID="btnParticiparEvento" OnClick="btnParticiparEvento_Click" style="font-size:small" Visible="false" Text="Remover do Evento" /><br />
+                            <asp:Label runat="server" ID="lblAcervo" style="color: white; font-size: medium" Visible="false" class="labels"></asp:Label>
+                            <asp:Button runat="server" ID="btnAcervo" OnClick="btnAcervo_Click" CssClass="botaosub" Visible="false" style="font-size:small" Text="Enviar para Acervo" />
                         <div class="mt-5 text-center">
                             <asp:LinkButton ID="btnSalvarPalestra" OnClick="btnSalvarPalestra_Click" runat="server" Width="200" CssClass="botaosub"><i class="fa fa-save"></i>&nbsp;Salvar</asp:LinkButton><br />
                             <asp:LinkButton Visible="false" ID="btnAtualizarPalestra" OnClick="btnAtualizarPalestra_Click" runat="server" CssClass="botaosub"><i class="fa fa-save"></i>&nbsp;Atualizar</asp:LinkButton><br />

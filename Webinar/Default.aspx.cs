@@ -22,6 +22,18 @@ namespace Webinar
 {
     public partial class Default : System.Web.UI.Page
     {
+
+        public static bool IsValidSenha(string senha)
+        {
+            var charactersInPassword = senha.ToCharArray();
+            if (charactersInPassword.Length < 8) return false;
+            if (charactersInPassword.Any(character => !char.IsLetterOrDigit(character)))
+                return false;
+
+            var numberOfDigits = charactersInPassword.Count(char.IsDigit);
+            return numberOfDigits >= 2;
+        }
+
         public static bool IsValidEmail(string email)
         {
             if (string.IsNullOrWhiteSpace(email))
@@ -333,43 +345,60 @@ namespace Webinar
         }
         protected void btnCadastrarUsuario_Click(object sender, EventArgs e)
         {
-            int userId = 0;
-            string constr = ConfigurationManager.ConnectionStrings["AggregateBD"].ConnectionString;
-            using (SqlConnection con = new SqlConnection(constr))
+            if (IsValidEmail(txtCadastrarEmail.Text) == false)
             {
-                using (SqlCommand cmd = new SqlCommand("Insert_User"))
+                ClientScript.RegisterStartupScript(GetType(), "alert", "alert('E-mail inválido.');", true);
+            }
+            else
+            {
+                if(IsValidSenha(txtCadastrarSenha.Text) == false)
                 {
-                    using (SqlDataAdapter sda = new SqlDataAdapter())
+                    ClientScript.RegisterStartupScript(GetType(), "alert", "alert('Senha inválida. Uma senha deve ter pelo menos oito caracteres, possuir apenas letras e dígitos e conter pelo menos dois dígitos.');", true);
+                    return;
+                }
+                else
+                {
+                    int userId = 0;
+                    string constr = ConfigurationManager.ConnectionStrings["AggregateBD"].ConnectionString;
+                    using (SqlConnection con = new SqlConnection(constr))
                     {
-                        string tipo = "Convidado";
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@Username", txtCadastrarNome.Text.Trim());
-                        cmd.Parameters.AddWithValue("@Password", Criptografia.GetMD5Hash(txtCadastrarSenha.Text.Trim()));
-                        cmd.Parameters.AddWithValue("@Email", txtCadastrarEmail.Text.Trim());
-                        cmd.Parameters.AddWithValue("@Tipo", tipo);
-                        cmd.Connection = con;
-                        con.Open();
-                        userId = Convert.ToInt32(cmd.ExecuteScalar());
-                        con.Close();
+                        using (SqlCommand cmd = new SqlCommand("Insert_User"))
+                        {
+                            using (SqlDataAdapter sda = new SqlDataAdapter())
+                            {
+                                string tipo = "Convidado";
+                                cmd.CommandType = CommandType.StoredProcedure;
+                                cmd.Parameters.AddWithValue("@Username", txtCadastrarNome.Text.Trim());
+                                cmd.Parameters.AddWithValue("@Password", Criptografia.GetMD5Hash(txtCadastrarSenha.Text.Trim()));
+                                cmd.Parameters.AddWithValue("@Email", txtCadastrarEmail.Text.Trim());
+                                cmd.Parameters.AddWithValue("@Tipo", tipo);
+                                cmd.Connection = con;
+                                con.Open();
+                                userId = Convert.ToInt32(cmd.ExecuteScalar());
+                                con.Close();
+                            }
+                        }
+                        string message = string.Empty;
+                        switch (userId)
+                        {
+                            case -1:
+                                message = "Nome de usuário já existe.\\nPor favor, escolha um nome de usuário diferente.";
+                                break;
+                            case -2:
+                                message = "O endereço de e-mail fornecido já foi usado.";
+                                break;
+                            default:
+                                message = "Registro bem sucedido. O e-mail de ativação foi enviado. Verifique em sua caixa de entrada.";
+                                SendActivationEmail(userId);
+                                CadastrarConvidado(userId);
+                                break;
+                        }
+                        ClientScript.RegisterStartupScript(GetType(), "alert", "alert('" + message + "');", true);
                     }
                 }
-                string message = string.Empty;
-                switch (userId)
-                {
-                    case -1:
-                        message = "Nome de usuário já existe.\\nPor favor, escolha um nome de usuário diferente.";
-                        break;
-                    case -2:
-                        message = "O endereço de e-mail fornecido já foi usado.";
-                        break;
-                    default:
-                        message = "Registro bem sucedido. O e-mail de ativação foi enviado. Verifique em sua caixa de entrada.";
-                        SendActivationEmail(userId);
-                        CadastrarConvidado(userId);
-                        break;
-                }
-                ClientScript.RegisterStartupScript(GetType(), "alert", "alert('" + message + "');", true);
+                
             }
+                
         }
         protected void CadastrarConvidado(int id)
         {
@@ -586,47 +615,56 @@ namespace Webinar
 
             if (txtNomeContato.Text != string.Empty && txtEmailContato.Text != string.Empty && txtTituloContato.Text != string.Empty && txtTituloContato.Text != string.Empty && txtMensagemContato.Text != string.Empty)
             {
-                MailMessage mm = new MailMessage("sender@gmail.com", txtEmailContato.Text);
-                mm.Subject = "Aggregate recebemos sua mensagem";
-                string body = "Olá " + txtNomeContato.Text + ",";
-                body += "<br /><br />Sua mensagem foi enviada. A equipe Aggregate agradece o seu contato. ";                
-                body += "<br /><br />Obrigado!";
-                mm.Body = body;
-                mm.IsBodyHtml = true;
-                SmtpClient smtp = new SmtpClient();
-                smtp.Host = "smtp.gmail.com";
-                smtp.EnableSsl = true;
-                smtp.UseDefaultCredentials = true;
-                NetworkCredential NetworkCred = new NetworkCredential("sender.email.validation@gmail.com", "P@ssw0rd2021");
-                smtp.Credentials = NetworkCred;
-                smtp.Port = 587;
-                smtp.Send(mm);
+                try
+                {
+                    MailMessage mm = new MailMessage("sender@gmail.com", txtEmailContato.Text);
+                    mm.Subject = "Aggregate recebemos sua mensagem";
+                    string body = "Olá " + txtNomeContato.Text + ",";
+                    body += "<br /><br />Sua mensagem foi enviada. A equipe Aggregate agradece o seu contato. ";
+                    body += "<br /><br />Obrigado!";
+                    mm.Body = body;
+                    mm.IsBodyHtml = true;
+                    SmtpClient smtp = new SmtpClient();
+                    smtp.Host = "smtp.gmail.com";
+                    smtp.EnableSsl = true;
+                    smtp.UseDefaultCredentials = true;
+                    NetworkCredential NetworkCred = new NetworkCredential("sender.email.validation@gmail.com", "P@ssw0rd2021");
+                    smtp.Credentials = NetworkCred;
+                    smtp.Port = 587;
+                    smtp.Send(mm);
 
-                MailMessage nn = new MailMessage("sender@gmail.com", "sender.email.validation@gmail.com");
-                nn.Subject = "Mensagem de contato";
-                string body2 = "Mensagem enviada por:<br />";
-                body2 += txtNomeContato.Text + "<br />";
-                body2 += txtEmailContato.Text + "<br />";
-                body2 += "<br /><br />Titulo: " + txtTituloContato.Text + "<br /><br />";
-                body2 += "Mensagem:<br /> " + txtMensagemContato.Text;
-                nn.Body = body2;
-                nn.IsBodyHtml = true;
-                SmtpClient smtp2 = new SmtpClient();
-                smtp2.Host = "smtp.gmail.com";
-                smtp2.EnableSsl = true;
-                smtp2.UseDefaultCredentials = true;
-                NetworkCredential NetworkCred2 = new NetworkCredential("sender.email.validation@gmail.com", "P@ssw0rd2021");
-                smtp2.Credentials = NetworkCred2;
-                smtp2.Port = 587;
-                smtp2.Send(nn);
+                    MailMessage nn = new MailMessage("sender@gmail.com", "sender.email.validation@gmail.com");
+                    nn.Subject = "Mensagem de contato";
+                    string body2 = "Mensagem enviada por:<br />";
+                    body2 += txtNomeContato.Text + "<br />";
+                    body2 += txtEmailContato.Text + "<br />";
+                    body2 += "<br /><br />Titulo: " + txtTituloContato.Text + "<br /><br />";
+                    body2 += "Mensagem:<br /> " + txtMensagemContato.Text;
+                    nn.Body = body2;
+                    nn.IsBodyHtml = true;
+                    SmtpClient smtp2 = new SmtpClient();
+                    smtp2.Host = "smtp.gmail.com";
+                    smtp2.EnableSsl = true;
+                    smtp2.UseDefaultCredentials = true;
+                    NetworkCredential NetworkCred2 = new NetworkCredential("sender.email.validation@gmail.com", "P@ssw0rd2021");
+                    smtp2.Credentials = NetworkCred2;
+                    smtp2.Port = 587;
+                    smtp2.Send(nn);
 
 
-                lblContato.Text = "Mensagem enviada. Agradecemos o seu contato";
-                lblContato.ForeColor = System.Drawing.Color.Green;
-                txtNomeContato.Text = string.Empty;
-                txtEmailContato.Text = string.Empty;
-                txtTituloContato.Text = string.Empty;
-                txtMensagemContato.Text = string.Empty;                
+                    lblContato.Text = "Mensagem enviada. Agradecemos o seu contato";
+                    lblContato.ForeColor = System.Drawing.Color.Green;
+                    txtNomeContato.Text = string.Empty;
+                    txtEmailContato.Text = string.Empty;
+                    txtTituloContato.Text = string.Empty;
+                    txtMensagemContato.Text = string.Empty;
+                }
+                catch
+                {
+                    lblContato.Text = "Erro de conexão, tente novamente...";
+                    lblContato.ForeColor = System.Drawing.Color.Red;
+                }
+                                
             }
             
 

@@ -47,7 +47,7 @@ namespace Webinar
                         TornarModeradorUsuario.Visible = false;
                         TornarAdministradorUsuario.Visible = false;
                         TornarPalestranteUsuario.Visible = false;
-                        btnBanir.Enabled = false;
+                        btnBanir.Visible = false;
                         lblConta.Text = "Não é possivel realizar alterações em contas 'Administrador'";
                     }
                     PanelUsuario.Visible = true;
@@ -201,7 +201,14 @@ namespace Webinar
             UsuarioDAL uDAL = new UsuarioDAL();
             Usuario objUsuario = uDAL.ObterUsuario(id);
 
-            string[] Palestrante = { "Convidado, Palestrante", "Palestrante, Convidado", "Moderador, Palestrante", "Palestrante, Moderador", "Administrador, Palestrante", "Palestrante, Administrador" };
+            string[] Palestrante = { "Convidado, Moderador", "Convidado, Palestrante", "Palestrante, Convidado", "Moderador, Palestrante", "Palestrante, Moderador" };
+            string[] Admin = { "Convidado, Administrador", "Palestrante, Administrador", "Moderador, Administrador" };
+
+            if (Admin.Contains(objUsuario.Tipo))
+            {
+                ClientScript.RegisterStartupScript(GetType(), "alert", "alert('Não é possível excluir conta de Administrador.');", true);
+                return;
+            }
 
             if (Palestrante.Contains(objUsuario.Tipo))
             {
@@ -277,7 +284,6 @@ namespace Webinar
                         
             Redirecionar();
         }
-
         protected void TornarAdministradorPalestrante_Click(object sender, EventArgs e)
         {
             int id = Convert.ToInt32(Session["id"]);
@@ -333,6 +339,11 @@ namespace Webinar
             else if (Palestrante.Contains(usuario.Tipo)) { Response.Redirect("PainelPalestrante.aspx"); }
             else if (Moderador.Contains(usuario.Tipo)) { Response.Redirect("PainelModerador.aspx"); }
             else { Response.Redirect("Default.aspx"); }
+        }
+        protected void EncerrarEvento(int id)
+        {
+            EventoDAL eDAL = new EventoDAL();
+
         }
     }
 }

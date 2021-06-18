@@ -13,35 +13,58 @@ namespace Webinar
     public partial class NewPalestra : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
-        {
-            if (!IsPostBack)
+        {        
+
+            try
             {
-                try
+                if (Session["EditarADM"].ToString() == "Sim")
                 {
-                    if (Session["EditarADM"].ToString() == "Sim")
-                    {
-                        CarregarPalestraADM();
-                        return;
-                    }
+                    CarregarPalestraADM();
+                    return;
                 }
-                catch { }
-                UsuarioDAL uDAL = new UsuarioDAL();
-                string s = HttpContext.Current.User.Identity.Name;
-                Usuario usuario = uDAL.BuscarID(s);
-
-                string[] Palestrante = { "Palestrante", "Convidado, Palestrante", "Palestrante, Convidado", "Moderador", "Moderador, Palestrante", "Palestrante, Moderador", "Convidado, Moderador", "Moderador, Convidado" };
-
-                if (Palestrante.Contains(usuario.Tipo)) { ddlPalestrantes.SelectedValue = usuario.Username; ddlPalestrantes.Enabled = false; }
             }
+            catch { }
+            novaPalestra();
+            
+           
+        }
+        protected void novaPalestra()
+        {
+            UsuarioDAL uDAL = new UsuarioDAL();
+            string s = HttpContext.Current.User.Identity.Name;
+            Usuario usuario = uDAL.BuscarID(s);
+
+            string[] Palestrante = { "Palestrante", "Convidado, Palestrante", "Palestrante, Convidado", "Moderador", "Moderador, Palestrante", "Palestrante, Moderador", "Convidado, Moderador", "Moderador, Convidado" };
+
+            if (Palestrante.Contains(usuario.Tipo)) { ddlPalestrantes.SelectedValue = usuario.Username; ddlPalestrantes.Enabled = false; }
         }
         protected void CarregarPalestraADM()
         {
+            txtDataPalestra.Attributes.Remove("TextMode");
             int id = Convert.ToInt32(Session["ID"]);            
             PalestraDAL pDAL = new PalestraDAL();
             Palestra p = pDAL.ObterPalestra(id);
             int idPalestrante = p.IDPalestrante;
             UsuarioDAL uDAL = new UsuarioDAL();
             Usuario us = uDAL.BuscarEmail(idPalestrante);
+
+            if (p.IDEvento != 0)
+            {
+                EventoDAL eDAL = new EventoDAL();
+                Evento ev = eDAL.ObterEvento2(p.IDEvento);
+                lblParticipaEvento.Text = "Palestra relacionada ao evento \"" + ev.EventoTitulo + "\"";
+                lblParticipaEvento.Visible = true;
+                btnParticiparEvento.Visible = true;
+            }
+            else
+            {
+                if (p.Acervo == false)
+                {
+                    lblAcervo.Text = "Palestra continuada";
+                    lblAcervo.Visible = true;
+                    btnAcervo.Visible = true;
+                }
+            }
 
             txtTituloPalestra.Text = p.PalestraTitulo;
             txtSubTituloPalestra.Text = p.PalestraSubTitulo;
@@ -53,7 +76,7 @@ namespace Webinar
             txtSinopseP4Palestra.Text = p.PalestraSinopseP4;
             ddlPalestrantes.SelectedValue = us.Username;
             txtTempoPalestra.Text = p.PalestraDuracao;
-            txtDataPalestra.Text = p.PalestraData.ToString("dd/MM/yyyy");
+            txtDataPalestra.Text = p.PalestraData.ToString("yyyy-MM-dd");
             cbAutorizarPalestra.Checked = p.PalestraAutoriza;
             byte[] bytes = p.PalestraCapa;
             string base64String = Convert.ToBase64String(bytes, 0, bytes.Length);
@@ -281,6 +304,36 @@ namespace Webinar
 
             pDAL.AtualizarPalestra(objPalestra);
             Response.Redirect("Default.aspx");
+        }
+
+        protected void btnAcervo_Click(object sender, EventArgs e)
+        {
+            int id = Convert.ToInt32(Session["ID"]);
+            PalestraDAL pDAL = new PalestraDAL();
+            pDAL.AddPalestraAcervo(id);
+        }
+
+        protected void btnParticiparEvento_Click(object sender, EventArgs e)
+        {
+            int id = Convert.ToInt32(Session["ID"]);
+            EventoDAL eDAL = new EventoDAL();            
+            PalestraDAL pDAL = new PalestraDAL();
+            Palestra p = pDAL.ObterPalestra(id);
+
+            if (p.IDEvento != 0)
+            {
+                Evento eve = eDAL.ObterEvento2(p.IDEvento);
+                if (eve.Acervo == false)
+                {
+                    ClientScript.RegisterStartupScript(GetType(), "alert", "alert('Não foi possível remover. Essa Palestra esta participando do evento \"" + eve.EventoTitulo + "\" que ainda esta em andamento.');", true);
+                    return;
+                }
+                else
+                {
+                    pDAL.RemoverPalestraDoEvento(id);
+                    ClientScript.RegisterStartupScript(GetType(), "alert", "alert('Removido com suceso.');", true);
+                }
+            }
         }
     }
 }

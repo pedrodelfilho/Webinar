@@ -40,12 +40,13 @@
                             <li class="btn-link"><asp:LinkButton runat="server" ID="btnPaginaInicial" OnClick="btnPaginaInicial_Click">Página Inicial</asp:LinkButton></li>
                         </ul><br /><br /><br />
                         <asp:Button runat="server" ID="btnAdicionarEvento" CssClass="botaosub" OnClick="btnAdicionarEvento_Click" Visible="false" Text="Adicionar Evento" Width="200px"/>
-                        <asp:Button runat="server" ID="btnAdicionarPalestra" OnClick="btnAdicionarPalestra_Click" CssClass="botaosub" Visible="false" Text="Adicionar Palestra" Width="200px" />
+                        <asp:Button runat="server" ID="btnAdicionarPalestraADM" OnClick="btnAdicionarPalestra_Click" CssClass="botaosub" Visible="false" Text="Adicionar Palestra" Width="200px" />
                     </div>               
                 </div>
                 <hr style="border-left:1px solid #ef4136; height: 220px; margin-left: -30px; margin-right: 30px" />
                 <div class="col-md-8">
                     <div class="p-3 py-5">
+                        <asp:HiddenField runat="server" id="hfWasConfirmed" />
                         <asp:Panel ID="PanelUsuarios" Visible="false" runat="server">
                             <div class="text-center">
                                 <h5 style="color:#ef4136;"><span class="fa fa-list-alt"></span> Listagem de Usuários</h5><br />
@@ -112,6 +113,7 @@
                         <asp:Panel ID="PanelEventos" Visible="false" runat="server">
                          <div class="text-center">
                                 <h5 style="color:#ef4136;"><span class="fa fa-list-alt"></span> Listagem de Eventos</h5><br />
+                                <asp:Label runat="server" ID="lblEventoRes1" Font-Size="Large" CssClass="labels" /><br />
                                 <asp:Label runat="server" ID="lblEventoRes" style="color: white" CssClass="labels" />
                             </div>
                             <div class="text-center">
@@ -123,7 +125,7 @@
                                     <Columns>
                 
                                         <asp:TemplateField HeaderText="ADM Criador" SortExpression="Username" ItemStyle-HorizontalAlign="Center">
-                                            <ItemTemplate><asp:Label ID="lblEventoTitulo" Text='<%#Eval("Username")%>' runat="server" /></ItemTemplate>
+                                            <ItemTemplate><asp:Label ID="lblEventoUsername" Text='<%#Eval("Username")%>' runat="server" /></ItemTemplate>
                                         </asp:TemplateField>
                 
                                         <asp:TemplateField HeaderText="Evento" SortExpression="EventoTitulo" ItemStyle-HorizontalAlign="Center">
@@ -139,14 +141,20 @@
                                         </asp:TemplateField>
 
                                         <asp:TemplateField HeaderText="Moderador Responsável" SortExpression="ModResponsavel" ItemStyle-HorizontalAlign="Center">
-                                            <ItemTemplate><asp:Label ID="lblEventoDtTer" Text='<%#Eval("ModResponsavel")%>' runat="server" /></ItemTemplate>
+                                            <ItemTemplate><asp:Label ID="lblEventoDtModRespavel" Text='<%#Eval("ModResponsavel")%>' runat="server" /></ItemTemplate>
                                         </asp:TemplateField>
                 
                                         <asp:TemplateField ShowHeader="False">
                                             <ItemTemplate>
-                                                <asp:Button ID="btnGridPalestrante" runat="server" CommandName="SendEventos" CausesValidation="false" Text="Visualizar" CommandArgument='<%# Eval("IDEvento") %>' />
+                                                <asp:Button ID="btnGridaDm" runat="server" OnClientClick="return getConfirmationValue();" CommandName="EncerrarEventos" CausesValidation="false" Text="Encerrar" CommandArgument='<%# Eval("IDEvento") %>' />
                                             </ItemTemplate>
                                         </asp:TemplateField>
+
+                                        <asp:TemplateField ShowHeader="False">
+                                                <ItemTemplate>
+                                                    <asp:ImageButton ID="btnGridConEmpresarial" runat="server" Height="25px" ImageUrl="~/img/delete.png" CommandName="DelEvento" CommandArgument='<%# Eval("IDEvento") %>' OnClientClick="return confirm('Deseja excluir o item selecionado?');" />
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
             
                                     </Columns>            
                                     <FooterStyle BackColor="#CCCCCC" />
@@ -180,10 +188,6 @@
                                 GridLines="Vertical" PageSize="30">          
             
                                     <Columns>
-                
-                                        <asp:TemplateField HeaderText="ID Palestra" SortExpression="IDPalestra" ItemStyle-HorizontalAlign="Center">                   
-                                            <ItemTemplate><asp:Label ID="lblIDPalestra" Text='<%#Eval("IDPalestra")%>' runat="server" /></ItemTemplate>
-                                        </asp:TemplateField>
                 
                                         <asp:TemplateField HeaderText="Palestrante" SortExpression="Palestrante" ItemStyle-HorizontalAlign="Center">
                                             <ItemTemplate><asp:Label ID="lblPalestrante" Text='<%#Eval("Palestrante")%>' runat="server" /></ItemTemplate>
@@ -254,10 +258,6 @@
                                         GridLines="Vertical" PageSize="30">          
             
                                         <Columns>
-                
-                                            <asp:TemplateField HeaderText="ID Usuário" SortExpression="UserId" ItemStyle-HorizontalAlign="Center">                   
-                                                <ItemTemplate><asp:Label ID="lblUserId" Text='<%#Eval("UserId")%>' runat="server" /></ItemTemplate>
-                                            </asp:TemplateField>
                 
                                             <asp:TemplateField HeaderText="Palestrante" SortExpression="Username" ItemStyle-HorizontalAlign="Center">
                                                 <ItemTemplate><asp:Label ID="lblNome" Text='<%#Eval("Username")%>' runat="server" /></ItemTemplate>
@@ -540,6 +540,17 @@
                 alert('Não é uma imagem válida')
             }
         });
+       </script>
+       <script>
+           function getConfirmationValue() {
+               if (confirm('Todas as palestras que contém nesse evento serão enviadas para o Acervo junto com o Evento. Você tem certeza que deseja continuar?')) {
+                   $('#<%=hfWasConfirmed.ClientID%>').val('true')
+   }
+   else{
+      $('#<%=hfWasConfirmed.ClientID%>').val('false')
+               }
+               return true;
+           }
        </script>
     </div>
 

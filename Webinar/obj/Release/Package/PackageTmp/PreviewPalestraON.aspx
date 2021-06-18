@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="PreviewPalestra.aspx.cs" Inherits="Webinar.PreviewPalestra" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="PreviewPalestraON.aspx.cs" Inherits="Webinar.PreviewPalestraON" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
     .botao {
@@ -24,11 +24,11 @@
           font-size: 14px;
           cursor: pointer;
         }
-    </style> 
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div style="background: rgba(25, 31, 32, 0.8); align-content: center"><br /><br /><br /><br /><br /><br /><br />                
-        <asp:Panel runat="server" ID="Panel1" HorizontalAlign="Center">
+        <asp:Panel runat="server" HorizontalAlign="Center">
             <div class="mx-auto" style="width: 800px;">
                 <asp:Table runat="server" CssClass="d-flex justify-content-between align-items-center mb-2">
                 <asp:TableHeaderRow HorizontalAlign="Center">
@@ -155,12 +155,10 @@
                 </div>                
             </div>
             <br /><br />
-            </div>  
-            <asp:LinkButton ID="btnAutorizarPalestra" OnClick="btnAutorizarPalestra_Click" runat="server" Width="170" CssClass="botao btn-success"><i class="fa fa-thumbs-o-up"></i>&nbsp;Autorizar</asp:LinkButton>   &nbsp;&nbsp;&nbsp; 
-            <asp:LinkButton ID="btnNegarPalestra" OnClick="btnNegarPalestra_Click" runat="server" Width="150" CssClass="botao btn-danger"><i class="fa fa-thumbs-o-down"></i>&nbsp;Negar</asp:LinkButton>
-            <asp:LinkButton ID="btnSalvarPalestra" OnClick="btnSalvarPalestra_Click" runat="server" Width="190" CssClass="botao btn-success"><i class="fa fa-thumbs-o-up"></i>&nbsp;Ok, Aprovar</asp:LinkButton>   &nbsp;&nbsp;&nbsp; 
-            <asp:LinkButton ID="btnEditarPalestra" OnClientClick="JavaScript:window.history.back(1); return false;" runat="server" Width="150" CssClass="botao btn-danger"><i class="fa fa-thumbs-o-down"></i>&nbsp;Editar</asp:LinkButton>
-            <asp:LinkButton ID="btnEditarADM" Visible="false" OnClick="btnEditarADM_Click" runat="server" Width="190" CssClass="botao btn-success"><i class="fa fa-thumbs-o-down"></i>&nbsp;Editar</asp:LinkButton>
-        </asp:Panel> 
-    <br /><br /><br /><br /><br /></div>
+            </div>
+            <asp:LinkButton runat="server" OnClick="btnAssistir_Click" CssClass="botaosub" ID="btnAssistir" Text="Assistir"></asp:LinkButton>
+            <asp:LinkButton  ID="btnSeIncrever" OnClick="btnSeIncrever_Click" runat="server" Width="200" CssClass="botaosub btn-success"><i class="fa fa-calendar-check-o"></i>&nbsp;Me inscrever</asp:LinkButton>
+        </asp:Panel>
+        
+    <br /><br /><br /><br /><br /></div>    
 </asp:Content>

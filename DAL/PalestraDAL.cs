@@ -118,7 +118,7 @@ namespace DAL
         {            
             SqlConnection conn = new SqlConnection(connectionString);
             conn.Open();
-            string sql = "select Palestras.IDPalestra, p.Username as Palestrante, c.Username as Criador, PalestraDtCriacao, PalestraLink, PalestraAutoriza, PalestraAprovada from Palestras join Users p on Palestras.IDPalestrante = p.UserId join Users c on Palestras.PalestraCriador = c.UserId";
+            string sql = "select Palestras.IDPalestra, p.Username as Palestrante, c.Username as Criador, convert(varchar(10), PalestraDtCriacao, 103) AS PalestraDtCriacao, PalestraLink, PalestraAutoriza, PalestraAprovada from Palestras join Users p on Palestras.IDPalestrante = p.UserId join Users c on Palestras.PalestraCriador = c.UserId";
             SqlCommand cmd = new SqlCommand(sql, conn);
             SqlDataAdapter adp = new SqlDataAdapter(cmd);
             
@@ -286,6 +286,30 @@ namespace DAL
             cmd.ExecuteNonQuery();
             conn.Close();
             
+        }
+        public void AddPalestraAcervo(int id)
+        {
+            SqlConnection conn = new SqlConnection(connectionString);
+            conn.Open();
+
+            string sql = "UPDATE Palestras Set Acervo = 'true' WHERE IDPalestra = @id";
+            SqlCommand cmd = new SqlCommand(sql, conn);
+            cmd.Parameters.AddWithValue("@id", id);
+            cmd.ExecuteNonQuery();
+            conn.Close();
+
+        }
+        public void RemoverPalestraDoEvento(int id)
+        {
+            SqlConnection conn = new SqlConnection(connectionString);
+            conn.Open();
+
+            string sql = "UPDATE Palestras Set IDEvento = null WHERE IDPalestra = @id";
+            SqlCommand cmd = new SqlCommand(sql, conn);
+            cmd.Parameters.AddWithValue("@id", id);
+            cmd.ExecuteNonQuery();
+            conn.Close();
+
         }
     }
 }

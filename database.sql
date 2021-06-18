@@ -8,15 +8,21 @@ select * from Convidados
 select * from Certificados
 select * from SendLinkEvento
 Select * from Maintenance
+select * from Administradores
+
+select * from [Validate_User]
+
+delete Users where UserId = 22
+delete Convidados where IDConvidados = 22
 SELECT * FROM Certificados WHERE UserId = 7 AND IDPalestra = 2
 alter table Certificados add Alvo time
-
-delete Eventos
-
+SELECT * FROM Eventos WHERE IDEvento = 10 
+delete Eventos where IDEvento = 10
+SELECT Users.Username, Palestrantes.PalestranteFoto, Palestras.PalestraTitulo, Palestras.PalestraData, Palestras.IDPalestra FROM Palestras LEFT JOIN Users ON users.UserId = Palestras.IDPalestrante LEFT JOIN Palestrantes ON Palestrantes.IDPalestrante = Palestras.IDPalestrante WHERE IDEvento = 10 ORDER BY PalestraData ASC
 SELECT * FROM Maintenance
-
+update Palestras Set IDEvento = 10, Acervo = 'false' WHERE IDPalestra = 9
 insert into Maintenance (EmailContact) Values('sender.email.validation@gmail.com')
-
+update Eventos Set Acervo = 'false'
 select Eventos.EventoTitulo, Palestras.PalestraTitulo, Certificados.DtInicio, Certificados.DtFinal, Progresso, Alvo from Certificados
 LEFT JOIN Eventos ON Eventos.IDEvento = Certificados.IDEvento
 LEFT JOIN Palestras ON Palestras.IDPalestra = Certificados.IDPalestra WHERE Certificados.UserId = 7
@@ -30,7 +36,9 @@ alter table Eventos add Acervo bit
 
 SELECT * FROM SendLinkEvento WHERE IDRequerente = @idReq AND IDEvento = @idEvent AND IDPalestra = @idPales
 
+SELECT Users.Username, IDPalestrante, PalestranteFoto, convert(varchar(10), PalestranteDtNasc, 103) AS PalestranteDtNasc, PalestranteCidadeUF, PalestranteSexo, PalestranteFormacao, PalestranteEspecialidade, PalestranteBioP1, PalestranteBioP2, PerfilAprovado, PalestranteReceberEmail, PalestranteAutoriza, PalestranteTwiter, PalestranteFacebook, PalestranteGoogle, PalestranteLinkedin, convert(varchar(10), CreatedDate, 103) AS CreatedDate, convert(varchar(10), LastLoginDate, 103) AS LastLoginDate FROM Palestrantes INNER JOIN Users ON Palestrantes.IDPalestrante=Users.UserId WHERE Palestrantes.PerfilAprovado IS NULL OR Palestrantes.PerfilAprovado = 'false'
 
+SELECT UserId, Username, Password, Email, convert(varchar(10), CreatedDate, 103) AS CreatedDate, convert(varchar(10), LastLoginDate, 103) AS LastLoginDate, Tipo FROM Users
 
 SELECT CONVERT(VARCHAR(10), PalestraData, 103), COUNT(*) AS Quantidade FROM Palestras WHERE IDEvento = 28 GROUP BY CONVERT(VARCHAR(10), PalestraData, 103)
 

@@ -490,11 +490,21 @@
                                 <label style="color: white" class="labels">E-mail</label>
                                 <asp:TextBox runat="server" CssClass="form-control" TextMode="Email" ID="txtEmail" placeholder="Digite o e-mail" />
                                 <label style="color: white" class="labels">E-mail que receberá as mensagens</label>
-                                <asp:TextBox runat="server" CssClass="form-control" TextMode="Email" ID="txtEmailADM" placeholder="Digite o e-mail" />
+                                <asp:TextBox runat="server" CssClass="form-control" TextMode="Email" ID="txtEmailADM" placeholder="Digite o e-mail" /><br />
+                            </div>
+                            <div class="col-md-6 mx-auto text-center">
+                                <label style="color: #ef4136; font-size: 16px; display:block; text-align:left;" class="labels">Certificado BackGround</label>
+                                <asp:Image runat="server" ID="imgBack" width="400" Height="150" />
+                                <label style="color: white" class="labels">Escolher imagem de fundo para o Certificado (Resolução recomendada: 1200 x 800)</label>
+                                <input runat="server" type="file" class="form-control" id="imgBackGroundCertificado" />
                             </div>
                             <div class="col-md-6 mx-auto text-center"><br />
-                                <asp:LinkButton runat="server" ID="btnVisualizarPagInicial" OnClick="btnVisualizarPagInicial_Click" Width="150px" CssClass="btn btn-outline-info"><i class=""></i>&nbsp;Visualizar</asp:LinkButton>
-                                <asp:LinkButton runat="server" ID="btnAplicarPagInicial" OnClick="btnAplicarPagInicial_Click" OnClientClick="return confirm('Realmente deseja atualizar a página inicial?');" Width="150px" CssClass="btn btn-outline-success"><i class=""></i>&nbsp;Aplicar</asp:LinkButton>
+                                <asp:LinkButton runat="server" ID="btnVisualizarPagInicial" OnClick="btnVisualizarPagInicial_Click" CssClass="botaosub btn-outline-info"><i class=""></i>&nbsp;Visualizar Página Inicial</asp:LinkButton>
+                                <asp:LinkButton runat="server" ID="btnCertificado" OnClick="btnCertificado_Click" CssClass="botaosub btn-outline-info"><i class=""></i>&nbsp;Visualizar Cetificado</asp:LinkButton>
+                                
+                            </div>
+                            <div class="col-md-6 mx-auto text-center"><br /><br /><br />
+                                <asp:LinkButton runat="server" ID="btnAplicarPagInicial" OnClick="btnAplicarPagInicial_Click" OnClientClick="return confirm('Realmente deseja atualizar a página inicial?');" CssClass="botao btn-outline-success"><i class=""></i>&nbsp;Salvar</asp:LinkButton>
                             </div>
                         </asp:Panel>
                     </div>
@@ -516,6 +526,21 @@
             }
         });
     </script>
+       <script>
+           $("#<%=imgBackGroundCertificado.ClientID%>").on('change', function () {
+               if (this.files[0].type.indexOf("image") > -1) {
+                   var reader = new FileReader();
+                   reader.onload = function (e) {
+                       $('#<%=imgBack.ClientID%>').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(this.files[0]);
+        }
+        else {                
+            $('#<%=imgBack.ClientID%>').attr('src', '');
+                alert('Não é uma imagem válida')
+            }
+        });
+       </script>
     </div>
 
 </asp:Content>

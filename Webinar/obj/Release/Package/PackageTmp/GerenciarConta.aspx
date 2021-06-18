@@ -126,7 +126,55 @@
                             </div>
                     </asp:Panel>
                     <asp:Panel runat="server" ID="PanelMeuHistorico" Visible="false">
+                        <div class="text-center">
+                                <h5 style="color:#ef4136;"><span class="fa fa-list-alt"></span> Meu Histórico</h5><br />
+                                <asp:Label runat="server" ID="Label1" style="color: white" CssClass="labels" />
+                            </div>
+                            <div class="text-center">
+                                <div style="display:inline-block; border-radius:8px; overflow:hidden;">
+                                <asp:GridView runat="server" ID="gvHistorico" HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center"
+                                AutoGenerateColumns="False" BackColor="Transparent" BorderColor="#999999" BorderWidth="2px" CellPadding="3" ForeColor="White" GridLines="Vertical" PageSize="30" CssClass="Grid">     
+            
+                                    <Columns>                
+                                        <asp:TemplateField HeaderText="Evento" SortExpression="EventoTitulo" ItemStyle-HorizontalAlign="Center">                   
+                                            <ItemTemplate><asp:Label ID="lblEventoTitulo" Text='<%#Eval("EventoTitulo")%>' runat="server" /></ItemTemplate>
+                                        </asp:TemplateField>
+                
+                                        <asp:TemplateField HeaderText="Palestra" SortExpression="PalestraTitulo" ItemStyle-HorizontalAlign="Center">
+                                            <ItemTemplate><asp:Label ID="lblPalestraTitulo" Text='<%#Eval("PalestraTitulo")%>' runat="server" /></ItemTemplate>
+                                        </asp:TemplateField>
+                
+                                        <asp:TemplateField HeaderText="Data de início" SortExpression="Data1" ItemStyle-HorizontalAlign="Center">                    
+                                            <ItemTemplate><asp:Label ID="lblDtInicio" Text='<%#Eval("Data1")%>' runat="server"/></ItemTemplate>
+                                        </asp:TemplateField>  
+                
+                                        <asp:TemplateField HeaderText="Último Acesso" SortExpression="Data2" ItemStyle-HorizontalAlign="Center">                    
+                                            <ItemTemplate><asp:Label ID="lblDtFinal" Text='<%#Eval("Data2")%>' runat="server" /></ItemTemplate>
+                                        </asp:TemplateField>
 
+                                        <asp:TemplateField HeaderText="Progresso" SortExpression="Porcentagem" ItemStyle-HorizontalAlign="Center">                    
+                                            <ItemTemplate><asp:Label ID="lblProgresso" Text='<%#Eval("Porcentagem")%>' runat="server" /></ItemTemplate>
+                                        </asp:TemplateField>
+            
+                                    </Columns>            
+                                    <FooterStyle BackColor="#CCCCCC" />
+                                    <HeaderStyle BackColor="#231F20" Font-Bold="True" Font-Underline="true" ForeColor="White" />
+                                    <PagerStyle BackColor="#999999" ForeColor="White" HorizontalAlign="Center" />
+                                    <SelectedRowStyle BackColor="#000099" Font-Bold="True" ForeColor="White" />
+                                    <SortedAscendingCellStyle BackColor="#F1F1F1" />
+                                    <SortedAscendingHeaderStyle BackColor="#808080" />
+                                    <SortedDescendingCellStyle BackColor="#CAC9C9" />
+                                    <SortedDescendingHeaderStyle BackColor="#383838" />
+                                    <PagerSettings  Position="Bottom" 
+                                        Mode="NextPreviousFirstLast"  
+                                        PreviousPageText="<i class='icon-previous' title='Página Anterior' /></i>" 
+                                        NextPageText="<i class='icon-next' title='Próxima Página' /></i>" 
+                                        FirstPageText="<i class='icon-backward' title='Primeira Página' /></i>" 
+                                        LastPageText="<i class='icon-forward2' title='Última Página' /></i>" 
+                                        PageButtonCount="3" />
+                                </asp:GridView>
+                            </div>
+                            </div>
                     </asp:Panel>
                 </div>
             </div>

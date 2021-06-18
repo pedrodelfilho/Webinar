@@ -25,41 +25,7 @@ namespace Webinar
 
         protected void btnteste_Click(object sender, EventArgs e)
         {
-            string imageLoc = @"D:\Users\Pedro\Downloads\Model.png";
-            // Create a new PDF document
-            PdfDocument document = new PdfDocument();
-            document.Info.Title = "Certificado";
-
-            // Create an empty page
-            PdfPage page = document.AddPage();
-            page.Width = 1200;
-            page.Height = 900;
-
-            // Get an XGraphics object for drawing
-            XGraphics gfx = XGraphics.FromPdfPage(page);
-            DrawImage(gfx, imageLoc, 0, 0, Convert.ToInt32(page.Width), Convert.ToInt32(page.Height));
-
-            // Create a font
-            XFont font = new XFont("Tahoma", 32, XFontStyle.BoldItalic);
-
-            // Draw the text
-            gfx.DrawString("Certificamos que Pedro Del Antonio FIlho", font, XBrushes.Black, new XRect(0, 300, page.Width, page.Height), XStringFormats.TopCenter);
-            gfx.DrawString("concluiu com êxito 7 total horas do curso online", font, XBrushes.Black, new XRect(0, 330, page.Width, page.Height), XStringFormats.TopCenter);
-            gfx.DrawString("Desenvolvimento WEB com Python e Django", font, XBrushes.Black, new XRect(0, 360, page.Width, page.Height), XStringFormats.TopCenter);
-            gfx.DrawString("em 23 de Outubro de 2020.", font, XBrushes.Black, new XRect(0, 390, page.Width, page.Height), XStringFormats.TopCenter);
-            
-
-            // Save the document...
-            const string filename = @"D:\Users\Pedro\Desktop\HelloWorld.pdf";
-            document.Save(filename);
-
-            // ...and start a viewer.
-            Process.Start(filename);
-        }
-        void DrawImage(XGraphics gfx, string jpegSamplePath, int x, int y, int width, int height)
-        {
-            XImage image = XImage.FromFile(@"D:\Users\Pedro\Downloads\Model.png");
-            gfx.DrawImage(image, x, y, width, height);
+            label.Text = "e";
         }
     }
 }

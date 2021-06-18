@@ -21,17 +21,13 @@ namespace Webinar
     public partial class PainelAdministrador : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e) // Chamado sempre que a página "PainelAdministrador.aspx" é carregada/atualizada
-        {      
-            if (!IsPostBack)
-            {
-            }
-            
+        {        
         }
 
         protected void btnUsuarios_Click(object sender, EventArgs e) //Botão "Usuários" no Painel do Administrador
         {
             btnAdicionarEvento.Visible = false;
-            btnAdicionarPalestra.Visible = false;
+            btnAdicionarPalestraADM.Visible = false;
             PanelUsuarios.Visible = true;
             PanelEventos.Visible = false;
             PanelPalestras.Visible = false;
@@ -42,7 +38,7 @@ namespace Webinar
         }
         protected void btnEventos_Click(object sender, EventArgs e) // Botão "Eventos" no Painel do Administrador
         {
-            btnAdicionarPalestra.Visible = false;
+            btnAdicionarPalestraADM.Visible = false;
             btnAdicionarEvento.Visible = true;
             PanelUsuarios.Visible = false;
             PanelEventos.Visible = true;
@@ -51,11 +47,12 @@ namespace Webinar
             PanelPaginaInicial.Visible = false;
             ViewState["sortOrder"] = "";
             BindGridViewEventos("", "");
+            lblEventoRes1.Text = string.Empty;
         }
         protected void btnPalestras_Click(object sender, EventArgs e) // Botão "Palestras" no Painel do Administrador
         {
             btnAdicionarEvento.Visible = false;
-            btnAdicionarPalestra.Visible = true;
+            btnAdicionarPalestraADM.Visible = true;
             PanelUsuarios.Visible = false;
             PanelEventos.Visible = false;
             PanelPalestras.Visible = true;
@@ -67,7 +64,7 @@ namespace Webinar
         protected void btnPendencias_Click(object sender, EventArgs e) // Botão "Pendências" no Painel do Administrador
         {
             btnAdicionarEvento.Visible = false;
-            btnAdicionarPalestra.Visible = false;
+            btnAdicionarPalestraADM.Visible = false;
             PanelUsuarios.Visible = false;
             PanelEventos.Visible = false;
             PanelPalestras.Visible = false;
@@ -79,7 +76,7 @@ namespace Webinar
         protected void btnPaginaInicial_Click(object sender, EventArgs e) // Botão "Página Inicial" no Painel do Administrador
         {
             btnAdicionarEvento.Visible = false;
-            btnAdicionarPalestra.Visible = false;
+            btnAdicionarPalestraADM.Visible = false;
             PanelUsuarios.Visible = false;
             PanelEventos.Visible = false;
             PanelPalestras.Visible = false;
@@ -235,6 +232,12 @@ namespace Webinar
             DataTable dt = uDAL.ListarUsuarios();
             if (dt.Rows.Count > 0)
             {
+                foreach(DataRow dr in dt.Rows)
+                {
+                    string a = dr["Tipo"].ToString();
+                    string[] aa = a.Split(',');
+                    dr["tipo"] = aa[aa.Length - 1];
+                }
                 DataView dv = new DataView();
                 dv = dt.DefaultView;
 
@@ -293,6 +296,7 @@ namespace Webinar
         }
         public void BindGridViewEventos(string sortExp, string sortDir) // Coloca todos os Eventos em uma GridView
         {
+            
             EventoDAL eDAL = new EventoDAL();
             DataTable dt = eDAL.ListarEventos();
             if (dt.Rows.Count > 0)
@@ -397,10 +401,51 @@ namespace Webinar
         }
         protected void gvEvento_RowCommand(object sender, GridViewCommandEventArgs e) // Botão "Visualizar" da GridView Eventos, para visualizar individualmente cada Evento
         {
-            if (e.CommandName != "SendEventos") return;
-            int id = Convert.ToInt32(e.CommandArgument);
-        }
+            EventoDAL eDAL = new EventoDAL();
+            PalestraDAL pDAL = new PalestraDAL();
+            if (e.CommandName == "EncerrarEventos")
+            {                
+                if (hfWasConfirmed.Value == "true")
+                {
+                    int id = Convert.ToInt32(e.CommandArgument);
+                    DataTable dt = pDAL.ObterPalestraEmEvento(id);
+                    foreach(DataRow dr in dt.Rows)
+                    {
+                        pDAL.RemoverPalestraDoEvento(Convert.ToInt32(dr["IDPalestra"]));
+                        pDAL.AddPalestraAcervo(Convert.ToInt32(dr["IDPalestra"]));
+                        eDAL.EncerrarEvento(id);
+                    }
 
+                }
+                else { return; }
+                lblEventoRes1.Text = "Evento encerrado com sucesso.";
+                lblEventoRes1.ForeColor = System.Drawing.Color.Green;
+            }
+            if (e.CommandName == "DelEvento")
+            {
+                int id = Convert.ToInt32(e.CommandArgument);
+                DataTable dt = pDAL.ObterPalestraEmEvento(id);
+                if (dt.Rows.Count == 0)
+                {
+                    eDAL.DeletarEvento(id);
+                    lblEventoRes1.Text = "Evento excluído com sucesso";
+                    lblEventoRes1.ForeColor = System.Drawing.Color.Green;
+                    return;
+                }
+                else
+                {
+                    List<string> palestras = new List<string>();
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        palestras.Add(row["PalestraTitulo"].ToString());                        
+                    }
+                    var result = String.Join(", ", palestras.ToArray());
+                    lblEventoRes1.Text = "Não foi possível excluir, evento possuí Palestras relacionadas.\r\nDesrelacione as seguintes palestras: " + result;
+                    lblEventoRes1.ForeColor = System.Drawing.Color.Red;
+                    return;
+                }                
+            }
+        }
 
         protected void btnVisualizarPagInicial_Click(object sender, EventArgs e) // Botão "Visualizar Alterações", monta a "PreviewHome.aspx" para visualização com as informações recém inseridas
         {

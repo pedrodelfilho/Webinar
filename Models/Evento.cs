@@ -18,6 +18,7 @@ namespace Models
         public DateTime EventoDtTer { get; set; }
         public virtual byte[] EventoCapa { get; set; }
         public string ModResponsavel { get; set; }
+        public bool Acervo { get; set; }
     }
 
     public class SendLinkEvento

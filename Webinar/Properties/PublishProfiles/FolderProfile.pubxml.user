@@ -23,16 +23,22 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>02/18/2021 13:59:17</publishTime>
     </File>
     <File Include="bin/DAL.dll">
-      <publishTime>06/11/2021 19:09:48</publishTime>
+      <publishTime>06/17/2021 17:00:30</publishTime>
     </File>
     <File Include="bin/DAL.dll.config">
       <publishTime>05/28/2021 11:26:53</publishTime>
     </File>
     <File Include="bin/DAL.pdb">
-      <publishTime>06/11/2021 19:09:48</publishTime>
+      <publishTime>06/17/2021 17:00:30</publishTime>
     </File>
     <File Include="bin/de/Microsoft.Build.resources.dll">
       <publishTime>02/18/2021 13:59:17</publishTime>
+    </File>
+    <File Include="bin/de/PdfSharp.Charting.resources.dll">
+      <publishTime>02/04/2019 13:21:54</publishTime>
+    </File>
+    <File Include="bin/de/PdfSharp.resources.dll">
+      <publishTime>02/04/2019 13:21:52</publishTime>
     </File>
     <File Include="bin/en/Microsoft.Build.resources.dll">
       <publishTime>02/18/2021 13:59:17</publishTime>
@@ -143,19 +149,25 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>05/28/2021 11:26:59</publishTime>
     </File>
     <File Include="bin/Models.dll">
-      <publishTime>06/11/2021 19:09:47</publishTime>
+      <publishTime>06/17/2021 17:00:29</publishTime>
     </File>
     <File Include="bin/Models.dll.config">
       <publishTime>05/28/2021 11:26:54</publishTime>
     </File>
     <File Include="bin/Models.pdb">
-      <publishTime>06/11/2021 19:09:47</publishTime>
+      <publishTime>06/17/2021 17:00:29</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.dll">
       <publishTime>05/28/2021 11:26:59</publishTime>
     </File>
     <File Include="bin/Owin.dll">
       <publishTime>05/28/2021 11:26:59</publishTime>
+    </File>
+    <File Include="bin/PdfSharp.Charting.dll">
+      <publishTime>02/04/2019 13:21:52</publishTime>
+    </File>
+    <File Include="bin/PdfSharp.dll">
+      <publishTime>02/04/2019 13:21:52</publishTime>
     </File>
     <File Include="bin/pl/Microsoft.Build.resources.dll">
       <publishTime>02/18/2021 13:59:18</publishTime>
@@ -434,10 +446,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>05/28/2021 11:26:59</publishTime>
     </File>
     <File Include="bin/Webinar.dll">
-      <publishTime>06/11/2021 19:14:32</publishTime>
+      <publishTime>06/17/2021 17:00:31</publishTime>
     </File>
     <File Include="bin/Webinar.pdb">
-      <publishTime>06/11/2021 19:14:32</publishTime>
+      <publishTime>06/17/2021 17:00:31</publishTime>
     </File>
     <File Include="bin/zh-Hans/Microsoft.Build.resources.dll">
       <publishTime>02/18/2021 13:59:18</publishTime>
@@ -449,16 +461,19 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>03/18/2021 15:28:38</publishTime>
     </File>
     <File Include="css/style.css">
-      <publishTime>06/10/2021 10:42:54</publishTime>
+      <publishTime>06/14/2021 11:53:29</publishTime>
     </File>
     <File Include="Default.aspx">
-      <publishTime>06/11/2021 16:52:46</publishTime>
+      <publishTime>06/17/2021 16:43:43</publishTime>
     </File>
     <File Include="frmPalestra.aspx">
       <publishTime>05/28/2021 11:26:55</publishTime>
     </File>
+    <File Include="GaleriaAcervo.aspx">
+      <publishTime>06/17/2021 16:30:31</publishTime>
+    </File>
     <File Include="GerenciarConta.aspx">
-      <publishTime>05/28/2021 11:26:54</publishTime>
+      <publishTime>06/16/2021 17:20:23</publishTime>
     </File>
     <File Include="img/about-bg.jpg">
       <publishTime>03/18/2021 15:28:38</publishTime>
@@ -713,13 +728,13 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>03/18/2021 15:28:38</publishTime>
     </File>
     <File Include="Master.Master">
-      <publishTime>05/28/2021 11:26:54</publishTime>
+      <publishTime>06/15/2021 12:34:40</publishTime>
     </File>
     <File Include="NewEvento.aspx">
       <publishTime>06/11/2021 11:24:44</publishTime>
     </File>
     <File Include="NewEvento2.aspx">
-      <publishTime>06/01/2021 14:26:33</publishTime>
+      <publishTime>06/17/2021 08:50:59</publishTime>
     </File>
     <File Include="NewEventoPage2.aspx">
       <publishTime>06/10/2021 12:37:35</publishTime>
@@ -728,10 +743,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>06/11/2021 14:18:00</publishTime>
     </File>
     <File Include="NewPalestra.aspx">
-      <publishTime>05/28/2021 11:26:54</publishTime>
+      <publishTime>06/15/2021 16:43:35</publishTime>
     </File>
     <File Include="PainelAdministrador.aspx">
-      <publishTime>06/11/2021 12:32:59</publishTime>
+      <publishTime>06/17/2021 13:35:26</publishTime>
     </File>
     <File Include="PainelModerador.aspx">
       <publishTime>05/28/2021 11:26:55</publishTime>
@@ -742,6 +757,12 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="PainelUsuario.aspx">
       <publishTime>05/28/2021 11:26:55</publishTime>
     </File>
+    <File Include="Player.aspx">
+      <publishTime>06/16/2021 09:00:59</publishTime>
+    </File>
+    <File Include="PreviewEventoON.aspx">
+      <publishTime>06/14/2021 15:50:06</publishTime>
+    </File>
     <File Include="PreviewEventos.aspx">
       <publishTime>06/11/2021 11:18:51</publishTime>
     </File>
@@ -749,10 +770,13 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>05/28/2021 11:26:55</publishTime>
     </File>
     <File Include="PreviewPalestra.aspx">
-      <publishTime>05/28/2021 11:26:55</publishTime>
+      <publishTime>06/15/2021 15:30:50</publishTime>
     </File>
     <File Include="PreviewPalestrante.aspx">
       <publishTime>05/28/2021 11:26:55</publishTime>
+    </File>
+    <File Include="PreviewPalestraON.aspx">
+      <publishTime>06/15/2021 15:08:38</publishTime>
     </File>
     <File Include="PreviewUsuarios.aspx">
       <publishTime>05/28/2021 11:26:55</publishTime>
@@ -770,7 +794,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>03/30/2021 10:10:06</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>06/11/2021 19:09:50</publishTime>
+      <publishTime>06/17/2021 17:00:33</publishTime>
     </File>
   </ItemGroup>
 </Project>

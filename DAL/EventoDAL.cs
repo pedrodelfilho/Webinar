@@ -89,13 +89,40 @@ namespace DAL
             }
             conn.Close();
             return evento;
-        }    
+        }
+        public Evento ObterEvento2(int id)
+        {
+            Evento evento = null;
+            SqlConnection conn = new SqlConnection(connectionString);
+            conn.Open();
+
+            string sql = "SELECT * FROM Eventos WHERE IDEvento = @id";
+            SqlCommand cmd = new SqlCommand(sql, conn);
+            cmd.Parameters.AddWithValue("@id", id);
+            SqlDataReader dr = cmd.ExecuteReader();
+
+            if (dr.HasRows && dr.Read())
+            {
+                evento = new Evento();
+                evento.EventoTitulo = dr["EventoTitulo"].ToString();
+                evento.IDEvento = Convert.ToInt32(dr["IDEvento"]);
+                evento.EventoSinopseP1 = dr["EventoSinopseP1"].ToString();
+                evento.EventoSinopseP2 = dr["eventoSinopseP2"].ToString();
+                evento.EventoDtIni = Convert.ToDateTime(dr["EventoDtIni"]);
+                evento.EventoDtTer = Convert.ToDateTime(dr["EventoDtTer"]);
+                evento.EventoCapa = (byte[])dr["EventoCapa"];
+                evento.EventoSubTitulo = dr["EventoSubTitulo"].ToString();
+                try { evento.Acervo = Convert.ToBoolean(dr["Acervo"]); } catch { evento.Acervo = false; }
+            }
+            conn.Close();
+            return evento;
+        }
         public DataTable EventosHome()
         {
             SqlConnection conn = new SqlConnection(connectionString);
             conn.Open();
 
-            string sql = "SELECT * FROM Eventos";
+            string sql = "SELECT * FROM Eventos WHERE Acervo = 'false'";
 
             SqlCommand cmd = new SqlCommand(sql, conn);
             SqlDataAdapter adp = new SqlDataAdapter(cmd);
@@ -148,6 +175,28 @@ namespace DAL
 
             conn.Close();
             return dt;
+        }
+        public void DeletarEvento(int id)
+        {
+            SqlConnection conn = new SqlConnection(connectionString);
+            conn.Open();
+
+            string sql = "DELETE Eventos WHERE IDEvento = @id";
+            SqlCommand cmd = new SqlCommand(sql, conn);
+            cmd.Parameters.AddWithValue("@id", id);
+            cmd.ExecuteNonQuery();
+            conn.Close();
+        }
+        public void EncerrarEvento(int id)
+        {
+            SqlConnection conn = new SqlConnection(connectionString);
+            conn.Open();
+
+            string sql = "UPDATE Eventos SET Acervo = 'true' WHERE IDEvento = @id";
+            SqlCommand cmd = new SqlCommand(sql, conn);
+            cmd.Parameters.AddWithValue("@id", id);
+            cmd.ExecuteNonQuery();
+            conn.Close();
         }
     }
 }

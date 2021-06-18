@@ -51,7 +51,6 @@ namespace Webinar
             int[] QtdPorDia = PalestraDia.ToArray();
 
             DataTable dd = pDAL.ObterPalestraEmEvento(id);
-
             
             int z = 0;
             for (int xx = 1; xx < dias+1; xx++)

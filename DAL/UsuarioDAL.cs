@@ -236,7 +236,7 @@ namespace DAL
             SqlConnection conn = new SqlConnection(connectionString);
             conn.Open();
 
-            string sql = "SELECT * FROM Moderadores WHERE IDModerador = @id";
+            string sql = "SELECT * FROM Administradores WHERE IDAdministrador = @id";
             SqlCommand cmd = new SqlCommand(sql, conn);
             cmd.Parameters.AddWithValue("@id", id);
             SqlDataReader dr = cmd.ExecuteReader();
@@ -400,7 +400,7 @@ namespace DAL
         {
             SqlConnection conn = new SqlConnection(connectionString);
             conn.Open();
-            string sql = "SELECT * FROM Users";
+            string sql = "SELECT UserId, Username, Password, Email, convert(varchar(10), CreatedDate, 103) AS CreatedDate, convert(varchar(10), LastLoginDate, 103) AS LastLoginDate, Tipo FROM Users";
             SqlCommand cmd = new SqlCommand(sql, conn);
             SqlDataAdapter adp = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();
@@ -413,7 +413,7 @@ namespace DAL
         {
             SqlConnection conn = new SqlConnection(connectionString);
             conn.Open();
-            string sql = "SELECT * FROM Palestrantes INNER JOIN Users ON Palestrantes.IDPalestrante=Users.UserId WHERE Palestrantes.PerfilAprovado IS NULL OR Palestrantes.PerfilAprovado = 'false'";
+            string sql = "SELECT Users.UserId, Users.Username, Users.Email, IDPalestrante, PalestranteFoto, convert(varchar(10), PalestranteDtNasc, 103) AS PalestranteDtNasc, PalestranteCidadeUF, PalestranteSexo, PalestranteFormacao, PalestranteEspecialidade, PalestranteBioP1, PalestranteBioP2, PerfilAprovado, PalestranteReceberEmail, PalestranteAutoriza, PalestranteTwiter, PalestranteFacebook, PalestranteGoogle, PalestranteLinkedin, convert(varchar(10), CreatedDate, 103) AS CreatedDate, convert(varchar(10), LastLoginDate, 103) AS LastLoginDate FROM Palestrantes INNER JOIN Users ON Palestrantes.IDPalestrante=Users.UserId WHERE Palestrantes.PerfilAprovado IS NULL OR Palestrantes.PerfilAprovado = 'false'";
             SqlCommand cmd = new SqlCommand(sql, conn);
             SqlDataAdapter adp = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();

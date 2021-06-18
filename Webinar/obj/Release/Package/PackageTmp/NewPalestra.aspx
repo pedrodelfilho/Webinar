@@ -126,6 +126,7 @@
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server" ControlToValidate="fuImageCapa" Display="Dynamic" ErrorMessage="Foto é obrigatório." ForeColor="Red"></asp:RequiredFieldValidator>
                         <div class="mt-5 text-center">
                             <asp:LinkButton ID="btnSalvarPalestra" OnClick="btnSalvarPalestra_Click" runat="server" Width="200" CssClass="botaosub"><i class="fa fa-save"></i>&nbsp;Salvar</asp:LinkButton><br />
+                            <asp:LinkButton Visible="false" ID="btnAtualizarPalestra" OnClick="btnAtualizarPalestra_Click" runat="server" CssClass="botaosub"><i class="fa fa-save"></i>&nbsp;Atualizar</asp:LinkButton><br />
                             <asp:Label Font-Size="X-Small" runat="server" ForeColor="Red">Antes de salvar, visualize a criação dá página no botão "Visualizar"</asp:Label>
                         </div>
                     </div>
